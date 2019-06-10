@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+*{
+    font-family: 'Roboto';
+}
+.board{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 300px);
+    grid-column-gap: 40px;
+    &-col{
+        background-color: #E5EEF4;
+        border-radius: 8px;
+        padding: 16px;
+        &__title{
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: #272C4D;
+        }
+    }
+}
+.task{
+    border-radius: 8px;
+    background-color: #fff;
+    padding: 10px;
+    margin-bottom: 16px;
+    display: block;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    &__title{
+        font-size: 16px;
+        font-weight: 500;
+    }
+    &__author{
+        font-weight: 700px;
+        margin-top: auto;
+        margin-left: auto;
+    }
+}
+.add-task{
+    text-decoration: none;
+    color: #ABACC3;
+}
