@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-
+import { ModalService } from '../modal/modal.service'
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -8,9 +8,9 @@ import { Component, Input } from '@angular/core';
 export class TaskComponent{
   @Input() task: {};
 
-
+  constructor(private modalService: ModalService){}
   openModal(e: any, task: {}) {
     e.preventDefault()
-    console.log(task);
+    this.modalService.setModalData(task)
   }
 }
