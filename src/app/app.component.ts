@@ -1,52 +1,21 @@
-import { Component, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { TaskListService } from './task-list.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers:[
+    TaskListService
+  ],
 })
-export class AppComponent {
-  title = 'Task management system'
-  taskList = [
-    {
-      name: 'To do',
-      tasks: [
-        {
-          title: 'task 1',
-          author: 'Maxim'
-        },
-        {
-          title: 'task 2',
-          author: 'Alex'
-        }
-      ]
-    },
-    {
-      name: 'Working',
-      tasks: [
-        {
-          title: 'task 3',
-          author: 'Vasya'
-        },
-        {
-          title: 'task 4',
-          author: 'Maxim'
-        }
-      ]
-    },
-    {
-      name: 'Done',
-      tasks: [
-        {
-          title: 'task 5',
-          author: 'Petya'
-        },
-        {
-          title: 'task 6',
-          author: 'Maxim'
-        }
-      ]
-    },
+export class AppComponent implements OnInit {
+  title = 'Task management system';
+  taskList = []
+  constructor(private taskListService: TaskListService){}
 
-  ]
+  ngOnInit(){
+      this.taskList =  this.taskListService.getTasks();
+      console.log(this.taskList)
+  }
 }

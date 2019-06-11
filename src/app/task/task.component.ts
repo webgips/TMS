@@ -6,6 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent{
-  @Input('title') title: string;
-  @Input('author') author: string;
+  @Input() title: string;
+  @Input() author: string;
 }
