@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
-import { TaskListService } from './task-list.service';
+import { ModalComponent } from './modal/modal.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TaskComponent
+    TaskComponent,
+    ModalComponent
   ],
   imports: [
     BrowserModule

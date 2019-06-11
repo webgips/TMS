@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TaskListService {
-  private taskList: {status: string, tasks: [{title: string, author: string, desc: string}] }[] = [
+  private taskList: {status: string, tasks: {title: string, author: string, desc: string}[] }[] = [
     {
       status: "To do",
       tasks: [
@@ -13,7 +13,7 @@ export class TaskListService {
         },
         {
           title: 'task 2',
-          author: 'Maxim',
+          author: 'Alex',
           desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
         }
       ]
@@ -23,7 +23,7 @@ export class TaskListService {
       tasks: [
         {
           title: 'task 3',
-          author: 'Maxim',
+          author: 'Alex',
           desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
         },
         {
@@ -43,13 +43,13 @@ export class TaskListService {
         },
         {
           title: 'task 6',
-          author: 'Maxim',
+          author: 'Alex',
           desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
         }
       ]
     }
   ];
-  getTasks(): {status: string, tasks: [{title: string, author: string, desc: string}] }[]{
+  getTasks(): {status: string, tasks: {title: string, author: string, desc: string}[] }[]{
     return this.taskList;
   }
   // addTask(name: string){

@@ -8,8 +8,7 @@
   <div class="board-col"  *ngFor="let statusCols of taskList; let i = index">
     <div class="board-col__title">{{statusCols.status}}</div>
     <app-task *ngFor="let task of statusCols.tasks; let i = index" 
-      [title]="task.title"
-      [author]="task.author"
+      [task]="task"
     ></app-task> 
     <!--  <a href="#" class="add-task">Add task...</a> -->
   </div>

@@ -1,4 +1,4 @@
-<div class="task">
-  <div class="task__title">{{title}}</div>
-  <div class="task__author">{{author}}</div>
+<div (click)="openModal($event,task)" class="task">
+  <div class="task__title">{{task.title}}</div>
+  <div class="task__author">{{task.author}}</div>
 </div>
