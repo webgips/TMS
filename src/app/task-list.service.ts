@@ -59,4 +59,8 @@ export class TaskListService {
     this.taskList.forEach(task => !this.statuses.includes(task.status)? this.statuses.push(task.status) : false )
     return this.statuses
   }
+  moveTask(task: object, val: string){
+    this.taskList.filter(item => item.id == task.id)[0].status = val
+    console.log(this.getStatuses())
+  }
 }

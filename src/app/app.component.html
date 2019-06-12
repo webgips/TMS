@@ -13,9 +13,8 @@
           [status]="statusCols.status"
         ></app-task> 
     </ng-container>
-    <!--  <a href="#" class="add-task">Add task...</a> -->
+     <a href="#" class="add-task" (click)="showNewTaskModal()">Add task...</a>
   </div>
   
 </main>
 <app-modal id='task-modal'></app-modal>
-

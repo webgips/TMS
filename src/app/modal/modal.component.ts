@@ -41,8 +41,8 @@ export class ModalComponent implements OnInit {
       this.element.style.display = 'none';
       this.visible = false;
   }
-  onChange(e: object){
-    // console.log(e.target.value)
-    // this.taskListService.moveTask(this.taskInfo,e.target.value)
+  onChange(e: any){
+    console.log(e.target.value)
+    this.taskListService.moveTask(this.taskInfo,e.target.value)
   }
 }
