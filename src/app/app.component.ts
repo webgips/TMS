@@ -21,4 +21,7 @@ export class AppComponent implements OnInit {
       this.statusCols = this.taskListService.getStatuses();
       console.log(this.statusCols)
   }
+  showNewTaskModal(){
+      this.modalService.open('new-task-modal')
+  }
 }

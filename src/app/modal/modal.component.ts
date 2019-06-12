@@ -28,7 +28,7 @@ export class ModalComponent implements OnInit {
     this.modalService.add(this);
     this.statuses = this.taskListService.getStatuses()
   }
-  setData(modalData): void{
+  setData(modalData: any){
     this.taskInfo = modalData
     console.log(this.taskInfo)
   }
