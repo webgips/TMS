@@ -2,57 +2,61 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TaskListService {
-  private taskList: {status: string, tasks: {title: string, author: string, desc: string}[] }[] = [
+  private statuses = []
+  private taskList: { id: number, title: string, author: string, desc: string, status: string }[] = [
     {
-      status: "To do",
-      tasks: [
-        {
-          title: 'task 1',
-          author: 'Petya',
-          desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-        },
-        {
-          title: 'task 2',
-          author: 'Alex',
-          desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-        }
-      ]
+      id: 1,
+      title: 'task 1',
+      author: 'Petya',
+      desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+      status: 'To do'
     },
     {
-      status: "Doing",
-      tasks: [
-        {
-          title: 'task 3',
-          author: 'Alex',
-          desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-        },
-        {
-          title: 'task 4',
-          author: 'Vasya',
-          desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-        },
-      ]
+      id: 2,
+      title: 'task 2',
+      author: 'Alex',
+      desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+      status: 'To do'
     },
     {
-      status: "Done",
-      tasks: [
-        {
-          title: 'task 5',
-          author: 'Petya',
-          desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-        },
-        {
-          title: 'task 6',
-          author: 'Alex',
-          desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum'
-        }
-      ]
+      id: 3,
+      title: 'task 3',
+      author: 'Alex',
+      desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+      status: 'Doing'
+    },
+    {
+      id: 4,
+      title: 'task 4',
+      author: 'Vasya',
+      desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+      status: 'Doing'
+    },
+    {
+      id: 5,
+      title: 'task 5',
+      author: 'Petya',
+      desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+      status: 'Done'
+    },
+    {
+      id: 6,
+      title: 'task 6',
+      author: 'Alex',
+      desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+      status: 'Done'
+    },
+    {
+      id: 7,
+      title: 'task 7 new',
+      author: 'masha',
+      desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
+      status: 'Done'
     }
-  ];
-  getTasks(): {status: string, tasks: {title: string, author: string, desc: string}[] }[]{
-    return this.taskList;
+  ]
+  getTasks = (): { title: string, author: string, desc: string }[] => this.taskList;
+  getStatuses() {
+    this.taskList.forEach(task => !this.statuses.includes(task.status)? this.statuses.push(task.status) : false )
+    return this.statuses
   }
-  // addTask(name: string){
-  //   this.taskList.push(name);
-  // }
 }

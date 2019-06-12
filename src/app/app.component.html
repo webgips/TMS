@@ -5,14 +5,17 @@
   </h1>
 </div>
 <main class="board">
-  <div class="board-col"  *ngFor="let statusCols of taskList; let i = index">
-    <div class="board-col__title">{{statusCols.status}}</div>
-    <app-task *ngFor="let task of statusCols.tasks; let i = index" 
-      [task]="task"
-    ></app-task> 
+  <div class="board-col"  *ngFor="let statusCol of statusCols; let i = index">
+    <div class="board-col__title">{{statusCol}}</div>
+    <ng-container *ngFor="let task of taskList; let i = index" > 
+        <app-task *ngIf="task.status == statusCol"
+          [task]="task"
+          [status]="statusCols.status"
+        ></app-task> 
+    </ng-container>
     <!--  <a href="#" class="add-task">Add task...</a> -->
   </div>
   
 </main>
-<app-modal></app-modal>
+<app-modal id='task-modal'></app-modal>
 

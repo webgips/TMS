@@ -7,10 +7,12 @@ import { ModalService } from '../modal/modal.service'
 })
 export class TaskComponent{
   @Input() task: {};
+  @Input() status: string;
 
   constructor(private modalService: ModalService){}
-  openModal(e: any, task: {}) {
+  openModal(e: any, task: {}, status: string) {
     e.preventDefault()
     this.modalService.setModalData(task)
+    this.modalService.open('task-modal')
   }
 }

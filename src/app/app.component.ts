@@ -12,10 +12,12 @@ import { TaskListService } from './task-list.service';
 export class AppComponent implements OnInit {
   title = 'Task management system';
   taskList = []
+  statusCols = [];
   constructor(private taskListService: TaskListService){}
 
   ngOnInit(){
       this.taskList =  this.taskListService.getTasks();
-      console.log(this.taskList)
+      this.statusCols = this.taskListService.getStatuses();
+      console.log(this.statusCols)
   }
 }
