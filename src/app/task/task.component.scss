@@ -1,24 +1,23 @@
 .task{
-    border-radius: 8px;
-    background-color: #fff;
-    padding: 10px;
-    margin-bottom: 16px;
-    display: block;
-    min-height: 120px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    &__title{
-        font-size: 16px;
-        font-weight: 500;
-    }
-    &__author{
-        font-weight: 700px;
-        margin-top: auto;
-        margin-left: auto;
-    }
+	border-radius: 8px;
+	background-color: #FFF;
+	padding: 10px;
+	margin-bottom: 16px;
+	min-height: 120px;
+	display: flex;
+	flex-direction: column;
+	cursor: pointer;
+	&__title{
+		font-size: 16px;
+		font-weight: 500;
+	}
+	&__author{
+		font-weight: 700px;
+		margin-top: auto;
+		margin-left: auto;
+	}
 }
 .add-task{
-    text-decoration: none;
-    color: #ABACC3;
+	text-decoration: none;
+	color: #ABACC3;
 }
