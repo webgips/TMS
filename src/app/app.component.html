@@ -19,7 +19,9 @@
     >
   </div>
   <div class="">
-    <a href="#" class="board-add-col-btn">Add status...</a>
+    <a href="#" class="board-add-col-btn" (click)="showNewStatusModal($event)"
+      >Add status...</a
+    >
   </div>
 </main>
 
@@ -48,7 +50,7 @@
 </app-modal>
 <app-modal id="new-task-modal" (onNewTaskSubmit)="onNewTaskSubmit($event)">
   <div class="modal__task-title">Create a new task:</div>
-  <form class="modal__form">
+  <form class="modal__form" id="new-task-form">
     <label class="modal__row">
       <div class="modal__row-name">Task title:</div>
       <input
@@ -86,6 +88,24 @@
       class="modal__form-submit"
       [disabled]="title.invalid || desc.invalid || author.invalid"
     >
+      Submit
+    </button>
+  </form>
+</app-modal>
+<app-modal id="new-status-modal" (onNewStatusSubmit)="onNewStatusSubmit($event)">
+  <form class="modal__form" id="new-status-form">
+    <label class="modal__row">
+      <div class="modal__row-name">New status name:</div>
+      <input
+        type="text"
+        name="statusname"
+        [(ngModel)]="newStatus"
+        class="modal__form-input"
+        required
+        #statusname="ngModel"
+      />
+    </label>
+    <button class="modal__form-submit" [disabled]="statusname.invalid">
       Submit
     </button>
   </form>
