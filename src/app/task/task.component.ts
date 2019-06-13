@@ -6,7 +6,7 @@ import { TaskListService } from '../task-list.service'
   templateUrl: './task.component.html',
   styleUrls: ['./task.component.scss']
 })
-export class TaskComponent{
+export class TaskComponent {
   @Input() task: {};
   @Input() status: string;
 
@@ -14,8 +14,8 @@ export class TaskComponent{
 
   openModal(e: any, task: {}, status: string) {
     e.preventDefault()
-    this.onOpenTaskModal.emit(task);
+    this.onOpenTaskModal.emit(task);
     this.modalService.open('task-modal')
   }
-  constructor(private modalService: ModalService, private taskListService: TaskListService){}
+  constructor(private modalService: ModalService, private taskListService: TaskListService) { }
 }

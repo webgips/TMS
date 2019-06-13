@@ -92,7 +92,10 @@
     </button>
   </form>
 </app-modal>
-<app-modal id="new-status-modal" (onNewStatusSubmit)="onNewStatusSubmit($event)">
+<app-modal
+  id="new-status-modal"
+  (onNewStatusSubmit)="onNewStatusSubmit($event)"
+>
   <form class="modal__form" id="new-status-form">
     <label class="modal__row">
       <div class="modal__row-name">New status name:</div>
