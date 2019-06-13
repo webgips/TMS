@@ -4,65 +4,89 @@
   </h1>
 </div>
 <main class="board">
-  <div class="board-col"  *ngFor="let status of statuses; let i = index">
-    <div class="board-col__title">{{status}}</div>
-    <ng-container *ngFor="let task of taskList; let i = index" > 
-        <app-task *ngIf="task.status == status"
-          [task]="task"
-          [status]="task.status"
-          (onOpenTaskModal)="onOpenTaskModal($event,task,status)" 
-        ></app-task> 
+  <div class="board-col" *ngFor="let status of statuses; let i = index">
+    <div class="board-col__title">{{ status }}</div>
+    <ng-container *ngFor="let task of taskList; let i = index">
+      <app-task
+        *ngIf="task.status == status"
+        [task]="task"
+        [status]="task.status"
+        (onOpenTaskModal)="onOpenTaskModal($event, task, status)"
+      ></app-task>
     </ng-container>
-     <a href="#" class="add-task" (click)="showNewTaskModal(status)">Add task...</a>
+    <a href="#" class="add-task" (click)="showNewTaskModal(status)"
+      >Add task...</a
+    >
   </div>
-  
+  <div class="">
+    <a href="#" class="board-add-col-btn">Add status...</a>
+  </div>
 </main>
-<app-modal id='task-modal' (onChangeStatus)="onChangeStatus($event)">
+
+<app-modal id="task-modal" (onChangeStatus)="onChangeStatus($event)">
   <div class="modal__task-title">{{ modalTaskInfo.title }}</div>
-    <div class="modal__row">
-      <div class="modal__row-name">Description:</div>
-      <div class="modal__task-desc">
-        {{ modalTaskInfo.desc }}
-      </div>
+  <div class="modal__row">
+    <div class="modal__row-name">Description:</div>
+    <div class="modal__task-desc">
+      {{ modalTaskInfo.desc }}
     </div>
-    <div class="modal__row">
-      <div class="modal__row-name">Author:</div>
-      <div class="modal__task-author">
-        {{ modalTaskInfo.author }}
-      </div>
+  </div>
+  <div class="modal__row">
+    <div class="modal__row-name">Author:</div>
+    <div class="modal__task-author">
+      {{ modalTaskInfo.author }}
     </div>
-    <div class="modal__row">
-      <div class="modal__row-name">Status:</div>
-      <select
-          class="form-control"
-          name="status"
-          [ngModel]="modalTaskInfo.status"
-        >
-          <option
-            *ngFor="let status of statuses"
-            [value]="status"
-          >
-            {{ status }}
-          </option>
-      </select>
-    </div> 
+  </div>
+  <div class="modal__row">
+    <div class="modal__row-name">Status:</div>
+    <select class="form-control" name="status" [ngModel]="modalTaskInfo.status">
+      <option *ngFor="let status of statuses" [value]="status">
+        {{ status }}
+      </option>
+    </select>
+  </div>
 </app-modal>
-<app-modal id='new-task-modal' (onNewTaskSubmit)="onNewTaskSubmit($event)">
+<app-modal id="new-task-modal" (onNewTaskSubmit)="onNewTaskSubmit($event)">
   <div class="modal__task-title">Create a new task:</div>
   <form class="modal__form">
     <label class="modal__row">
       <div class="modal__row-name">Task title:</div>
-      <input type="text"  name="title" [(ngModel)]="newTask.title" class="modal__form-input" required #title="ngModel" >
+      <input
+        type="text"
+        name="title"
+        [(ngModel)]="newTask.title"
+        class="modal__form-input"
+        required
+        #title="ngModel"
+      />
     </label>
     <label class="modal__row">
       <div class="modal__row-name">Task Description:</div>
-      <input type="text"  name="desc" [(ngModel)]="newTask.desc" class="modal__form-input" required #desc="ngModel">
+      <input
+        type="text"
+        name="desc"
+        [(ngModel)]="newTask.desc"
+        class="modal__form-input"
+        required
+        #desc="ngModel"
+      />
     </label>
     <label class="modal__row">
       <div class="modal__row-name">Task Author:</div>
-      <input type="text" name="author" [(ngModel)]="newTask.author"  class="modal__form-input" required #author="ngModel">
+      <input
+        type="text"
+        name="author"
+        [(ngModel)]="newTask.author"
+        class="modal__form-input"
+        required
+        #author="ngModel"
+      />
     </label>
-    <button class="modal__form-submit" [disabled]="title.invalid || desc.invalid || author.invalid" >Submit</button>
+    <button
+      class="modal__form-submit"
+      [disabled]="title.invalid || desc.invalid || author.invalid"
+    >
+      Submit
+    </button>
   </form>
-  
 </app-modal>
