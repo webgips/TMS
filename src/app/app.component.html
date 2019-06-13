@@ -1,7 +1,6 @@
-<!--The content below is only a placeholder and can be replaced.-->
 <div style="text-align: center;">
   <h1>
-    {{ title }}!
+    <!-- {{ title }}! -->
   </h1>
 </div>
 <main class="board">
@@ -53,34 +52,17 @@
   <form class="modal__form">
     <label class="modal__row">
       <div class="modal__row-name">Task title:</div>
-      <input type="text"  name="title" [(ngModel)]="newTask.title" class="modal__input" required>
+      <input type="text"  name="title" [(ngModel)]="newTask.title" class="modal__form-input" required #title="ngModel" >
     </label>
     <label class="modal__row">
       <div class="modal__row-name">Task Description:</div>
-      <input type="text"  name="desc" [(ngModel)]="newTask.desc" class="modal__input" required>
+      <input type="text"  name="desc" [(ngModel)]="newTask.desc" class="modal__form-input" required #desc="ngModel">
     </label>
     <label class="modal__row">
       <div class="modal__row-name">Task Author:</div>
-      <input type="text" name="author" [(ngModel)]="newTask.author"  class="modal__input" required>
+      <input type="text" name="author" [(ngModel)]="newTask.author"  class="modal__form-input" required #author="ngModel">
     </label>
-    <!-- <label class="modal__row">
-      <div class="modal__row-name">Status:</div>
-        <select
-            class="form-control"
-            name="status"
-            [ngModel]="modalTaskInfo.status"
-          >
-            <option
-              *ngFor="let status of statuses"
-              [value]="status"
-            >
-              {{ status }}
-            </option>
-        </select>
-    </label> -->
-    <label class="modal__row">
-      <button type="submit" class="modal__form-submit">Submit</button>
-    </label>
+    <button class="modal__form-submit" [disabled]="title.invalid || desc.invalid || author.invalid" >Submit</button>
   </form>
   
 </app-modal>

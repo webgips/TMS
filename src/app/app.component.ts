@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskListService } from './task-list.service';
 import { ModalService } from './modal/modal.service';
-import { NgModel } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -12,8 +11,8 @@ import { NgModel } from '@angular/forms';
   ],
 })
 export class AppComponent implements OnInit {
-  private title: string = 'Task management system';
-  private taskList: any[] = []
+  private title: string = "Task management system";
+  private taskList: any[] = [];
   private modalTaskInfo: any = {};
   private statuses: string[] = [];
   private newTask: any = {};
@@ -23,11 +22,13 @@ export class AppComponent implements OnInit {
     this.taskList =  this.taskListService.getTasks();
     this.statuses = this.taskListService.getStatuses();
     this.modalTaskInfo = this.taskListService.getModalData()
+    
   }
   onOpenTaskModal(task: any){
     this.modalTaskInfo = task
   }
   onChangeStatus(e: any){
+    console.log(this.modalTaskInfo)
     this.taskListService.moveTask(this.modalTaskInfo,e.target.value)
   }
   onNewTaskSubmit(e: any){
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit {
   showNewTaskModal(status: string){
     this.modalService.open('new-task-modal')
     this.newTask = {}
+    this.newTask.id = this.taskList.length + 1
     this.newTask.status = status
   }
 }

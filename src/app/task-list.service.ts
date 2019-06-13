@@ -66,10 +66,8 @@ export class TaskListService {
   getModalData = () => this.modalData
   moveTask(task: any, val: string){
     this.taskList.filter(item => item.id == task.id)[0].status = val
-    console.log(this.getStatuses())
   }
   createNewTask(task: any){
     this.taskList.push(task)
-    console.log('addNewtask')
   }
 }

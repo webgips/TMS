@@ -18,9 +18,4 @@ export class TaskComponent{
     this.modalService.open('task-modal')
   }
   constructor(private modalService: ModalService, private taskListService: TaskListService){}
-  // openModal(e: any, task: {}, status: string) {
-  //   e.preventDefault()
-  //   this.taskListService.setModalData(task)
-  //   this.modalService.open('task-modal')
-  // }
 }
