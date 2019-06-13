@@ -4,7 +4,7 @@
         "indentation": "tab",
         "string-quotes": "single",
         "no-duplicate-selectors": true,
-        "color-hex-case": "upper",
+        "color-hex-case": "lower",
         "selector-no-qualifying-type": true,
         "selector-attribute-quotes": "always",
         "selector-attribute-operator-space-after": "always",
