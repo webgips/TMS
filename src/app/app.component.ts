@@ -1,27 +1,41 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskListService } from './task-list.service';
-import { ModalService } from './modal/modal.service'
-import { from } from 'rxjs';
+import { ModalService } from './modal/modal.service';
+import { NgModel } from '@angular/forms';
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss'],
+  styleUrls: ['./app.component.scss', './modal/modal.component.scss'],
   providers:[
     TaskListService
   ],
 })
 export class AppComponent implements OnInit {
-  title = 'Task management system';
-  taskList = []
-  statusCols = [];
+  private title: string = 'Task management system';
+  private taskList: any[] = []
+  private modalTaskInfo: any = {};
+  private statuses: string[] = [];
+  private newTask: any = {};
   constructor(private taskListService: TaskListService, private modalService: ModalService){}
 
   ngOnInit(){
-      this.taskList =  this.taskListService.getTasks();
-      this.statusCols = this.taskListService.getStatuses();
-      console.log(this.statusCols)
+    this.taskList =  this.taskListService.getTasks();
+    this.statuses = this.taskListService.getStatuses();
+    this.modalTaskInfo = this.taskListService.getModalData()
   }
-  showNewTaskModal(){
-      this.modalService.open('new-task-modal')
+  onOpenTaskModal(task: any){
+    this.modalTaskInfo = task
+  }
+  onChangeStatus(e: any){
+    this.taskListService.moveTask(this.modalTaskInfo,e.target.value)
+  }
+  onNewTaskSubmit(e: any){
+    this.taskListService.createNewTask(this.newTask)
+  }
+  showNewTaskModal(status: string){
+    this.modalService.open('new-task-modal')
+    this.newTask = {}
+    this.newTask.status = status
   }
 }

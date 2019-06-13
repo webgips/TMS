@@ -29,6 +29,7 @@
 		padding: 20px;
 	}
 	&__row{
+		display: block;
 		margin-bottom: 16px;
 		&:last-child{
 			margin-bottom: 0;
@@ -50,6 +51,12 @@
 		}
 		&-author{
 			font-weight: 700px;
+		}
+	}
+	&__form{
+		&-submit{
+			margin-left: auto;
+			display: block;
 		}
 	}
 }

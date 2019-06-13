@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TaskListService {
-  private statuses = []
+  private statuses: string[] = []
+  modalData: any = {}
   private taskList: { id: number, title: string, author: string, desc: string, status: string }[] = [
     {
       id: 1,
@@ -55,12 +56,20 @@ export class TaskListService {
     }
   ]
   getTasks = (): { title: string, author: string, desc: string }[] => this.taskList;
-  getStatuses() {
+  getStatuses = (): string[] => {
     this.taskList.forEach(task => !this.statuses.includes(task.status)? this.statuses.push(task.status) : false )
     return this.statuses
   }
+  setModalData(taskInfo: any){
+    this.modalData = taskInfo
+  }
+  getModalData = () => this.modalData
   moveTask(task: any, val: string){
     this.taskList.filter(item => item.id == task.id)[0].status = val
     console.log(this.getStatuses())
+  }
+  createNewTask(task: any){
+    this.taskList.push(task)
+    console.log('addNewtask')
   }
 }

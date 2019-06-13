@@ -1,7 +1,5 @@
-import { Component, ElementRef, Input, OnInit } from '@angular/core';
-import { NgModel } from '@angular/forms';
+import { Component, ElementRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ModalService } from './modal.service'
-import { TaskListService } from '../task-list.service'
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -10,14 +8,15 @@ import { TaskListService } from '../task-list.service'
 export class ModalComponent implements OnInit {
   @Input() id: string;
   @Input() visible: boolean = false;
-  @Input() taskInfo: object
+  @Output() onChangeStatus = new EventEmitter<any>();
+  @Output() onNewTaskSubmit = new EventEmitter<any>();
+
   private element: any;
-  private statuses: any[] = [];
-  constructor(private modalService: ModalService, private taskListService: TaskListService,  private el: ElementRef) {
+  constructor(private modalService: ModalService,   private el: ElementRef) {
     this.element = el.nativeElement;
   }
-
-  ngOnInit() {
+  
+  ngOnInit(): void {
     let modal = this;
     
     this.element.addEventListener('click', function (e: any) {
@@ -26,11 +25,14 @@ export class ModalComponent implements OnInit {
         }
     });
     this.modalService.add(this);
-    this.statuses = this.taskListService.getStatuses()
   }
-  setData(modalData: any){
-    this.taskInfo = modalData
-    console.log(this.taskInfo)
+  inputChange(e: any) {
+    this.onChangeStatus.emit(e);
+    
+  }
+  submit(e: any){
+    this.onNewTaskSubmit.emit(e)
+    this.close()
   }
   open(): void {
     this.element.style.display = 'block';
@@ -40,9 +42,5 @@ export class ModalComponent implements OnInit {
   close(): void {
       this.element.style.display = 'none';
       this.visible = false;
-  }
-  onChange(e: any){
-    console.log(e.target.value)
-    this.taskListService.moveTask(this.taskInfo,e.target.value)
   }
 }
