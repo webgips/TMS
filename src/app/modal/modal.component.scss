@@ -38,7 +38,7 @@
 		&-name{
 			font-size: 20px;
 			font-weight: 700;
-			margin-bottom: 10px;
+			margin-bottom: 6px;
 		}
 	}
 	&__task{
@@ -82,6 +82,17 @@
 			&.ng-touched.ng-valid{
 				border: solid green 2px;
 			}
+		}
+		&-select{
+			height: 40px;
+			min-width: 60px;
+			padding: 6px 8px;
+			padding-right: 26px;
+			font-weight: 700;
+			font-size: 18px;
+			border: none;
+			border-radius: 3px;
+			text-align: center;
 		}
 	}
 }

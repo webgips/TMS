@@ -13,7 +13,7 @@ export class ModalComponent implements OnInit {
   @Output() onNewStatusSubmit = new EventEmitter<any>();
 
   private element: any;
-  constructor(private modalService: ModalService,   private el: ElementRef) {
+  constructor(private modalService: ModalService, private el: ElementRef) {
     this.element = el.nativeElement;
   }
 
@@ -21,9 +21,14 @@ export class ModalComponent implements OnInit {
     const modal = this;
 
     this.element.addEventListener('click', (e: any) => {
-        if (e.target.className === 'modal__wrap') {
-            modal.close();
-        }
+      if (e.target.className === 'modal__wrap') {
+        modal.close();
+      }
+    });
+    document.addEventListener('keyup', (e: any) => {
+      if (e.key === 'Escape') {
+        modal.close();
+      }
     });
     this.modalService.add(this);
   }
@@ -47,10 +52,12 @@ export class ModalComponent implements OnInit {
   open(): void {
     this.element.style.display = 'block';
     this.visible = true;
+    document.querySelector('body').classList.add('show-popup');
   }
 
   close(): void {
-      this.element.style.display = 'none';
-      this.visible = false;
+    this.element.style.display = 'none';
+    this.visible = false;
+    document.querySelector('body').classList.remove('show-popup');
   }
 }

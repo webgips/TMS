@@ -1,7 +1,5 @@
 <div style="text-align: center;">
-  <h1>
-    <!-- {{ title }}! -->
-  </h1>
+  <h1 class="title">Task management system</h1>
 </div>
 <main class="board">
   <div class="board-col" *ngFor="let status of statuses; let i = index">
@@ -14,12 +12,12 @@
         (onOpenTaskModal)="onOpenTaskModal($event, task, status)"
       ></app-task>
     </ng-container>
-    <a href="#" class="add-task" (click)="showNewTaskModal(status)"
+    <a href="#" class="add-task add-btn" (click)="showNewTaskModal(status)"
       >Add task...</a
     >
   </div>
   <div class="">
-    <a href="#" class="board-add-col-btn" (click)="showNewStatusModal($event)"
+    <a href="#" class="board-add-col-btn add-btn" (click)="showNewStatusModal($event)"
       >Add status...</a
     >
   </div>
@@ -41,7 +39,7 @@
   </div>
   <div class="modal__row">
     <div class="modal__row-name">Status:</div>
-    <select class="form-control" name="status" [ngModel]="modalTaskInfo.status">
+    <select class="form-control modal__form-select" name="status" [ngModel]="modalTaskInfo.status">
       <option *ngFor="let status of statuses" [value]="status">
         {{ status }}
       </option>

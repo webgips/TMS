@@ -11,7 +11,6 @@ import { ModalService } from './modal/modal.service';
   ],
 })
 export class AppComponent implements OnInit {
-  private title = 'Task management system';
   private taskList: any[] = [];
   private modalTaskInfo: any = {};
   private statuses: string[] = [];
