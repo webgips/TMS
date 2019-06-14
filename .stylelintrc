@@ -5,7 +5,6 @@
         "string-quotes": "single",
         "no-duplicate-selectors": true,
         "color-hex-case": "lower",
-        "selector-no-qualifying-type": true,
         "selector-attribute-quotes": "always",
         "selector-attribute-operator-space-after": "always",
         "declaration-block-trailing-semicolon": "always",
