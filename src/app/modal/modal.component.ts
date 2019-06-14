@@ -8,9 +8,9 @@ import { ModalService } from './modal.service';
 export class ModalComponent implements OnInit {
   @Input() id: string;
   @Input() visible = false;
-  @Output() onChangeStatus = new EventEmitter<any>();
-  @Output() onNewTaskSubmit = new EventEmitter<any>();
-  @Output() onNewStatusSubmit = new EventEmitter<any>();
+  @Output() ChangeStatus = new EventEmitter<any>();
+  @Output() NewTaskSubmit = new EventEmitter<any>();
+  @Output() NewStatusSubmit = new EventEmitter<any>();
 
   private element: any;
   constructor(private modalService: ModalService, private el: ElementRef) {
@@ -33,31 +33,27 @@ export class ModalComponent implements OnInit {
     this.modalService.add(this);
   }
   inputChange(e: any) {
-    this.onChangeStatus.emit(e);
-
+    this.ChangeStatus.emit(e);
   }
   submit(e: any) {
-    console.log(e.target.id);
     if (e.target.id === 'new-task-form') {
-      this.onNewTaskSubmit.emit(e);
+      this.NewTaskSubmit.emit(e);
       this.close();
     }
     if (e.target.id === 'new-status-form') {
-      this.onNewStatusSubmit.emit(e);
+      this.NewStatusSubmit.emit(e);
       this.close();
     }
-
-
   }
   open(): void {
     this.element.style.display = 'block';
     this.visible = true;
-    document.querySelector('body').classList.add('show-popup');
+    document.querySelector('body').classList.add('show-modal');
   }
 
   close(): void {
     this.element.style.display = 'none';
     this.visible = false;
-    document.querySelector('body').classList.remove('show-popup');
+    document.querySelector('body').classList.remove('show-modal');
   }
 }

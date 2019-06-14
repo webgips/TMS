@@ -9,12 +9,11 @@ import { TaskListService } from '../task-list.service';
 export class TaskComponent {
   @Input() task: {};
   @Input() status: string;
-
-  @Output() onOpenTaskModal = new EventEmitter<any>();
+  @Output() openTaskModal = new EventEmitter<any>();
 
   openModal(e: any, task: {}, status: string) {
     e.preventDefault();
-    this.onOpenTaskModal.emit(task);
+    this.openTaskModal.emit(task);
     this.modalService.open('task-modal');
   }
   constructor(private modalService: ModalService, private taskListService: TaskListService) { }

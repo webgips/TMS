@@ -30,11 +30,10 @@ export class AppComponent implements OnInit {
   onChangeStatus(e: any) {
     this.taskListService.moveTask(this.modalTaskInfo, e.target.value);
   }
-
   showNewTaskModal(status: string) {
     this.modalService.open('new-task-modal');
     this.newTask = {};
-    this.newTask.id = this.taskList.length + 1;
+    this.newTask.id = this.taskList.length;
     this.newTask.status = status;
   }
   onNewTaskSubmit(e: any) {
@@ -47,5 +46,8 @@ export class AppComponent implements OnInit {
     this.taskListService.createNewStatus(this.newStatus);
     this.newStatus = '';
   }
-
+  deleteTask(e: any) {
+    this.taskListService.deleteTask(this.modalTaskInfo);
+    this.modalService.close('task-modal');
+  }
 }
