@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class TaskListService {
-  private statusList: string[] = []
-  modalData: any = {}
+  private statusList: string[] = [];
+  modalData: any = {};
   private taskList: { id: number, title: string, author: string, desc: string, status: string }[] = [
     {
       id: 1,
@@ -54,24 +54,24 @@ export class TaskListService {
       desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
       status: 'Done'
     }
-  ]
+  ];
   getTasks = (): { title: string, author: string, desc: string }[] => this.taskList;
   getStatuses = (): string[] => {
-    this.taskList.forEach(task => !this.statusList.includes(task.status)? this.statusList.push(task.status) : false )
-    return this.statusList
+    this.taskList.forEach(task => !this.statusList.includes(task.status) ? this.statusList.push(task.status) : false );
+    return this.statusList;
   }
-  setModalData(taskInfo: any){
-    this.modalData = taskInfo
+  setModalData(taskInfo: any) {
+    this.modalData = taskInfo;
   }
-  getModalData = () => this.modalData
-  moveTask(task: any, val: string){
-    this.taskList.filter(item => item.id == task.id)[0].status = val
+  getModalData = () => this.modalData;
+  moveTask(task: any, val: string) {
+    this.taskList.filter(item => item.id === task.id)[0].status = val;
   }
-  createNewTask(task: any){
-    this.taskList.push(task)
+  createNewTask(task: any) {
+    this.taskList.push(task);
   }
-  createNewStatus(status: any){
-    console.log(status)
-    this.statusList.push(status)
+  createNewStatus(status: any) {
+    console.log(status);
+    this.statusList.push(status);
   }
 }

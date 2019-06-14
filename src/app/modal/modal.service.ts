@@ -10,12 +10,12 @@ export class ModalService {
       this.modals.push(modal);
   }
   open(id: string) {
-      let modal: any = this.modals.filter(x => x.id === id)[0];
+      const modal: any = this.modals.filter(x => x.id === id)[0];
       modal.open();
   }
 
   close(id: string) {
-      let modal: any = this.modals.filter(x => x.id === id)[0];
+      const modal: any = this.modals.filter(x => x.id === id)[0];
       modal.close();
   }
 }
