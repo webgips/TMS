@@ -1,6 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalService } from '../modal/modal.service';
-import { TaskListService } from '../task-list.service';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
@@ -11,10 +10,11 @@ export class TaskComponent {
   @Input() status: string;
   @Output() openTaskModal = new EventEmitter<any>();
 
+  constructor(private modalService: ModalService) { }
+
   openModal(e: any, task: {}, status: string) {
     e.preventDefault();
     this.openTaskModal.emit(task);
     this.modalService.open('task-modal');
   }
-  constructor(private modalService: ModalService, private taskListService: TaskListService) { }
 }
