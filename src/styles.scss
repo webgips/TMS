@@ -12,11 +12,31 @@ body{
 	background-color: #303b4a;
 	background-size: cover;
 	background-position: center;
-	&.modal-show{
+	&.show-modal{
 		position: relative;
 		overflow: hidden;
+		height: 100%;
 	}
+}
+button{
+	cursor: pointer;
 }
 .title{
 	color: #fff;
+}
+.btn{
+	height: 40px;
+	padding: 6px 8px;
+	color: #fff;
+	background-color: #007bff;
+	font-weight: 700;
+	font-size: 18px;
+	border: none;
+	border-radius: 3px;
+	&[disabled]{
+		opacity: 0.5;
+	}
+}
+.del-btn{
+	float: right;
 }

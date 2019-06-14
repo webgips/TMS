@@ -9,7 +9,7 @@
         *ngIf="task.status == status"
         [task]="task"
         [status]="task.status"
-        (onOpenTaskModal)="onOpenTaskModal($event, task, status)"
+        (openTaskModal)="onOpenTaskModal($event, task, status)"
       ></app-task>
     </ng-container>
     <a href="#" class="add-task add-btn" (click)="showNewTaskModal(status)"
@@ -26,7 +26,7 @@
   </div>
 </main>
 
-<app-modal id="task-modal" (onChangeStatus)="onChangeStatus($event)">
+<app-modal id="task-modal" (ChangeStatus)="onChangeStatus($event)">
   <div class="modal__task-title">{{ modalTaskInfo.title }}</div>
   <div class="modal__row">
     <div class="modal__row-name">Description:</div>
@@ -51,9 +51,10 @@
         {{ status }}
       </option>
     </select>
+    <button class="btn del-btn" (click)="deleteTask($event)">Delete task</button>
   </div>
 </app-modal>
-<app-modal id="new-task-modal" (onNewTaskSubmit)="onNewTaskSubmit($event)">
+<app-modal id="new-task-modal" (NewTaskSubmit)="onNewTaskSubmit($event)">
   <div class="modal__task-title">Create a new task:</div>
   <form class="modal__form" id="new-task-form">
     <label class="modal__row">
@@ -90,17 +91,14 @@
       />
     </label>
     <button
-      class="modal__form-submit"
+      class="modal__form-submit btn"
       [disabled]="title.invalid || desc.invalid || author.invalid"
     >
       Submit
     </button>
   </form>
 </app-modal>
-<app-modal
-  id="new-status-modal"
-  (onNewStatusSubmit)="onNewStatusSubmit($event)"
->
+<app-modal id="new-status-modal" (NewStatusSubmit)="onNewStatusSubmit($event)">
   <form class="modal__form" id="new-status-form">
     <label class="modal__row">
       <div class="modal__row-name">New status name:</div>
