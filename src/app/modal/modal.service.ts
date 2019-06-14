@@ -7,15 +7,15 @@ export class ModalService {
   private modals: any[] = [];
   constructor() { }
   add(modal: any) {
-      this.modals.push(modal);
+    this.modals.push(modal);
   }
   open(id: string) {
-      const modal: any = this.modals.filter(x => x.id === id)[0];
-      modal.open();
+    const modal: any = this.modals.filter(x => x.id === id)[0];
+    modal.open();
   }
 
   close(id: string) {
-      const modal: any = this.modals.filter(x => x.id === id)[0];
-      modal.close();
+    const modal: any = this.modals.filter(x => x.id === id)[0];
+    modal.close();
   }
 }

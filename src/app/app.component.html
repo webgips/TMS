@@ -17,7 +17,10 @@
     >
   </div>
   <div class="">
-    <a href="#" class="board-add-col-btn add-btn" (click)="showNewStatusModal($event)"
+    <a
+      href="#"
+      class="board-add-col-btn add-btn"
+      (click)="showNewStatusModal($event)"
       >Add status...</a
     >
   </div>
@@ -39,7 +42,11 @@
   </div>
   <div class="modal__row">
     <div class="modal__row-name">Status:</div>
-    <select class="form-control modal__form-select" name="status" [ngModel]="modalTaskInfo.status">
+    <select
+      class="form-control modal__form-select"
+      name="status"
+      [ngModel]="modalTaskInfo.status"
+    >
       <option *ngFor="let status of statuses" [value]="status">
         {{ status }}
       </option>
