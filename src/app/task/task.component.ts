@@ -9,6 +9,7 @@ export class TaskComponent {
   @Input() task: {};
   @Input() status: string;
   @Output() openTaskModal = new EventEmitter<any>();
+  @Output() openTaskEditModal = new EventEmitter<any>();
 
   constructor(private modalService: ModalService) { }
 
@@ -17,4 +18,11 @@ export class TaskComponent {
     this.openTaskModal.emit(task);
     this.modalService.open('task-modal');
   }
+  openEditModal(e: any, task: {}) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.openTaskEditModal.emit(task);
+    this.modalService.open('task-edit-modal');
+  }
+
 }

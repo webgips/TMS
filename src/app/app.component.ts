@@ -21,10 +21,12 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.taskList = this.taskListService.getTasks();
     this.statuses = this.taskListService.getStatuses();
-    this.modalTaskInfo = this.taskListService.getModalData();
 
   }
   onOpenTaskModal(task: any) {
+    this.modalTaskInfo = task;
+  }
+  onOpenTaskEditModal(task: any) {
     this.modalTaskInfo = task;
   }
   onChangeStatus(e: any) {
@@ -39,6 +41,9 @@ export class AppComponent implements OnInit {
   onNewTaskSubmit(e: any) {
     this.taskListService.createNewTask(this.newTask);
   }
+  onTaskUpdateSubmit(e: any) {
+    this.taskListService.updateTask(this.modalTaskInfo);
+  }
   showNewStatusModal(e: any) {
     this.modalService.open('new-status-modal');
   }
@@ -48,6 +53,6 @@ export class AppComponent implements OnInit {
   }
   deleteTask(e: any) {
     this.taskListService.deleteTask(this.modalTaskInfo);
-    this.modalService.close('task-modal');
+    this.modalService.closeAll();
   }
 }

@@ -1,7 +1,14 @@
+interface ITask {
+  id: number;
+  title: string;
+  author: string;
+  desc: string;
+  status: string;
+}
 export class TaskListService {
   private statusList: string[] = [];
   modalData: any = {};
-  private taskList: { id: number, title: string, author: string, desc: string, status: string }[] = [
+  private taskList: ITask[] = [
     {
       id: 0,
       title: 'task 1',
@@ -52,25 +59,27 @@ export class TaskListService {
       status: 'Done'
     }
   ];
-  getTasks = (): { title: string, author: string, desc: string }[] => this.taskList;
+  getTasks = (): ITask[] => this.taskList;
   getStatuses = (): string[] => {
     this.taskList.forEach(task => !this.statusList.includes(task.status) ? this.statusList.push(task.status) : false );
     return this.statusList;
   }
-  setModalData(taskInfo: object) {
+  setModalData(taskInfo: ITask) {
     this.modalData = taskInfo;
   }
-  getModalData = () => this.modalData;
-  moveTask(task: any, val: string) {
+  moveTask(task: ITask, val: string) {
     this.taskList.filter(item => item.id === task.id)[0].status = val;
   }
-  deleteTask(task: any) {
+  deleteTask(task: ITask) {
     this.taskList.splice(this.taskList.map(item => item.id).indexOf(task.id), 1);
   }
-  createNewTask(task: any) {
+  createNewTask(task: ITask) {
     this.taskList.push(task);
   }
   createNewStatus(status: any) {
     this.statusList.push(status);
+  }
+  updateTask(task: ITask) {
+    console.log(task)
   }
 }

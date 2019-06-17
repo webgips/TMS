@@ -10,6 +10,7 @@
         [task]="task"
         [status]="task.status"
         (openTaskModal)="onOpenTaskModal($event, task, status)"
+        (openTaskEditModal)="onOpenTaskEditModal($event, task, status)"
       ></app-task>
     </ng-container>
     <a href="#" class="add-task add-btn" (click)="showNewTaskModal(status)"
@@ -51,9 +52,57 @@
         {{ status }}
       </option>
     </select>
-    <button class="btn del-btn" (click)="deleteTask($event)">Delete task</button>
+    <button class="btn del-btn" (click)="deleteTask($event)">
+      Delete task
+    </button>
   </div>
 </app-modal>
+<app-modal id="task-edit-modal" (updateTaskSubmit)="onTaskUpdateSubmit($event)">
+  <div class="modal__title">Task edit</div>
+  <form class="modal__form" id="edit-task-form">
+    <div class="modal__row">
+      <div class="modal__row-name">Title:</div>
+      <input
+        type="text"
+        class="form-control modal__form-input"
+        name="title"
+        [(ngModel)]="modalTaskInfo.title"
+      />
+    </div>
+    <div class="modal__row">
+      <div class="modal__row-name">Description:</div>
+      <input
+        class="form-control modal__form-input"
+        name="desc"
+        [(ngModel)]="modalTaskInfo.desc"
+      />
+    </div>
+    <div class="modal__row">
+      <div class="modal__row-name">Author:</div>
+      <input
+        class="form-control modal__form-input"
+        name="author"
+        [(ngModel)]="modalTaskInfo.author"
+      />
+    </div>
+    <div class="modal__row">
+      <div class="modal__row-name">Status:</div>
+      <select
+        class="form-control modal__form-select"
+        name="status"
+        [(ngModel)]="modalTaskInfo.status"
+      >
+        <option *ngFor="let status of statuses" [value]="status">
+          {{ status }}
+        </option>
+      </select>
+      <button class="btn del-btn" (click)="deleteTask($event)">
+        Delete task
+      </button>
+    </div>
+  </form>
+</app-modal>
+
 <app-modal id="new-task-modal" (NewTaskSubmit)="onNewTaskSubmit($event)">
   <div class="modal__task-title">Create a new task:</div>
   <form class="modal__form" id="new-task-form">
