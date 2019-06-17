@@ -57,7 +57,7 @@ export class TaskListService {
     this.taskList.forEach(task => !this.statusList.includes(task.status) ? this.statusList.push(task.status) : false );
     return this.statusList;
   }
-  setModalData(taskInfo: any) {
+  setModalData(taskInfo: object) {
     this.modalData = taskInfo;
   }
   getModalData = () => this.modalData;
