@@ -2,27 +2,29 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { ModalComponent } from './modal/modal.component';
-import { TaskListService } from './task-list.service';
+import ITask, { TaskListService } from './task-list.service';
 import { FormsModule } from '@angular/forms';
 import { forwardRef } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let taskListService: TaskListService;
   let spy: jasmine.Spy;
-  let mockTasks;
+  let mockTasks: ITask[];
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
-        FormsModule
+        FormsModule,
+        RouterTestingModule
       ],
       declarations: [
         AppComponent,
         TaskComponent,
         ModalComponent,
-        HeaderComponent
+        HeaderComponent,
       ],
       providers: [forwardRef(() => TaskListService)]
     }).compileComponents();
