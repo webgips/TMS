@@ -5,6 +5,7 @@ import { ModalComponent } from './modal/modal.component';
 import { TaskListService } from './task-list.service';
 import { FormsModule } from '@angular/forms';
 import { forwardRef } from '@angular/core';
+import { HeaderComponent } from './header/header.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -20,7 +21,8 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent,
         TaskComponent,
-        ModalComponent
+        ModalComponent,
+        HeaderComponent
       ],
       providers: [forwardRef(() => TaskListService)]
     }).compileComponents();
