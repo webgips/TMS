@@ -4,14 +4,14 @@ import { TaskComponent } from './task/task.component';
 import { ModalComponent } from './modal/modal.component';
 import { TaskListService } from './task-list.service';
 import { FormsModule } from '@angular/forms';
+import { forwardRef } from '@angular/core';
 
 describe('AppComponent', () => {
   let component: AppComponent;
   let fixture: ComponentFixture<AppComponent>;
   let taskListService: TaskListService;
-  const taskListServiceStub = {
-    getTasks: () => {}
-  };
+  let spy: jasmine.Spy;
+  let mockTasks;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -22,15 +22,23 @@ describe('AppComponent', () => {
         TaskComponent,
         ModalComponent
       ],
-      providers: [{provide: TaskListService, useValue: taskListServiceStub } ]
+      providers: [forwardRef(() => TaskListService)]
     }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    taskListService = fixture.debugElement.injector.get(TaskListService);
+    mockTasks = [{
+      id: 0,
+      title: 'test task',
+      author: 'John',
+      desc: 'lorem ipsum',
+      status: 'To do'
+    }];
+    spy = spyOn(taskListService, 'getTasks').and.returnValue(mockTasks);
     fixture.detectChanges();
-    taskListService = TestBed.get(TaskListService);
   });
 
 
@@ -39,7 +47,12 @@ describe('AppComponent', () => {
     expect(app).toBeTruthy();
   });
 
-  it('should be created', () => {
-    expect(taskListService).toBeTruthy();
+  it('should call taskListService ', () => {
+    expect(spy.calls.any()).toBeTruthy();
   });
+
+  it('should set tasks', () => {
+    expect(component.taskList).toEqual(mockTasks);
+  });
+
 });

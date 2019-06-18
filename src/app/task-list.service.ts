@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-interface ITask {
+export default interface ITask {
   id: number;
   title: string;
   author: string;

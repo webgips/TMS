@@ -11,7 +11,7 @@ import { ModalService } from './modal/modal.service';
   ]
 })
 export class AppComponent implements OnInit {
-  private taskList: any[] = [];
+  public taskList: any[] = [];
   private modalTaskInfo: any = {};
   private statuses: string[] = [];
   private newTask: any = {};
