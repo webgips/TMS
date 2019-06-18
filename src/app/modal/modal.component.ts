@@ -48,7 +48,6 @@ export class ModalComponent implements OnInit {
     if (e.target.id === 'edit-task-form') {
       this.updateTaskSubmit.emit(e);
       this.close();
-      console.log(e)
     }
   }
   open(): void {

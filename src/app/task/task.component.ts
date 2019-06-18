@@ -13,7 +13,7 @@ export class TaskComponent {
 
   constructor(private modalService: ModalService) { }
 
-  openModal(e: any, task: {}, status: string) {
+  openModal(e: any, task: {}) {
     e.preventDefault();
     this.openTaskModal.emit(task);
     this.modalService.open('task-modal');

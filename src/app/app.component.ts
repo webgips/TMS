@@ -21,7 +21,6 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.taskList = this.taskListService.getTasks();
     this.statuses = this.taskListService.getStatuses();
-
   }
   onOpenTaskModal(task: any) {
     this.modalTaskInfo = task;
