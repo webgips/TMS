@@ -1,3 +1,5 @@
+import { Injectable } from '@angular/core';
+
 interface ITask {
   id: number;
   title: string;
@@ -5,6 +7,7 @@ interface ITask {
   desc: string;
   status: string;
 }
+@Injectable()
 export class TaskListService {
   private statusList: string[] = [];
   modalData: any = {};
@@ -80,6 +83,5 @@ export class TaskListService {
     this.statusList.push(status);
   }
   updateTask(task: ITask) {
-    console.log(task)
   }
 }

@@ -1,6 +1,6 @@
 <div (click)="openModal($event, task, status)" class="task">
   <a (click)="openEditModal($event,task)" class="task__edit"></a>  
-  <div class="task__title">{{ task.title }}</div>
-  <div class="task__desc">{{ task.desc }}</div>
-  <div class="task__author">{{ task.author }}</div>
+  <div class="task__title">{{ task?.title }}</div>
+  <div class="task__desc">{{ task?.desc }}</div>
+  <div class="task__author">{{ task?.author }}</div>
 </div>

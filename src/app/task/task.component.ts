@@ -6,7 +6,7 @@ import { ModalService } from '../modal/modal.service';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  @Input() task: {};
+  @Input() task: any;
   @Input() status: string;
   @Output() openTaskModal = new EventEmitter<any>();
   @Output() openTaskEditModal = new EventEmitter<any>();

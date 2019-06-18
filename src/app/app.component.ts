@@ -8,7 +8,7 @@ import { ModalService } from './modal/modal.service';
   styleUrls: ['./app.component.scss', './modal/modal.component.scss'],
   providers: [
     TaskListService
-  ],
+  ]
 })
 export class AppComponent implements OnInit {
   private taskList: any[] = [];
