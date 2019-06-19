@@ -1,0 +1,22 @@
+.board{
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 250px);
+	grid-gap: 40px;
+	&-col{
+		background-color: #e5eff5;
+		border-radius: 6px;
+		padding: 10px;
+		height: fit-content;
+		&__title{
+			font-size: 18px;
+			font-weight: 700;
+			margin-bottom: 25px;
+			color: #272c4d;
+		}
+	}
+}
+.add-btn{
+	color: #aaa;
+	text-decoration: none;
+	font-size: 18px;
+}

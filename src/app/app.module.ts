@@ -9,6 +9,7 @@ import { HeaderComponent } from './header/header.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { RouterModule, Routes } from '@angular/router';
+import { BoardComponent } from './board/board.component';
 
 const routes: Routes = [
   // { path: '', component: HomeComponent, },
@@ -24,7 +25,8 @@ const routes: Routes = [
     ModalComponent,
     HeaderComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    BoardComponent
   ],
   imports: [
     BrowserModule,
