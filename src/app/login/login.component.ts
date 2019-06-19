@@ -19,8 +19,14 @@ export class LoginComponent {
   }
   submit() {
     console.log('submit');
-    this.authenticationService.login(this.loginForm.value.userName, this.loginForm.value.password);
-    // this.authenticationService.test()
+    this.authenticationService.login(this.loginForm.value.userName, this.loginForm.value.password).subscribe(
+      data => {
+        console.log('succes login');
+        this.router.navigate(['/']);
+      },
+      error => {
+        console.log('error login', error);
+      });
   }
 
 }
