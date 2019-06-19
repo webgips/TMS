@@ -12,14 +12,21 @@ export class RegisterComponent {
   registerForm: FormGroup;
   constructor(private router: Router, private authenticationService: AuthenticationService) {
     this.registerForm = new FormGroup({
-      userName: new FormControl('', Validators.required),
+      username: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
       });
   }
   submit() {
-    console.log('send register');
-    this.authenticationService.register(this.registerForm.value);
+    console.log('send register', this.registerForm.value);
+    this.authenticationService.register(this.registerForm.value).subscribe(
+    data => {
+      console.log('succes registration', data);
+      this.router.navigate(['/login']);
+    },
+    error => {
+      console.log('error registration', error);
+    });
   }
 
 }
