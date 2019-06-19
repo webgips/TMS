@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+*{
+	font-family: Roboto, Helvetica, Arial, sans-serif;
+}
 *{
 	box-sizing: border-box;
 }
@@ -25,13 +29,15 @@ button{
 }
 .btn{
 	height: 40px;
-	padding: 6px 8px;
+	padding: 0 8px;
 	color: #fff;
 	background-color: #007bff;
 	font-weight: 700;
 	font-size: 18px;
 	border: none;
 	border-radius: 3px;
+	text-decoration: none;
+	line-height: 40px;
 	&[disabled]{
 		opacity: 0.5;
 	}
