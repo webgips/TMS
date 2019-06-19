@@ -1,11 +1,19 @@
-<h1 class="title">Registration:</h1>
-<form class="register_form">
-  <label  class="register__label">
-    <div class="register__label-text">Username:</div>
-    <input type="text" name="login" class="register__input">
+<h1 class="title">Register:</h1>
+<form class="auth__form">
+  <label  class="auth__label">
+    <div class="auth__label-text">Username:</div>
+    <input type="text" name="login" class="auth__input">
   </label>
-  <label  class="register__label">
-    <div class="register__label-text">Password:</div>
-    <input type="password" name="login" class="register__input">
+  <label  class="auth__label">
+    <div class="auth__label-text">Name:</div>
+    <input type="text" name="login" class="auth__input">
   </label>
+  <label  class="auth__label">
+    <div class="auth__label-text">Password:</div>
+    <input type="password" name="login" class="auth__input">
+  </label>
+  <div class="auth__bottom">
+    <button class="btn">Confirm</button>
+    <a routerLink = "/login" class="btn" routerLinkActive="active-link">Login</a>
+  </div>
 </form>
