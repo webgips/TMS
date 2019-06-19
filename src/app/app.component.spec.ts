@@ -8,6 +8,7 @@ import { forwardRef } from '@angular/core';
 import { HeaderComponent } from './header/header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BoardComponent } from './board/board.component';
+import { HttpClientModule } from '@angular/common/http';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -16,7 +17,8 @@ describe('AppComponent', () => {
     TestBed.configureTestingModule({
       imports: [
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        HttpClientModule
       ],
       declarations: [
         AppComponent,

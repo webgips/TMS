@@ -43,7 +43,6 @@ export class AuthenticationService {
       }));
   }
   register(user: User) {
-      console.log('register', user);
       return this.http.post(`/user/register`, user);
   }
   logout() {
