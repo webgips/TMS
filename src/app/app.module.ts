@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { ModalComponent } from './modal/modal.component';
@@ -11,6 +11,9 @@ import { RegisterComponent } from './register/register.component';
 import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './board/board.component';
 import { AuthGuard } from './auth.guard';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FakeBackendInterceptor } from './fake-backend.interceptor';
+import { AuthenticationService } from './authentication.service';
 
 const routes: Routes = [
   // { path: '', component: HomeComponent, canActivate: [AuthGuard},
@@ -34,7 +37,17 @@ const routes: Routes = [
     BrowserModule,
     FormsModule,
     RouterModule,
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    HttpClientModule,
+    ReactiveFormsModule
+  ],
+  providers: [
+    AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FakeBackendInterceptor,
+      multi: true
+    }
   ],
   bootstrap: [AppComponent]
 })
