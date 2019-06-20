@@ -11,11 +11,9 @@ export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = req;
         if (url.endsWith('/user/login') && method === 'POST') {
-            console.log('login in fake backend');
             return authenticate();
         }
         if (url.endsWith('/user/register') && method === 'POST') {
-            console.log('register in fake backend');
             return register();
         }
 
@@ -26,14 +24,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
             return ok({
                 id: user.id,
                 username: user.username,
-                name: user.firstName,
+                name: user.name,
                 token: 'fake-jwt-token'
             });
         }
 
         function register() {
             const user = body;
-            console.log(body);
             if (users.find(x => x.username === user.username)) {
                 return error('Username "' + user.username + '" is already taken');
             }
