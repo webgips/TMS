@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskListService } from './task-list.service';
-import { ModalService } from './modal/modal.service';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +6,8 @@ import { ModalService } from './modal/modal.service';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  constructor() {}
+  constructor() {
+  }
   ngOnInit() {
 
   }
