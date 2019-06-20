@@ -9,6 +9,7 @@
         "selector-attribute-operator-space-after": "always",
         "declaration-block-trailing-semicolon": "always",
         "block-opening-brace-space-before": "never",
-        "rule-empty-line-before": "never"
+        "rule-empty-line-before": "never",
+        "number-leading-zero": "never"
     }
 }
