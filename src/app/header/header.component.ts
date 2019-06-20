@@ -15,7 +15,7 @@ export class HeaderComponent {
     });
   }
   logout() {
-    this.authenticationService.logout()
+    this.authenticationService.logout();
     this.router.navigate(['/login']);
   }
 }
