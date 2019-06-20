@@ -10,13 +10,17 @@ const users = JSON.parse(localStorage.getItem('users')) || [];
 export class FakeBackendInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         const { url, method, headers, body } = req;
-        if (url.endsWith('/user/login') && method === 'POST') {
-            return authenticate();
-        }
-        if (url.endsWith('/user/register') && method === 'POST') {
-            return register();
-        }
-
+        return of(null)
+        .pipe(mergeMap(() => {
+            if (url.endsWith('/user/login') && method === 'POST') {
+                return authenticate();
+            }
+            if (url.endsWith('/user/register') && method === 'POST') {
+                return register();
+            }
+        }))
+        .pipe(delay(500));
+        
         function authenticate() {
             const { username, password } = body;
             const user = users.find(x => x.username === username && x.password === password);

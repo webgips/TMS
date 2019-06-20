@@ -1,31 +1,40 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../authentication.service';
 import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss'],
-  providers: [ AuthenticationService ]
+  styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
-  constructor(private router: Router, private authenticationService: AuthenticationService) {
+  returnUrl: string;
+  constructor(private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) {
+    if (this.authenticationService.currentUserValue) {
+      this.router.navigate(['/']);
+    }
+  }
+  ngOnInit() {
     this.loginForm = new FormGroup({
       userName: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
-      });
+    });
   }
   submit() {
-    console.log('submit');
-    this.authenticationService.login(this.loginForm.value.userName, this.loginForm.value.password).subscribe(
-      data => {
-        console.log('succes login');
-        this.router.navigate(['/']);
-      },
-      error => {
-        console.log('error login', error);
+    if (this.loginForm.invalid) {
+        return;
+    }
+    this.authenticationService.login(this.loginForm.value.userName, this.loginForm.value.password)
+      .pipe(first())
+      .subscribe(
+        data => {
+          this.router.navigate(['/']);
+        },
+        error => {
+          console.log('error login', error);
       });
   }
 
