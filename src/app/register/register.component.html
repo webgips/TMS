@@ -1,5 +1,5 @@
-<h1 class="title">Register:</h1>
 <form [formGroup]="registerForm" class="auth__form" novalidate (ngSubmit)="submit()">
+  <h1 class="title">Register:</h1>
   <label  class="auth__label">
     <div class="auth__label-text">Username:</div>
     <input type="text" name="userName" formControlName="username" class="auth__input">
@@ -14,6 +14,6 @@
   </label>
   <div class="auth__bottom">
     <button class="btn">Confirm</button>
-    <a routerLink = "/login" class="btn" routerLinkActive="active-link">Login</a>
+    <a routerLink = "/login" class="btn" routerLinkActive="active-link">Login page</a>
   </div>
 </form>

@@ -9,17 +9,17 @@ import ITask from '../task-list.service';
 export class TaskComponent {
   @Input() task: ITask;
   @Input() status: string;
-  @Output() openTaskModal = new EventEmitter<any>();
+  @Output() openTaskModal = new EventEmitter<ITask>();
   @Output() openTaskEditModal = new EventEmitter<any>();
 
   constructor(private modalService: ModalService) { }
 
-  openModal(e: any, task: {}) {
+  openModal(e: Event, task: ITask) {
     e.preventDefault();
     this.openTaskModal.emit(task);
     this.modalService.open('task-modal');
   }
-  openEditModal(e: any, task: {}) {
+  openEditModal(e: Event, task: ITask) {
     e.stopPropagation();
     e.preventDefault();
     this.openTaskEditModal.emit(task);

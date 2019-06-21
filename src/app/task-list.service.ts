@@ -10,7 +10,7 @@ export default interface ITask {
 @Injectable()
 export class TaskListService {
   private statusList: string[] = [];
-  modalData: any = {};
+  modalData: ITask;
   private taskList: ITask[] = [
     {
       id: 0,
@@ -79,7 +79,7 @@ export class TaskListService {
   createNewTask(task: ITask) {
     this.taskList.push(task);
   }
-  createNewStatus(status: any) {
+  createNewStatus(status: string) {
     this.statusList.push(status);
   }
   updateTask(task: ITask) {
