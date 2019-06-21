@@ -1,0 +1,15 @@
+.notification{
+	padding: 8px 12px;
+	border-radius: 6px;
+	margin: 0 auto;
+	background-color: #d4edda;
+	border-color: #c3e6cb;
+	&.error{
+		background-color: #ea9ca3;
+		border-color: #ea9ca3;
+	}
+	&__wrap{
+		display: flex;
+		justify-content: center;
+	}
+}
