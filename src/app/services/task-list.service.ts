@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import ITask from './models/ITask';
+import ITask from '../models/ITask';
 
 @Injectable()
 export class TaskListService {

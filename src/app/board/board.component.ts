@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { TaskListService } from '../task-list.service';
-import { ModalService } from '../modal/modal.service';
+import { TaskListService } from '../services/task-list.service';
+import { ModalService } from '../services/modal.service';
 
 @Component({
   selector: 'app-board',
