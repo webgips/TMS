@@ -2,16 +2,26 @@
   <h1 class="title">Register:</h1>
   <label  class="auth__label">
     <div class="auth__label-text">Username:</div>
-    <input type="text" name="userName" formControlName="username" class="auth__input">
+    <input type="text" name="userName" formControlName="username" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.username.errors }" />
   </label>
+  <div *ngIf="submitted && inpt.username.errors" class="auth__input-error">
+      <div *ngIf="inpt.username.errors.required">Username is required</div>
+  </div>
   <label  class="auth__label">
     <div class="auth__label-text">Name:</div>
-    <input type="name"  name="name" formControlName="name" class="auth__input">
-  </label>  
+    <input type="name"  name="name" formControlName="name" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.name.errors }" />
+  </label>
+  <div *ngIf="submitted && inpt.name.errors" class="auth__input-error">
+      <div *ngIf="inpt.name.errors.required">Name is required</div>
+  </div>
   <label  class="auth__label">
     <div class="auth__label-text">Password:</div>
-    <input type="password"  name="password" formControlName="password" class="auth__input">
+    <input type="password"  name="password" formControlName="password" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.password.errors }" />
   </label>
+  <div *ngIf="submitted && inpt.password.errors" class="auth__input-error">
+      <div *ngIf="inpt.password.errors.required">Password is required</div>
+      <div *ngIf="inpt.password.errors.minlength">Password must be at least 6 characters</div>
+  </div>
   <div class="auth__bottom">
     <button class="btn">Confirm</button>
     <a routerLink = "/login" class="btn" routerLinkActive="active-link">Login page</a>

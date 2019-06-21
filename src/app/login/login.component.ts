@@ -12,6 +12,7 @@ import { first } from 'rxjs/operators';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
+  submitted = false;
   constructor(private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -19,15 +20,16 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
     this.loginForm = new FormGroup({
-      userName: new FormControl('', Validators.required),
+      username: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
   }
   submit() {
+    this.submitted = true;
     if (this.loginForm.invalid) {
         return;
     }
-    this.authenticationService.login(this.loginForm.value.userName, this.loginForm.value.password)
+    this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.password)
       .pipe(first())
       .subscribe(
         data => {
@@ -37,5 +39,5 @@ export class LoginComponent implements OnInit {
           console.log('error login', error);
       });
   }
-
+  get inpt() { return this.loginForm.controls; }
 }

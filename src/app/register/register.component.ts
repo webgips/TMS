@@ -10,6 +10,7 @@ import { AuthenticationService } from '../authentication.service';
 })
 export class RegisterComponent {
   registerForm: FormGroup;
+  submitted = false;
   constructor(private router: Router, private authenticationService: AuthenticationService) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
@@ -17,10 +18,16 @@ export class RegisterComponent {
     this.registerForm = new FormGroup({
       username: new FormControl('', Validators.required),
       name: new FormControl('', Validators.required),
-      password: new FormControl('', Validators.required)
+      password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
   }
   submit() {
+    this.submitted = true;
+
+    console.log(this.registerForm);
+    if (this.registerForm.invalid) {
+        return;
+    }
     this.authenticationService.register(this.registerForm.value).subscribe(
     data => {
       this.router.navigate(['/login']);
@@ -29,5 +36,5 @@ export class RegisterComponent {
       console.log('error registration', error);
     });
   }
-
+  get inpt() { return this.registerForm.controls; }
 }
