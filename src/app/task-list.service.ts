@@ -1,12 +1,6 @@
 import { Injectable } from '@angular/core';
+import ITask from './models/ITask';
 
-export default interface ITask {
-  id: number;
-  title: string;
-  author: string;
-  desc: string;
-  status: string;
-}
 @Injectable()
 export class TaskListService {
   private statusList: string[] = [];

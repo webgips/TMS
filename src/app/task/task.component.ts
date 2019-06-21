@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ModalService } from '../modal/modal.service';
-import ITask from '../task-list.service';
+import ITask from '../models/ITask';
 @Component({
   selector: 'app-task',
   templateUrl: './task.component.html',
