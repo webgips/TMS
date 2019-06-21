@@ -1,7 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TaskComponent } from './task.component';
-import { ModalService } from '../modal/modal.service';
+import { ModalService } from '../services/modal.service';
 
 describe('TaskComponent', () => {
   let component: TaskComponent;
@@ -28,9 +27,10 @@ describe('TaskComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should called open', () => {
-  //   const openSpy = spyOn(modal, 'open');
-  //   fixture.detectChanges();
-  //   expect(openSpy).toHaveBeenCalled();
-  // });
+  it('should called open', () => {
+    const openSpy = spyOn(modal, 'open');
+    fixture.detectChanges();
+    expect(openSpy).toHaveBeenCalled();
+  });
+
 });

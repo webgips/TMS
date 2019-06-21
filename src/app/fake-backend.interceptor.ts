@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequest, HttpResponse, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { delay, mergeMap, materialize, dematerialize } from 'rxjs/operators';
-
+import IUser from './models/IUser';
 // array in local storage for registered users
 const users = JSON.parse(localStorage.getItem('users')) || [];
 
@@ -35,7 +35,7 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
         function register() {
             const user = body;
-            if (users.find(x => x.username === user.username)) {
+            if (users.find((x: IUser) => x.username === user.username)) {
                 return error('Username "' + user.username + '" is already taken');
             }
 

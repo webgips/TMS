@@ -7,7 +7,7 @@ import { TaskComponent } from '../task/task.component';
 import { ModalComponent } from '../modal/modal.component';
 import { HeaderComponent } from '../header/header.component';
 import { forwardRef } from '@angular/core';
-import { TaskListService } from '../task-list.service';
+import { TaskListService } from '../services/task-list.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import ITask from '../models/ITask';
 
