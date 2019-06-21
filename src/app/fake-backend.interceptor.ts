@@ -45,14 +45,13 @@ export class FakeBackendInterceptor implements HttpInterceptor {
 
             return ok();
         }
-        // helper functions
 
         function ok(body?) {
             return of(new HttpResponse({ status: 200, body }));
         }
 
-        function error(message: any) {
-            return throwError({ error: { message } });
+        function error(message: string) {
+            return throwError(message);
         }
     }
 }

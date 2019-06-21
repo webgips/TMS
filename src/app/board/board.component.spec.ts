@@ -10,6 +10,7 @@ import { forwardRef } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import ITask from '../models/ITask';
+import { NotificationComponent } from '../notification/notification.component';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -30,6 +31,7 @@ describe('BoardComponent', () => {
         TaskComponent,
         ModalComponent,
         HeaderComponent,
+        NotificationComponent
       ],
       providers: [forwardRef(() => TaskListService)]
     }).compileComponents();

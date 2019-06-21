@@ -13,6 +13,7 @@ import { BoardComponent } from './board/board.component';
 import { AuthGuard } from './auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FakeBackendInterceptor } from './fake-backend.interceptor';
+import { NotificationComponent } from './notification/notification.component';
 
 const routes: Routes = [
   // { path: '', component: HomeComponent, canActivate: [AuthGuard},
@@ -30,7 +31,8 @@ const routes: Routes = [
     HeaderComponent,
     LoginComponent,
     RegisterComponent,
-    BoardComponent
+    BoardComponent,
+    NotificationComponent
   ],
   imports: [
     BrowserModule,

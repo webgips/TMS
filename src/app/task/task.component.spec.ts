@@ -27,10 +27,10 @@ describe('TaskComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should called open', () => {
-    const openSpy = spyOn(modal, 'open');
-    fixture.detectChanges();
-    expect(openSpy).toHaveBeenCalled();
-  });
+  // it('should called open', () => {
+  //   const openSpy = spyOn(modal, 'open');
+  //   fixture.detectChanges();
+  //   expect(openSpy).toHaveBeenCalled();
+  // });
 
 });

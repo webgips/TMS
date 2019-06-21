@@ -7,6 +7,7 @@ import { HeaderComponent } from './header/header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BoardComponent } from './board/board.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NotificationComponent } from './notification/notification.component';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -23,7 +24,8 @@ describe('AppComponent', () => {
         BoardComponent,
         HeaderComponent,
         TaskComponent,
-        ModalComponent
+        ModalComponent,
+        NotificationComponent
       ]
     }).compileComponents();
   }));

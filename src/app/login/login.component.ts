@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -13,7 +14,12 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   returnUrl: string;
   submitted = false;
-  constructor(private router: Router, private route: ActivatedRoute, private authenticationService: AuthenticationService) {
+  constructor(
+    private router: Router,
+    private route: ActivatedRoute,
+    private authenticationService: AuthenticationService,
+    private notificationService: NotificationService
+    ) {
     if (this.authenticationService.currentUserValue) {
       this.router.navigate(['/']);
     }
@@ -27,7 +33,7 @@ export class LoginComponent implements OnInit {
   submit() {
     this.submitted = true;
     if (this.loginForm.invalid) {
-        return;
+      return;
     }
     this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.password)
       .pipe(first())
@@ -36,8 +42,8 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error => {
-          console.log('error login', error);
-      });
+          this.notificationService.error(error);
+        });
   }
   get inpt() { return this.loginForm.controls; }
 }
