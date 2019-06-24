@@ -12,8 +12,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './board/board.component';
 import { AuthGuard } from './auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FakeBackendInterceptor } from './fake-backend.interceptor';
+// import { FakeBackendInterceptor } from './fake-backend.interceptor';
 import { NotificationComponent } from './notification/notification.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabase } from '@angular/fire/database';
+import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+import { environment } from 'src/environments/environment';
 
 const routes: Routes = [
   // { path: '', component: HomeComponent, canActivate: [AuthGuard},
@@ -22,7 +27,6 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: '' }
 ];
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,14 +44,17 @@ const routes: Routes = [
     RouterModule,
     RouterModule.forRoot(routes),
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: FakeBackendInterceptor,
-      multi: true
-    }
+    // {
+    //   provide: HTTP_INTERCEPTORS,
+    //   useClass: FakeBackendInterceptor,
+    //   multi: true
+    // }
   ],
   bootstrap: [AppComponent]
 })
