@@ -6,7 +6,6 @@ import IUser from '../models/IUser';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
-
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
@@ -23,6 +22,7 @@ export class AuthenticationService {
       this.user = this.currentUserSubject.asObservable();
       this.afAuth.authState.subscribe(user => {
         if (user) {
+          // console.log(this.userdata)
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSubject.next(user);
         } else {
@@ -34,6 +34,10 @@ export class AuthenticationService {
   public get userValue() {
     return this.currentUserSubject.value;
   }
+  public get userdata(){
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userValue.uid}`);
+    return userRef.get();
+  }
   public updateUserData(user) {
     // Sets user data to firestore on login
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
@@ -42,39 +46,18 @@ export class AuthenticationService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL
+      photoURL: user.photoURL,
+      boards: user.boards
     }
-
     return userRef.set(data, { merge: true });
 
   }
   register(user: any) {
-    return this.afAuth.auth
-      // .createUserWithEmailAndPassword(user.email, user.password)
-      .createUserWithEmailAndPassword(user.email, user.password)
-      // .then(val => {
-      //   console.log(user)
-      // //   console.log('Welcome new user!', 'success', val);
-      //   // return this.updateUserData(user); // if using firestore
-      // })
-      // .catch(error => console.log(error));
+    return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
   login(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
-  // login(username: string, password: string) {
-  //   return this.http.post<IUser>(`/user/login`, { username, password })
-  //     .pipe(map(user => {
-  //       if (user && user.token) {
-  //         localStorage.setItem('currentUser', JSON.stringify(user));
-  //         this.currentUserSubject.next(user);
-  //       }
-  //       return user;
-  //     }));
-  // }
-  // register(user: IUser) {
-  //     return this.http.post(`/user/register`, user);
-  // }
   logout() {
     this.afAuth.auth.signOut();
     this.currentUserSubject.next(null)

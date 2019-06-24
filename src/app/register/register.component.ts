@@ -36,10 +36,17 @@ export class RegisterComponent {
       val => {
         this.router.navigate(['/login']);
         this.notificationService.message('Registration successful');
-        // this.authenticationService.updateUserData(this.authenticationService.currentUserSubject)
+        const data = {
+          uid: val.user.uid,
+          email: val.user.email,
+          displayName: this.registerForm.value.name,
+          photoURL: val.user.photoURL,
+          boards: []
+        };
+
+        this.authenticationService.updateUserData(data);
       },
       error => {
-        console.log(error)
         this.notificationService.error(error.message);
       });
   }

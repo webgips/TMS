@@ -12,6 +12,7 @@ export class ModalComponent implements OnInit {
   @Output() NewTaskSubmit = new EventEmitter<any>();
   @Output() NewStatusSubmit = new EventEmitter<any>();
   @Output() updateTaskSubmit = new EventEmitter<any>();
+  @Output() NewBoardSubmit = new EventEmitter<any>();
 
   private element: any;
   constructor(private modalService: ModalService, private el: ElementRef) {
@@ -43,6 +44,10 @@ export class ModalComponent implements OnInit {
     }
     if (e.target.id === 'new-status-form') {
       this.NewStatusSubmit.emit(e);
+      this.close();
+    }
+    if (e.target.id === 'new-board-form') {
+      this.NewBoardSubmit.emit(e);
       this.close();
     }
     if (e.target.id === 'edit-task-form') {

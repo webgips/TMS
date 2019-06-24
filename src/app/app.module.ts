@@ -19,10 +19,11 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireDatabase } from '@angular/fire/database';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
-  // { path: '', component: HomeComponent, canActivate: [AuthGuard},
-  { path: '', component: BoardComponent, canActivate: [AuthGuard] },
+  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
+  // { path: '', component: BoardComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: '**', redirectTo: '' }
@@ -36,7 +37,8 @@ const routes: Routes = [
     LoginComponent,
     RegisterComponent,
     BoardComponent,
-    NotificationComponent
+    NotificationComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
