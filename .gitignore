@@ -40,9 +40,9 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-/src/environments/*
 
 # System Files
 .DS_Store
 Thumbs.db
 db.ts
+src/environments/environment.ts
