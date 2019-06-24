@@ -49,13 +49,7 @@ const routes: Routes = [
     AngularFireAuthModule,
     AngularFirestoreModule
   ],
-  providers: [
-    // {
-    //   provide: HTTP_INTERCEPTORS,
-    //   useClass: FakeBackendInterceptor,
-    //   multi: true
-    // }
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
