@@ -1,12 +1,16 @@
 <form [formGroup]="registerForm" class="auth__form" novalidate (ngSubmit)="submit()">
   <h1 class="title">Register:</h1>
   <label  class="auth__label">
-    <div class="auth__label-text">Username:</div>
-    <input type="text" name="userName" formControlName="username" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.username.errors }" />
+    <div class="auth__label-text">Email:</div>
+    <input type="text" name="email" formControlName="email" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.email.errors }" />
   </label>
-  <div *ngIf="submitted && inpt.username.errors" class="auth__input-error">
-      <div *ngIf="inpt.username.errors.required">Username is required</div>
+  <div *ngIf="submitted && inpt.email.errors" class="auth__input-error">
+      <div *ngIf="inpt.email.errors.required">Email is required</div>
   </div>
+  <div *ngIf="submitted && inpt.email.errors" class="auth__input-error">
+      <div *ngIf="inpt.email.errors.email">Invalid email address.</div>
+  </div>
+  
   <label  class="auth__label">
     <div class="auth__label-text">Name:</div>
     <input type="name"  name="name" formControlName="name" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.name.errors }" />
@@ -24,6 +28,6 @@
   </div>
   <div class="auth__bottom">
     <button class="btn">Confirm</button>
-    <a routerLink = "/login" class="btn" routerLinkActive="active-link">Login page</a>
+    <a routerLink = "/login" class="btn btn--no-bg" routerLinkActive="active-link">Exit</a>
   </div>
 </form>

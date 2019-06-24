@@ -2,10 +2,10 @@
   <h1 class="title">Login:</h1>
   <label  class="auth__label">
     <div class="auth__label-text">Username:</div>
-    <input type="text" name="username" formControlName="username" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.username.errors }" />
+    <input type="email" name="email" formControlName="email" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.email.errors }" />
   </label>
-  <div *ngIf="submitted && inpt.username.errors" class="auth__input-error">
-      <div *ngIf="inpt.username.errors.required">Username is required</div>
+  <div *ngIf="submitted && inpt.email.errors" class="auth__input-error">
+      <div *ngIf="inpt.email.errors.required">Email is required</div>
   </div>
   <label  class="auth__label">
     <div class="auth__label-text">Password:</div>

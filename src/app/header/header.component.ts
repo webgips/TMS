@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { Router } from '@angular/router';
-import IUser from '../models/IUser';
 
 @Component({
   selector: 'app-header',
@@ -9,9 +8,9 @@ import IUser from '../models/IUser';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  user: IUser;
+  user: any;
   constructor(private authenticationService: AuthenticationService, private router: Router) {
-    this.authenticationService.currentUser.subscribe(x => {
+    this.authenticationService.user.subscribe(x => {
       this.user = x;
     });
   }

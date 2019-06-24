@@ -43,6 +43,12 @@ button{
 	&[disabled]{
 		opacity: 0.5;
 	}
+	&--no-bg{
+		background-color: transparent;
+		color: #007bff;
+		text-decoration: underline;
+		font-size: 20px;
+	}
 }
 .del-btn{
 	float: right;

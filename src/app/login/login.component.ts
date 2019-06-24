@@ -20,13 +20,13 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService
     ) {
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.userValue) {
       this.router.navigate(['/']);
     }
   }
   ngOnInit() {
     this.loginForm = new FormGroup({
-      username: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', Validators.required)
     });
   }
@@ -35,15 +35,15 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) {
       return;
     }
-    this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.password)
-      .pipe(first())
-      .subscribe(
-        data => {
-          this.router.navigate(['/']);
-        },
-        error => {
-          this.notificationService.error(error);
-        });
+    this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password).then(
+      res => {
+        this.router.navigate(['/']);
+      },
+      error => {
+        console.log(error)
+        this.notificationService.error(error.message)
+      }
+    )
   }
   get inpt() { return this.loginForm.controls; }
 }

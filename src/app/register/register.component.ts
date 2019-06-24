@@ -17,11 +17,11 @@ export class RegisterComponent {
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService
   ) {
-    if (this.authenticationService.currentUserValue) {
+    if (this.authenticationService.userValue) {
       this.router.navigate(['/']);
     }
     this.registerForm = new FormGroup({
-      username: new FormControl('', Validators.required),
+      email: new FormControl('', [Validators.required, Validators.email ]),
       name: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
@@ -31,13 +31,16 @@ export class RegisterComponent {
     if (this.registerForm.invalid) {
       return;
     }
-    this.authenticationService.register(this.registerForm.value).subscribe(
-      data => {
+    this.authenticationService.register(this.registerForm.value)
+    .then(
+      val => {
         this.router.navigate(['/login']);
         this.notificationService.message('Registration successful');
+        // this.authenticationService.updateUserData(this.authenticationService.currentUserSubject)
       },
       error => {
-        this.notificationService.error(error);
+        console.log(error)
+        this.notificationService.error(error.message);
       });
   }
   get inpt() { return this.registerForm.controls; }

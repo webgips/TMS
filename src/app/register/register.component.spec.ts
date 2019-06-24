@@ -4,6 +4,8 @@ import { RegisterComponent } from './register.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -14,7 +16,9 @@ describe('RegisterComponent', () => {
       imports: [
         RouterTestingModule,
         HttpClientTestingModule,
-        ReactiveFormsModule
+        ReactiveFormsModule,
+        AngularFireAuthModule,
+        AngularFirestoreModule
       ],
       declarations: [ RegisterComponent],
     })

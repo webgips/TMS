@@ -21,6 +21,7 @@ export class BoardComponent implements OnInit {
   ngOnInit() {
     this.taskList = this.taskListService.getTasks();
     this.statuses = this.taskListService.getStatuses();
+    console.log('init board');
   }
   onOpenTaskModal(task: any) {
     this.modalTaskInfo = task;
