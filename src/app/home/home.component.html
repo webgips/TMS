@@ -1,0 +1,28 @@
+<main class="boards">
+  <app-board *ngFor="let board of boards;  let i = index">
+  </app-board>
+  <a
+      href="#"
+      class="board-add-btn add-btn"
+      (click)="showNewBoardModal($event)"
+      >Add board...
+  </a>
+  <app-modal id="new-board-modal" (NewBoardSubmit)="onNewBoardSubmit($event)">
+    <form class="modal__form" id="new-board-form">
+      <label class="modal__row">
+        <div class="modal__row-name">New board name:</div>
+        <input
+          type="text"
+          name="statusname"
+          [(ngModel)]="newBoard"
+          class="modal__form-input"
+          required
+          #statusname="ngModel"
+        />
+      </label>
+      <button class="modal__form-submit" [disabled]="statusname.invalid">
+        Submit
+      </button>
+    </form>
+  </app-modal> 
+</main>
