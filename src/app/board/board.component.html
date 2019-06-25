@@ -26,7 +26,7 @@
 </main>
 
 
-<app-modal id="task-modal" (ChangeStatus)="onChangeStatus($event)">
+<app-modal id="task-modal">
   <div class="modal__task-title">{{ modalTaskInfo.title }}</div>
   <div class="modal__row">
     <div class="modal__row-name">Description:</div>
@@ -35,26 +35,23 @@
     </div>
   </div>
   <div class="modal__row">
-    <div class="modal__row-name">Author:</div>
-    <div class="modal__task-author">
-      {{ modalTaskInfo.author }}
-    </div>
-  </div>
-  <div class="modal__row">
     <div class="modal__row-name">Status:</div>
     <div class="modal__task-desc"> {{ modalTaskInfo.status }}</div>
   </div>
 </app-modal>
-<app-modal id="task-edit-modal" (updateTaskSubmit)="onTaskUpdateSubmit($event)">
+
+<!-- <app-modal id="task-edit-modal" (updateTaskSubmit)="onTaskUpdateSubmit($event)"> -->
+<app-modal id="task-edit-modal">
   <div class="modal__title">Task edit</div>
-  <form class="modal__form" id="edit-task-form">
+  <form [formGroup]="updateTaskForm" class="modal__form" id="edit-task-form" (ngSubmit)="onTaskUpdateSubmit($event)">
     <div class="modal__row">
       <div class="modal__row-name">Title:</div>
       <input
         type="text"
         class=" modal__form-input"
         name="title"
-        [(ngModel)]="modalTaskInfo.title"
+       
+        formControlName="title"
       />
     </div>
     <div class="modal__row">
@@ -62,15 +59,7 @@
       <input
         class=" modal__form-input"
         name="desc"
-        [(ngModel)]="modalTaskInfo.desc"
-      />
-    </div>
-    <div class="modal__row">
-      <div class="modal__row-name">Author:</div>
-      <input
-        class=" modal__form-input"
-        name="author"
-        [(ngModel)]="modalTaskInfo.author"
+        formControlName="desc"
       />
     </div>
     <div class="modal__row">
@@ -78,15 +67,21 @@
       <select
         class=" modal__form-select"
         name="status"
-        [(ngModel)]="modalTaskInfo.status"
+        formControlName="status"
       >
         <option *ngFor="let status of statuses" [value]="status">
           {{ status }}
         </option>
       </select>
-      <button class="btn del-btn" (click)="deleteTask($event)">
-        Delete task
-      </button>
+      
+    </div>
+    <div class="modal__row">
+        <button class="btn" type="submit">
+          Save
+        </button>
+        <button class="btn del-btn" (click)="deleteTask($event)">
+            Delete task
+        </button>
     </div>
   </form>
 </app-modal>
@@ -116,20 +111,9 @@
         #desc="ngModel"
       />
     </label>
-    <label class="modal__row">
-      <div class="modal__row-name">Task Author:</div>
-      <input
-        type="text"
-        name="author"
-        [(ngModel)]="newTask.author"
-        class="modal__form-input"
-        required
-        #author="ngModel"
-      />
-    </label>
     <button
       class="modal__form-submit btn"
-      [disabled]="title.invalid || desc.invalid || author.invalid"
+      [disabled]="title.invalid || desc.invalid"
     >
       Submit
     </button>

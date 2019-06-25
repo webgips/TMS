@@ -13,14 +13,15 @@ import IBoard from '../models/IBoard';
 })
 export class HomeComponent implements OnInit {
   boards: IBoard[] = [];
-  private selectedBoard: IBoard;
+  private currentBoard: string = localStorage.getItem('currentBoard') ?
+                          JSON.parse(localStorage.getItem('currentBoard')) : null;
   private newBoard = '';
   constructor(private taskListService: TaskListService, private modalService: ModalService ) {
     taskListService.boards.subscribe(x => this.boards = x);
   }
 
   ngOnInit() {
-    
+
   }
   showNewBoardModal(e: any) {
     this.modalService.open('new-board-modal');
@@ -28,6 +29,10 @@ export class HomeComponent implements OnInit {
   onNewBoardSubmit(e: any) {
     this.taskListService.createNewBoard(this.newBoard);
     this.newBoard = '';
+  }
+  onChange(boardId: string) {
+    this.currentBoard = boardId;
+    localStorage.setItem('currentBoard', boardId);
   }
 
 }

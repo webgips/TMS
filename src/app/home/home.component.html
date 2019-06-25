@@ -2,9 +2,10 @@
   <div class="boards__top" *ngIf="boards.length">
     <div>Select board: </div>
     <select
+      (ngModelChange)="onChange($event)"
       class="boards__select"
       name="board"
-      [(ngModel)]="currentBoard"
+      [ngModel]="currentBoard"
     >
       <option *ngFor="let board of boards" [value]="board.id">
         {{ board.name }}

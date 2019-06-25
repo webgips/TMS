@@ -16,7 +16,6 @@ export class LoginComponent implements OnInit {
   submitted = false;
   constructor(
     private router: Router,
-    private route: ActivatedRoute,
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService
     ) {
@@ -40,9 +39,9 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/']);
       },
       error => {
-        this.notificationService.error(error.message)
+        this.notificationService.error(error.message);
       }
-    )
+    );
   }
   get inpt() { return this.loginForm.controls; }
 }

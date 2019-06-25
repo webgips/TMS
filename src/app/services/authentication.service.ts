@@ -34,7 +34,7 @@ export class AuthenticationService {
   public get userValue() {
     return this.currentUserSubject.value;
   }
-  public get userdata(){
+  public get userdata() {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userValue.uid}`);
     return userRef.get();
   }
@@ -48,7 +48,7 @@ export class AuthenticationService {
       displayName: user.displayName,
       photoURL: user.photoURL,
       boards: user.boards
-    }
+    };
     return userRef.set(data, { merge: true });
   }
   register(user: any) {
@@ -59,6 +59,6 @@ export class AuthenticationService {
   }
   logout() {
     this.afAuth.auth.signOut();
-    this.currentUserSubject.next(null)
+    this.currentUserSubject.next(null);
   }
 }

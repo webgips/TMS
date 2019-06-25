@@ -9,6 +9,9 @@ export class ModalService {
   add(modal: any) {
     this.modals.push(modal);
   }
+  clearAll() {
+    this.modals = [];
+  }
   open(id: string) {
     const modal: any = this.modals.filter(x => x.id === id)[0];
     modal.open();

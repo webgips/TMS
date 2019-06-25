@@ -3,6 +3,7 @@ import { TaskListService } from '../services/task-list.service';
 import { ModalService } from '../services/modal.service';
 import ITask from '../models/ITask';
 import IBoard from '../models/IBoard';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -15,31 +16,47 @@ import IBoard from '../models/IBoard';
 })
 
 export class BoardComponent implements OnInit {
-  private modalTaskInfo: any = {};
-  private statuses: string[] = [];
+  updateTaskForm: FormGroup;
+  private modalTaskInfo: ITask = {
+    title: '',
+    id: null,
+    desc: '',
+    status: ''
+  };
   private newTask: ITask = {
     title: '',
     id: null,
     desc: '',
     status: ''
   };
+  private statuses: string[] = [];
   private newStatus = '';
   @Input() board: IBoard;
+
   constructor(private taskListService: TaskListService, private modalService: ModalService) {}
   ngOnInit() {
-    console.log('board init')
-    if(this.board) {
+    this.modalService.clearAll();
+    if (this.board) {
       this.statuses = this.taskListService.getStatuses(this.board.tasks);
     }
+    this.updateTaskForm = new FormGroup({
+      title: new FormControl('', Validators.required),
+      desc: new FormControl('', Validators.required),
+      status: new FormControl('', Validators.required),
+      id: new FormControl('')
+    });
   }
   onOpenTaskModal(task: any) {
     this.modalTaskInfo = task;
   }
   onOpenTaskEditModal(task: any) {
-    this.modalTaskInfo = task;
-  }
-  onChangeStatus(e: any) {
-    this.taskListService.moveTask(this.modalTaskInfo, e.target.value);
+    // this.modalTaskInfo = task;
+    this.updateTaskForm.setValue({
+      title: task.title,
+      desc:  task.desc,
+      status: task.status,
+      id: task.id
+    });
   }
   showNewTaskModal(status: string) {
     this.modalService.open('new-task-modal');
@@ -56,7 +73,11 @@ export class BoardComponent implements OnInit {
     this.taskListService.createNewTask(this.newTask, this.board.name);
   }
   onTaskUpdateSubmit(e: any) {
-    this.taskListService.updateTask(this.modalTaskInfo);
+    if (this.updateTaskForm.invalid) {
+      return;
+    }
+    // this.taskListService.updateTask({...this.modalTaskInfo, ...this.updateTaskForm.value} );
+    this.taskListService.updateTask(this.updateTaskForm.value, this.board.name);
   }
   showNewStatusModal(e: any) {
     this.modalService.open('new-status-modal');

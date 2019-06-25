@@ -22,7 +22,6 @@ body{
 .container{
 	padding: 0 20px;
 }
-
 button{
 	cursor: pointer;
 }
@@ -41,7 +40,7 @@ button{
 	text-decoration: none;
 	line-height: 40px;
 	&[disabled]{
-		opacity: 0.5;
+		opacity: .5;
 	}
 	&--no-bg{
 		background-color: transparent;
