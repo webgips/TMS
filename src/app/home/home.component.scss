@@ -1,0 +1,22 @@
+.boards{
+	&__top{
+		display: flex;
+		align-items: center;
+		color: #fff;
+		margin-bottom: 30px;
+		font-size: 24px;
+	}
+	&__select{
+		display: block;
+		height: 40px;
+		min-width: 60px;
+		padding: 6px 8px;
+		padding-right: 26px;
+		font-weight: 700;
+		font-size: 18px;
+		border: none;
+		border-radius: 3px;
+		text-align: center;
+		margin-left: 14px;
+	}
+}

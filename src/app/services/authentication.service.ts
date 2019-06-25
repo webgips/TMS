@@ -50,7 +50,6 @@ export class AuthenticationService {
       boards: user.boards
     }
     return userRef.set(data, { merge: true });
-
   }
   register(user: any) {
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);

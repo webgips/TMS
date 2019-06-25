@@ -40,7 +40,7 @@ export class ModalComponent implements OnInit {
   submit(e: any) {
     if (e.target.id === 'new-task-form') {
       this.NewTaskSubmit.emit(e);
-      this.close();
+      // this.close();
     }
     if (e.target.id === 'new-status-form') {
       this.NewStatusSubmit.emit(e);

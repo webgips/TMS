@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ModalService } from '../services/modal.service';
+import ITask from '../models/ITask';
+import IBoard from '../models/IBoard';
+
 
 @Component({
   selector: 'app-board',
@@ -10,17 +13,18 @@ import { ModalService } from '../services/modal.service';
     TaskListService
   ]
 })
+
 export class BoardComponent implements OnInit {
-  public taskList: any[] = [];
   private modalTaskInfo: any = {};
   private statuses: string[] = [];
-  private newTask: any = {};
+  private newTask: ITask = {};
   private newStatus = '';
+  @Input() board: IBoard;
   constructor(private taskListService: TaskListService, private modalService: ModalService) { }
 
   ngOnInit() {
     this.taskList = this.taskListService.getTasks();
-    this.statuses = this.taskListService.getStatuses();
+    this.statuses = this.taskListService.getStatuses(this.board.tasks);
   }
   onOpenTaskModal(task: any) {
     this.modalTaskInfo = task;
@@ -34,11 +38,11 @@ export class BoardComponent implements OnInit {
   showNewTaskModal(status: string) {
     this.modalService.open('new-task-modal');
     this.newTask = {};
-    this.newTask.id = this.taskList.length;
+    this.newTask.id = this.board.tasks.length;
     this.newTask.status = status;
   }
   onNewTaskSubmit(e: any) {
-    this.taskListService.createNewTask(this.newTask);
+    this.taskListService.createNewTask(this.newTask, this.board.name);
   }
   onTaskUpdateSubmit(e: any) {
     this.taskListService.updateTask(this.modalTaskInfo);

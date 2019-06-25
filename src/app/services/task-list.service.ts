@@ -1,86 +1,35 @@
 import { Injectable } from '@angular/core';
 import ITask from '../models/ITask';
-import { AngularFirestore } from '@angular/fire/firestore';
+import IBoard from '../models/IBoard'
+import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { User } from 'firebase';
 
 @Injectable()
 export class TaskListService {
   private statusList: string[] = [];
   modalData: ITask;
-  private boards: ITask[][] = [];
+  private _boards: BehaviorSubject<IBoard[]> = new BehaviorSubject([]);
+  public boards: Observable<IBoard[]> = this._boards.asObservable();
   private taskList: ITask[] = [];
-  userRef = this.afs.doc(`users/${this.authenticationService.userValue.uid}`);
-  // private taskList: ITask[] = [
-  //   {
-  //     id: 0,
-  //     title: 'task 1',
-  //     author: 'Petya',
-  //     desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  //     status: 'To do'
-  //   },
-  //   {
-  //     id: 1,
-  //     title: 'task 2',
-  //     author: 'Alex',
-  //     desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  //     status: 'To do'
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'task 3',
-  //     author: 'Alex',
-  //     desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  //     status: 'Doing'
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'task 4',
-  //     author: 'Vasya',
-  //     desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  //     status: 'Doing'
-  //   },
-  //   {
-  //     id: 4,
-  //     title: 'task 5',
-  //     author: 'Petya',
-  //     desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  //     status: 'Done'
-  //   },
-  //   {
-  //     id: 5,
-  //     title: 'task 6',
-  //     author: 'Alex',
-  //     desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  //     status: 'Done'
-  //   },
-  //   {
-  //     id: 6,
-  //     title: 'task 7 new',
-  //     author: 'masha',
-  //     desc: 'lorem ipsum lorem ipsum lorem ipsum lorem ipsum',
-  //     status: 'Done'
-  //   }
-  // ];
-  // getTasks = (): ITask[] => this.taskList;
+  private boardsRef: AngularFirestoreCollection<IBoard> = this.afs
+                .doc(`users/${this.authenticationService.userValue.uid}`)
+                .collection('boards');
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
-    // this.afs.doc(`users/${this.authenticationService.userValue.uid}`).set({ boards : this.boards });
-    // this.getTasks().subscribe(data => console.log(data))
-    // if()
-    this.userRef.get().subscribe(data => {
-      this.boards = data.get('boards')
-      console.log(data.get('boards'));
+    this.boardsRef.valueChanges().subscribe(data => {
+      this._boards.next(data);
     });
-    // console.log(this.getBoards())
   }
-  getTasks = (): any => {
-    return this.afs.doc(`users/${this.authenticationService.userValue.uid}`).get()
+  getTasks = () => {
+    return this.afs.doc(`users/${this.authenticationService.userValue.uid}`).get();
   }
-  getBoards = (): any => {
+  getBoards = (): Observable<IBoard[]> => {
     return this.boards;
   }
 
-  getStatuses = (): string[] => {
-    this.taskList.forEach(task => !this.statusList.includes(task.status) ? this.statusList.push(task.status) : false );
+  getStatuses = (taskList: ITask[]): string[] => {
+    taskList.forEach(task => !this.statusList.includes(task.status) ? this.statusList.push(task.status) : false );
     return this.statusList;
   }
   setModalData(taskInfo: ITask) {
@@ -92,22 +41,20 @@ export class TaskListService {
   deleteTask(task: ITask) {
     this.taskList.splice(this.taskList.map(item => item.id).indexOf(task.id), 1);
   }
-  createNewTask(task: ITask) {
-    this.taskList.push(task);
+  createNewTask(task: ITask, currentBoard: string) {
+    this.boardsRef.doc(currentBoard).get().subscribe(data => {
+      const newTasks = data.get('tasks');
+      newTasks.push(task);
+      this.boardsRef.doc(currentBoard).set({tasks: newTasks}, {merge: true});
+    });
   }
   createNewStatus(status: string) {
     this.statusList.push(status);
   }
   createNewBoard(val: string) {
-    this.userRef.get().subscribe(data => {
-      // data.{merge: true });
-      const newBoards = data.get('boards')
-      console.log(newBoards)
-      newBoards.push({name: val, tasks: []})
-      data.ref.set({boards: newBoards}, {merge: true});
-    })
-    console.log(val);
+    this.boardsRef.doc(val).set({name: val, id: this._boards.value.length, tasks: []});
   }
   updateTask(task: ITask) {
+
   }
 }

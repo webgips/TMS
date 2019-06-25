@@ -1,24 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ModalService } from '../services/modal.service';
+import IBoard from '../models/IBoard';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./home.component.scss', '../modal/modal.component.scss'],
   providers: [
     TaskListService
   ]
 })
 export class HomeComponent implements OnInit {
-  boards: [] = [];
+  boards: IBoard[] = [];
+  private selectedBoard: IBoard;
   private newBoard = '';
   constructor(private taskListService: TaskListService, private modalService: ModalService ) {
-    this.boards = taskListService.getBoards();
+    taskListService.boards.subscribe(x => this.boards = x);
   }
 
   ngOnInit() {
-    console.log(this.boards)
+    
   }
   showNewBoardModal(e: any) {
     this.modalService.open('new-board-modal');
