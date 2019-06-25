@@ -1,24 +1,23 @@
 import { Injectable } from '@angular/core';
 import ITask from '../models/ITask';
-import IBoard from '../models/IBoard'
-import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/firestore';
+import IBoard from '../models/IBoard';
+import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { User } from 'firebase';
 
 @Injectable()
 export class TaskListService {
   private statusList: string[] = [];
   modalData: ITask;
-  private _boards: BehaviorSubject<IBoard[]> = new BehaviorSubject([]);
-  public boards: Observable<IBoard[]> = this._boards.asObservable();
+  private boardsSubject: BehaviorSubject<IBoard[]> = new BehaviorSubject([]);
+  public boards: Observable<IBoard[]> = this.boardsSubject.asObservable();
   private taskList: ITask[] = [];
   private boardsRef: AngularFirestoreCollection<IBoard> = this.afs
                 .doc(`users/${this.authenticationService.userValue.uid}`)
                 .collection('boards');
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
     this.boardsRef.valueChanges().subscribe(data => {
-      this._boards.next(data);
+      this.boardsSubject.next(data);
     });
   }
   getTasks = () => {
@@ -35,9 +34,9 @@ export class TaskListService {
   setModalData(taskInfo: ITask) {
     this.modalData = taskInfo;
   }
-  moveTask(task: ITask, val: string) {
-    this.taskList.filter(item => item.id === task.id)[0].status = val;
-  }
+  // moveTask(task: ITask, val: string) {
+  //   this.taskList.filter(item => item.id === task.id)[0].status = val;
+  // }
   deleteTask(task: ITask) {
     this.taskList.splice(this.taskList.map(item => item.id).indexOf(task.id), 1);
   }
@@ -52,9 +51,17 @@ export class TaskListService {
     this.statusList.push(status);
   }
   createNewBoard(val: string) {
-    this.boardsRef.doc(val).set({name: val, id: this._boards.value.length, tasks: []});
+    this.boardsRef.doc(val).set({name: val, id: this.boardsSubject.value.length, tasks: []});
   }
-  updateTask(task: ITask) {
-
+  updateTask(task: ITask, currentBoard: string) {
+    this.boardsRef.doc(currentBoard).get().subscribe(data => {
+      const newTasks = data.get('tasks');
+      newTasks.forEach((el, index) => {
+        if (el.id === task.id) {
+          newTasks[index] = task;
+        }
+      });
+      this.boardsRef.doc(currentBoard).set({tasks: newTasks}, {merge: true});
+    });
   }
 }
