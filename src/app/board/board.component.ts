@@ -17,14 +17,20 @@ import IBoard from '../models/IBoard';
 export class BoardComponent implements OnInit {
   private modalTaskInfo: any = {};
   private statuses: string[] = [];
-  private newTask: ITask = {};
+  private newTask: ITask = {
+    title: '',
+    id: null,
+    desc: '',
+    status: ''
+  };
   private newStatus = '';
   @Input() board: IBoard;
-  constructor(private taskListService: TaskListService, private modalService: ModalService) { }
-
+  constructor(private taskListService: TaskListService, private modalService: ModalService) {}
   ngOnInit() {
-    this.taskList = this.taskListService.getTasks();
-    this.statuses = this.taskListService.getStatuses(this.board.tasks);
+    console.log('board init')
+    if(this.board) {
+      this.statuses = this.taskListService.getStatuses(this.board.tasks);
+    }
   }
   onOpenTaskModal(task: any) {
     this.modalTaskInfo = task;
@@ -37,7 +43,12 @@ export class BoardComponent implements OnInit {
   }
   showNewTaskModal(status: string) {
     this.modalService.open('new-task-modal');
-    this.newTask = {};
+    this.newTask = {
+      title: '',
+      id: null,
+      desc: '',
+      status: ''
+    };
     this.newTask.id = this.board.tasks.length;
     this.newTask.status = status;
   }

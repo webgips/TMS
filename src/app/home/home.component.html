@@ -1,8 +1,7 @@
 <main class="boards">
-  <div class="boards__top">
+  <div class="boards__top" *ngIf="boards.length">
     <div>Select board: </div>
     <select
-      *ngIf="boards.length"
       class="boards__select"
       name="board"
       [(ngModel)]="currentBoard"

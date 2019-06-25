@@ -7,6 +7,9 @@
   <div *ngIf="submitted && inpt.email.errors" class="auth__input-error">
       <div *ngIf="inpt.email.errors.required">Email is required</div>
   </div>
+  <div *ngIf="submitted && inpt.email.errors" class="auth__input-error">
+      <div *ngIf="inpt.email.errors.email">Invalid email address.</div>
+  </div>
   <label  class="auth__label">
     <div class="auth__label-text">Password:</div>
     <input type="password"  name="password" formControlName="password" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.password.errors }" />
