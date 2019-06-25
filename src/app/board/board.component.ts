@@ -50,7 +50,7 @@ export class BoardComponent implements OnInit {
     this.modalTaskInfo = task;
   }
   onOpenTaskEditModal(task: any) {
-    // this.modalTaskInfo = task;
+    this.modalTaskInfo = task;
     this.updateTaskForm.setValue({
       title: task.title,
       desc:  task.desc,
@@ -86,8 +86,10 @@ export class BoardComponent implements OnInit {
     this.taskListService.createNewStatus(this.newStatus);
     this.newStatus = '';
   }
-  deleteTask(e: any) {
-    this.taskListService.deleteTask(this.modalTaskInfo);
+  deleteTask(e: Event) {
+    e.stopPropagation();
+    e.preventDefault();
+    this.taskListService.deleteTask(this.modalTaskInfo, this.board.name);
     this.modalService.closeAll();
   }
 

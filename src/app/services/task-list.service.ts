@@ -37,14 +37,18 @@ export class TaskListService {
   // moveTask(task: ITask, val: string) {
   //   this.taskList.filter(item => item.id === task.id)[0].status = val;
   // }
-  deleteTask(task: ITask) {
-    this.taskList.splice(this.taskList.map(item => item.id).indexOf(task.id), 1);
+  deleteTask(task: ITask, currentBoard) {
+    this.boardsRef.doc(currentBoard).get().subscribe(data => {
+      const newTasksList = data.get('tasks');
+      newTasksList.splice(newTasksList.map(item => item.id).indexOf(task.id), 1);
+      this.boardsRef.doc(currentBoard).set({tasks: newTasksList}, {merge: true});
+    });
   }
   createNewTask(task: ITask, currentBoard: string) {
     this.boardsRef.doc(currentBoard).get().subscribe(data => {
-      const newTasks = data.get('tasks');
-      newTasks.push(task);
-      this.boardsRef.doc(currentBoard).set({tasks: newTasks}, {merge: true});
+      const newTasksList = data.get('tasks');
+      newTasksList.push(task);
+      this.boardsRef.doc(currentBoard).set({tasks: newTasksList}, {merge: true});
     });
   }
   createNewStatus(status: string) {
@@ -55,13 +59,13 @@ export class TaskListService {
   }
   updateTask(task: ITask, currentBoard: string) {
     this.boardsRef.doc(currentBoard).get().subscribe(data => {
-      const newTasks = data.get('tasks');
-      newTasks.forEach((el, index) => {
-        if (el.id === task.id) {
-          newTasks[index] = task;
+      const newTasksList = data.get('tasks');
+      newTasksList.forEach((item, index) => {
+        if (item.id === task.id) {
+          newTasksList[index] = task;
         }
       });
-      this.boardsRef.doc(currentBoard).set({tasks: newTasks}, {merge: true});
+      this.boardsRef.doc(currentBoard).set({tasks: newTasksList}, {merge: true});
     });
   }
 }
