@@ -11,6 +11,7 @@ import { User } from 'firebase';
 export class AuthenticationService {
   public currentUserSubject: BehaviorSubject<User>;
   public user: Observable<User>;
+  public userId;
   constructor(
     private afAuth: AngularFireAuth,
     private afs: AngularFirestore,
@@ -21,17 +22,18 @@ export class AuthenticationService {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSubject.next(user);
+        this.userId = this.afAuth.auth.currentUser.uid;
       } else {
         localStorage.setItem('user', null);
       }
     });
   }
 
-  public get userValue() {
-    return this.currentUserSubject.value;
-  }
+  // public get userValue() {
+  //   return this.currentUserSubject.value;
+  // }
   public get userdata() {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userValue.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userId}`);
     // const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.uid}`);
     return userRef.get();
   }
@@ -56,5 +58,6 @@ export class AuthenticationService {
   logout() {
     this.afAuth.auth.signOut();
     this.currentUserSubject.next(null);
+    this.userId = null;
   }
 }
