@@ -6,6 +6,8 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 describe('RegisterComponent', () => {
   let component: RegisterComponent;
@@ -18,7 +20,8 @@ describe('RegisterComponent', () => {
         HttpClientTestingModule,
         ReactiveFormsModule,
         AngularFireAuthModule,
-        AngularFirestoreModule
+        AngularFirestoreModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig)
       ],
       declarations: [ RegisterComponent],
     })

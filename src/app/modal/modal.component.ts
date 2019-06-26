@@ -22,7 +22,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     const modal = this;
-    document.addEventListener('keyup', (e: Event) => {
+    document.addEventListener('keyup', (e: any) => {
       if (e.key === 'Escape') {
         modal.close();
       }

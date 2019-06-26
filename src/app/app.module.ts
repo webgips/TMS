@@ -12,12 +12,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { BoardComponent } from './board/board.component';
 import { AuthGuard } from './auth.guard';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-// import { FakeBackendInterceptor } from './fake-backend.interceptor';
 import { NotificationComponent } from './notification/notification.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
-import { AngularFireDatabase } from '@angular/fire/database';
-import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 

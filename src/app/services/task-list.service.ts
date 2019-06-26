@@ -11,22 +11,16 @@ export class TaskListService {
   modalData: ITask;
   private boardsSubject: BehaviorSubject<IBoard[]> = new BehaviorSubject([]);
   public boards: Observable<IBoard[]> = this.boardsSubject.asObservable();
-  private taskList: ITask[] = [];
-  private boardsRef: AngularFirestoreCollection<IBoard> = this.afs
-                .doc(`users/${this.authenticationService.userValue.uid}`)
-                .collection('boards');
+  private boardsRef: AngularFirestoreCollection<IBoard>;
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
+    this.boardsRef = this.afs.doc(`users/${this.authenticationService.userValue.uid}`).collection('boards');
     this.boardsRef.valueChanges().subscribe(data => {
       this.boardsSubject.next(data);
     });
   }
-  getTasks = () => {
-    return this.afs.doc(`users/${this.authenticationService.userValue.uid}`).get();
-  }
   getBoards = (): Observable<IBoard[]> => {
     return this.boards;
   }
-
   getStatuses = (taskList: ITask[]): string[] => {
     taskList.forEach(task => !this.statusList.includes(task.status) ? this.statusList.push(task.status) : false );
     return this.statusList;
@@ -34,9 +28,6 @@ export class TaskListService {
   setModalData(taskInfo: ITask) {
     this.modalData = taskInfo;
   }
-  // moveTask(task: ITask, val: string) {
-  //   this.taskList.filter(item => item.id === task.id)[0].status = val;
-  // }
   deleteTask(task: ITask, currentBoard) {
     this.boardsRef.doc(currentBoard).get().subscribe(data => {
       const newTasksList = data.get('tasks');

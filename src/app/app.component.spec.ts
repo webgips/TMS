@@ -2,12 +2,16 @@ import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
 import { ModalComponent } from './modal/modal.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { RouterTestingModule } from '@angular/router/testing';
 import { BoardComponent } from './board/board.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NotificationComponent } from './notification/notification.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from 'src/environments/environment';
 
 describe('AppComponent', () => {
   let component: AppComponent;
@@ -17,7 +21,11 @@ describe('AppComponent', () => {
       imports: [
         RouterTestingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        ReactiveFormsModule,
+        AngularFireAuthModule,
+        AngularFirestoreModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig)
       ],
       declarations: [
         AppComponent,

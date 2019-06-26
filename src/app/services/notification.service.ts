@@ -9,7 +9,7 @@ import { Router, NavigationStart } from '@angular/router';
 export class NotificationService {
   private notification = new Subject<INotification>();
   constructor(private router: Router) {
-    router.events.subscribe((val) => {
+    this.router.events.subscribe((val) => {
       if (val instanceof NavigationStart ) {
         this.clear();
       }
