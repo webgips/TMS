@@ -7,8 +7,8 @@
         *ngIf="task.status == status"
         [task]="task"
         [status]="task.status"
-        (openTaskModal)="onOpenTaskModal($event, task, status)"
-        (openTaskEditModal)="onOpenTaskEditModal($event, task, status)"
+        (openTaskModal)="onOpenTaskModal(task)"
+        (openTaskEditModal)="onOpenTaskEditModal(task)"
       ></app-task>
     </ng-container>
     <a href="#" class="add-task add-btn" (click)="showNewTaskModal(status)"

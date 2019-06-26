@@ -22,7 +22,6 @@ export class AuthenticationService {
       this.user = this.currentUserSubject.asObservable();
       this.afAuth.authState.subscribe(user => {
         if (user) {
-          // console.log(this.userdata)
           localStorage.setItem('user', JSON.stringify(user));
           this.currentUserSubject.next(user);
         } else {

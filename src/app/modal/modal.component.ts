@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { ModalService } from '../services/modal.service';
+
 @Component({
   selector: 'app-modal',
   templateUrl: './modal.component.html',
@@ -21,13 +22,7 @@ export class ModalComponent implements OnInit {
 
   ngOnInit(): void {
     const modal = this;
-
-    this.element.addEventListener('click', (e: any) => {
-      if (e.target.className === 'modal__wrap') {
-        modal.close();
-      }
-    });
-    document.addEventListener('keyup', (e: any) => {
+    document.addEventListener('keyup', (e: Event) => {
       if (e.key === 'Escape') {
         modal.close();
       }

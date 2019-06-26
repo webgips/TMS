@@ -46,10 +46,10 @@ export class BoardComponent implements OnInit {
       id: new FormControl('')
     });
   }
-  onOpenTaskModal(task: any) {
+  onOpenTaskModal(task: ITask) {
     this.modalTaskInfo = task;
   }
-  onOpenTaskEditModal(task: any) {
+  onOpenTaskEditModal(task: ITask) {
     this.modalTaskInfo = task;
     this.updateTaskForm.setValue({
       title: task.title,
@@ -69,20 +69,19 @@ export class BoardComponent implements OnInit {
     this.newTask.id = this.board.tasks.length;
     this.newTask.status = status;
   }
-  onNewTaskSubmit(e: any) {
+  onNewTaskSubmit(e: Event) {
     this.taskListService.createNewTask(this.newTask, this.board.name);
   }
-  onTaskUpdateSubmit(e: any) {
+  onTaskUpdateSubmit(e: Event) {
     if (this.updateTaskForm.invalid) {
       return;
     }
-    // this.taskListService.updateTask({...this.modalTaskInfo, ...this.updateTaskForm.value} );
     this.taskListService.updateTask(this.updateTaskForm.value, this.board.name);
   }
-  showNewStatusModal(e: any) {
+  showNewStatusModal(e: Event) {
     this.modalService.open('new-status-modal');
   }
-  onNewStatusSubmit(e: any) {
+  onNewStatusSubmit(e: Event) {
     this.taskListService.createNewStatus(this.newStatus);
     this.newStatus = '';
   }
