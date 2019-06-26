@@ -65,7 +65,7 @@
     <div class="modal__row">
       <div class="modal__row-name">Status:</div>
       <select
-        class=" modal__form-select"
+        class="modal__form-select select"
         name="status"
         formControlName="status"
       >
@@ -75,12 +75,12 @@
       </select>
       
     </div>
-    <div class="modal__row">
-        <button class="btn" type="submit">
-          Save
-        </button>
+    <div class="modal__bottom">
         <button class="btn del-btn" (click)="deleteTask($event)">
             Delete task
+        </button>
+        <button class="btn" type="submit">
+            Save
         </button>
     </div>
   </form>

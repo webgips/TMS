@@ -1,25 +1,27 @@
 <main class="boards">
-  <div class="boards__top" *ngIf="boards.length">
-    <div>Select board: </div>
+  <div class="boards__top" >
+    <div *ngIf="boards.length" >Select board: </div>
     <select
       (ngModelChange)="onChange($event)"
-      class="boards__select"
+      class="boards__select select"
       name="board"
       [ngModel]="currentBoard"
+      *ngIf="boards.length"
     >
       <option *ngFor="let board of boards" [value]="board.id">
         {{ board.name }}
       </option>
     </select>
+    <a href="#" class="board-add-btn add-btn" (click)="showNewBoardModal($event)"
+    >Add board...
+    </a>
   </div>
   <ng-container *ngFor="let board of boards; let i = index" >
       <app-board  *ngIf="board.id == currentBoard" [board]="board">
         </app-board>
   </ng-container>
   
-  <a  *ngIf="!currentBoard" href="#" class="board-add-btn add-btn" (click)="showNewBoardModal($event)"
-    >Add board...
-  </a>
+  
   <app-modal id="new-board-modal" (NewBoardSubmit)="onNewBoardSubmit($event)">
     <form class="modal__form" id="new-board-form">
       <label class="modal__row">
