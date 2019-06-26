@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService
     ) {
-    if (this.authenticationService.userValue) {
+    if (this.authenticationService.userId) {
       this.router.navigate(['/']);
     }
   }

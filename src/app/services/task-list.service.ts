@@ -13,7 +13,7 @@ export class TaskListService {
   public boards: Observable<IBoard[]> = this.boardsSubject.asObservable();
   private boardsRef: AngularFirestoreCollection<IBoard>;
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
-    this.boardsRef = this.afs.doc(`users/${this.authenticationService.userValue.uid}`).collection('boards');
+    this.boardsRef = this.afs.doc(`users/${this.authenticationService.userId}`).collection('boards');
     this.boardsRef.valueChanges().subscribe(data => {
       this.boardsSubject.next(data);
     });
