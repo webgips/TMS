@@ -19,7 +19,6 @@ export class AuthenticationService {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.currentUserSubject.asObservable();
     this.afAuth.authState.subscribe(user => {
-      console.log('autch state')
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSubject.next(user);
@@ -34,8 +33,9 @@ export class AuthenticationService {
     return this.currentUserSubject.value;
   }
   public get userdata() {
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userId}`);
-    // const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.uid}`);
+    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userValue.uid}`);
+      // const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.uid}`);
+      // console.log(this.userValue)
     return userRef.get();
   }
   public updateUserData(user) {

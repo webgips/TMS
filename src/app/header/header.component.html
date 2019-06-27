@@ -1,6 +1,10 @@
-<header class="header" *ngIf="user">
-<div class="header__user" >
+<header class="header" *ngIf="user" >
+<div class="header__user" *ngIf="user.email">
     Hi {{user.email}}!
 </div>
+<div class="header__user" *ngIf="user.email == null">
+    Hi anonym!
+</div>
+
 <a class="header__logout" (click)="logout()">Logout</a>
 </header>

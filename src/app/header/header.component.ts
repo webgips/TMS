@@ -8,11 +8,14 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  user: any;
-  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  private user;
+  constructor(private authenticationService: AuthenticationService, private router: Router) {    
     this.authenticationService.user.subscribe(x => {
       this.user = x;
-    });
+    })
+    // this.authenticationService.userdata.subscribe(x => {
+    //   this.username = x.get('displayName')
+    // })
   }
   logout() {
     this.authenticationService.logout();
