@@ -19,6 +19,7 @@ export class AuthenticationService {
     this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
     this.user = this.currentUserSubject.asObservable();
     this.afAuth.authState.subscribe(user => {
+      console.log('autch state')
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSubject.next(user);
@@ -53,6 +54,9 @@ export class AuthenticationService {
   }
   login(email: string, password: string) {
     return this.afAuth.auth.signInWithEmailAndPassword(email, password);
+  }
+  anonymosLogin() {
+    return this.afAuth.auth.signInAnonymously();
   }
   logout() {
     this.afAuth.auth.signOut();

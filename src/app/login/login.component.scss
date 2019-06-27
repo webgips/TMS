@@ -35,5 +35,14 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		@media screen  and (max-width: 480px){
+			flex-wrap: wrap;
+			.btn{
+				margin-bottom: 10px;
+				&.anon{
+					order: 1;
+				}
+			}
+		}
 	}
 }
