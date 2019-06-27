@@ -18,22 +18,16 @@ export class HomeComponent implements OnInit, OnDestroy {
   private currentBoard: string = localStorage.getItem('currentBoard') ?
                           JSON.parse(localStorage.getItem('currentBoard')) : null;
   private newBoard = '';
-  private ngUnsubscribe: Subject<void> = new Subject();
-  constructor(private taskListService: TaskListService, private modalService: ModalService ) {
-    this.taskListService.getBoards().subscribe(boards => this.boards = boards);
-    // taskListService.boards.subscribe(x => this.boards = x);
-  }
+  constructor(private taskListService: TaskListService, private modalService: ModalService ) {  }
   ngOnInit() {
-    
+    this.taskListService.getBoards().subscribe(boards => this.boards = boards);
   }
   ngOnDestroy() {
-    this.ngUnsubscribe.next();
-    this.ngUnsubscribe.complete();
   }
-  showNewBoardModal(e: any) {
+  showNewBoardModal(e: Event) {
     this.modalService.open('new-board-modal');
   }
-  onNewBoardSubmit(e: any) {
+  onNewBoardSubmit(e: Event) {
     this.taskListService.createNewBoard(this.newBoard);
     this.newBoard = '';
   }

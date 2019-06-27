@@ -4,6 +4,7 @@ import IBoard from '../models/IBoard';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { first, delay } from 'rxjs/operators';
 
 @Injectable()
 export class TaskListService {
@@ -12,11 +13,18 @@ export class TaskListService {
   private boardsSubject: BehaviorSubject<IBoard[]> = new BehaviorSubject([]);
   public boards: Observable<IBoard[]> = this.boardsSubject.asObservable();
   private boardsRef: AngularFirestoreCollection<IBoard>;
+  private userId;
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
-    this.boardsRef = this.afs.doc(`users/${this.authenticationService.userValue.uid}`).collection('boards');
-    this.boardsRef.valueChanges().subscribe(data => {
-      this.boardsSubject.next(data);
-    });
+    this.authenticationService.user.subscribe(data => {
+      if (data && data.uid){
+        this.userId = data.uid;
+        this.boardsRef = this.afs.doc(`users/${this.userId}`).collection('boards');
+        this.boardsRef.valueChanges().subscribe(data => {
+          this.boardsSubject.next(data);
+        });
+      }
+    })
+   
   }
   getBoards = (): Observable<IBoard[]> => {
     return this.boards;

@@ -61,9 +61,10 @@ describe('BoardComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should call taskListService ', () => {
-    expect(spy.calls.any()).toBeTruthy();
-  });
+
+  // it('should call taskListService ', () => {
+  //   expect(spy.calls.any()).toBeTruthy();
+  // });
 
   // it('should set tasks', () => {
   //   expect(component.board.tasks).toEqual(mockTasks);

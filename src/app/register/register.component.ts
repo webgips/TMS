@@ -40,8 +40,7 @@ export class RegisterComponent {
           uid: val.user.uid,
           email: val.user.email,
           displayName: this.registerForm.value.name,
-          photoURL: val.user.photoURL,
-          boards: []
+          photoURL: val.user.photoURL
         };
 
         this.authenticationService.updateUserData(data);

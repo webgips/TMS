@@ -22,6 +22,7 @@ export class AuthenticationService {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSubject.next(user);
+        this.userId = user.uid;
       } else {
         localStorage.setItem('user', null);
       }
@@ -43,8 +44,7 @@ export class AuthenticationService {
       uid: user.uid,
       email: user.email,
       displayName: user.displayName,
-      photoURL: user.photoURL,
-      boards: user.boards
+      photoURL: user.photoURL
     };
     return userRef.set(data, { merge: true });
   }
