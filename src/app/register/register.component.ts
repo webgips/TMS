@@ -34,7 +34,7 @@ export class RegisterComponent {
     this.authenticationService.register(this.registerForm.value)
     .then(
       val => {
-        this.router.navigate(['/login']);
+        this.router.navigate(['/']);
         this.notificationService.message('Registration successful');
         const data = {
           uid: val.user.uid,
