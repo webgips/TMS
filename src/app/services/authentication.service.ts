@@ -22,16 +22,15 @@ export class AuthenticationService {
       if (user) {
         localStorage.setItem('user', JSON.stringify(user));
         this.currentUserSubject.next(user);
-        this.userId = this.afAuth.auth.currentUser.uid;
       } else {
         localStorage.setItem('user', null);
       }
     });
   }
 
-  // public get userValue() {
-  //   return this.currentUserSubject.value;
-  // }
+  public get userValue() {
+    return this.currentUserSubject.value;
+  }
   public get userdata() {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.userId}`);
     // const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${this.uid}`);

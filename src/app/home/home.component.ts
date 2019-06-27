@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ModalService } from '../services/modal.service';
 import IBoard from '../models/IBoard';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',
@@ -11,17 +13,22 @@ import IBoard from '../models/IBoard';
     TaskListService
   ]
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
   boards: IBoard[] = [];
   private currentBoard: string = localStorage.getItem('currentBoard') ?
                           JSON.parse(localStorage.getItem('currentBoard')) : null;
   private newBoard = '';
+  private ngUnsubscribe: Subject<void> = new Subject();
   constructor(private taskListService: TaskListService, private modalService: ModalService ) {
-    taskListService.boards.subscribe(x => this.boards = x);
+    this.taskListService.getBoards().subscribe(boards => this.boards = boards);
+    // taskListService.boards.subscribe(x => this.boards = x);
   }
-
   ngOnInit() {
-
+    
+  }
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
   showNewBoardModal(e: any) {
     this.modalService.open('new-board-modal');
