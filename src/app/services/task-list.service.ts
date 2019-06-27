@@ -23,9 +23,9 @@ export class TaskListService {
           this.boardsSubject.next(data);
         });
       }
-    })
-   
+    });
   }
+
   getBoards = (): Observable<IBoard[]> => {
     return this.boards;
   }

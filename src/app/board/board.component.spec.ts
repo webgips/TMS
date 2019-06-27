@@ -9,7 +9,6 @@ import { HeaderComponent } from '../header/header.component';
 import { forwardRef } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { RouterTestingModule } from '@angular/router/testing';
-import ITask from '../models/ITask';
 import { NotificationComponent } from '../notification/notification.component';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
@@ -20,8 +19,6 @@ describe('BoardComponent', () => {
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;
   let taskListService: TaskListService;
-  let spy: jasmine.Spy;
-  // let mockTasks: ITask[];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -49,24 +46,10 @@ describe('BoardComponent', () => {
     fixture = TestBed.createComponent(BoardComponent);
     component = fixture.componentInstance;
     taskListService = fixture.debugElement.injector.get(TaskListService);
-    // mockTasks = [{
-    //   id: 0,
-    //   title: 'test task',
-    //   desc: 'lorem ipsum',
-    //   status: 'To do'
-    // }];
-    // fixture.detectChanges();
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should call taskListService ', () => {
-  //   expect(spy.calls.any()).toBeTruthy();
-  // });
-
-  // it('should set tasks', () => {
-  //   expect(component.board.tasks).toEqual(mockTasks);
-  // });
 });

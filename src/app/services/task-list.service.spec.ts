@@ -53,7 +53,7 @@ describe('TaskListService', () => {
       { provide: AngularFirestore, useValue: angularFirestoreStub }
     ]
   }));
-  
+
 
   it('should be created', () => {
     angularFirestore = TestBed.get(AngularFirestore);
