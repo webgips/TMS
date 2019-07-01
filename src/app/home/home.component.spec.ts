@@ -11,7 +11,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { TaskListService } from '../services/task-list.service';
 import IBoard from '../models/IBoard';
-import { forwardRef } from '@angular/core';
+import { of } from 'rxjs';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -36,7 +36,7 @@ describe('HomeComponent', () => {
         ModalComponent,
         TaskComponent
       ],
-      providers: [forwardRef(() => TaskListService)]
+      providers: [ TaskListService ]
     })
     .compileComponents();
   }));
@@ -57,6 +57,7 @@ describe('HomeComponent', () => {
         }
       ]
     }];
+    spy = spyOn(taskListService, 'getBoards').and.returnValue(of(mockBoards));
     fixture.detectChanges();
   });
 
@@ -64,13 +65,13 @@ describe('HomeComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  // it('should call taskListService ', () => {
-  //   expect(spy.calls.any()).toBeTruthy();
-  // });
+  it('should call taskListService ', () => {
+    expect(spy.calls.any()).toBeTruthy();
+  });
+  it('should call getBoards one time and update the view', () => {
+    expect(spy).toHaveBeenCalled();
+    expect(spy.calls.all().length ).toEqual(1);
 
-  // it('should set boards', () => {
-  //   spyOn(TaskListService, 'getBoards').and.returnValue(mockBoards);
-  //   fixture.detectChanges();
-  // });
+  });
 
 });
