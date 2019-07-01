@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   private user;
-  constructor(private authenticationService: AuthenticationService, private router: Router) {    
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
     this.authenticationService.user.subscribe(x => {
       this.user = x;
     });

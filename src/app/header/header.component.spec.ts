@@ -7,11 +7,15 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
+import { AuthenticationService } from '../services/authentication.service';
+import { User } from 'firebase';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
-
+  let authenticationService: AuthenticationService;
+  let mockUser;
+  let mockUserNoEmail;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [
@@ -23,6 +27,9 @@ describe('HeaderComponent', () => {
       ],
       declarations: [
         HeaderComponent
+      ],
+      providers: [
+        AuthenticationService
       ]
     })
     .compileComponents();
@@ -31,10 +38,29 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
+    authenticationService = fixture.debugElement.injector.get(AuthenticationService);
+    mockUser = {
+      uid: 'testuid',
+      email: 'test@test.test'
+    };
+    mockUserNoEmail = {
+      uid: 'testuid',
+      email: null
+    };
   });
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should set user email', () => {
+    authenticationService.currentUserSubject.next(mockUser);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.header__user').innerText).toEqual(`Hi ${mockUser.email}!`);
+  });
+  it('should set user email to anonym', () => {
+    authenticationService.currentUserSubject.next(mockUserNoEmail);
+    fixture.detectChanges();
+    expect(fixture.nativeElement.querySelector('.header__user').innerText).toEqual(`Hi anonym!`);
   });
 });

@@ -41,7 +41,7 @@ describe('NotificationComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call getNotification one time and get notification', () => {
+  it('should call getNotification one time and get notification message', () => {
 
     expect(spy).toHaveBeenCalled();
     expect(spy.calls.all().length ).toEqual(1);
