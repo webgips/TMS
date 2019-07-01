@@ -53,7 +53,7 @@ describe('HomeComponent', () => {
           id: 2,
           title: 'title test',
           desc: 'test descr',
-          status: 'complite'
+          status: 'done'
         }
       ]
     }];

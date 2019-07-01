@@ -2,25 +2,15 @@ import { TestBed } from '@angular/core/testing';
 
 import { TaskListService } from './task-list.service';
 import { AngularFirestore, AngularFirestoreModule } from '@angular/fire/firestore';
-import { AuthenticationService } from './authentication.service';
-import { from, BehaviorSubject } from 'rxjs';
+import { from } from 'rxjs';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import IBoard from '../models/IBoard';
 
-// const FirestoreStub = {
-//   collection: (name: string) => ({
-//     doc: (_id: string) => ({
-//       valueChanges: () => new BehaviorSubject({ foo: 'bar' }),
-//       set: (_d: any) => new Promise((resolve, _reject) => resolve()),
-//     }),
-//   }),
-// };
-
 const input: IBoard[] = [
   {
-    id: 1,
+    id: 0,
     name: 'test',
     tasks: [
       {
@@ -30,11 +20,22 @@ const input: IBoard[] = [
         title: 'title'
       }
     ]
+  },
+  {
+    id: 1,
+    name: 'test2',
+    tasks: [
+      {
+        desc: 'test2 desc',
+        id: 0,
+        status: 'test2',
+        title: 'title2'
+      }
+    ]
   }
 ];
-const data = from(input);
 const collectionStub = {
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(data)
+  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(from(input))
 };
 const angularFirestoreStub = {
   collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
@@ -42,6 +43,7 @@ const angularFirestoreStub = {
 
 describe('TaskListService', () => {
   let angularFirestore: AngularFirestore;
+  let service: TaskListService;
   beforeEach(() => TestBed.configureTestingModule({
     imports: [
       AngularFireAuthModule,
@@ -53,11 +55,36 @@ describe('TaskListService', () => {
       { provide: AngularFirestore, useValue: angularFirestoreStub }
     ]
   }));
+  beforeEach(() => {
+    angularFirestore = TestBed.get(AngularFirestore);
+    service = TestBed.get(TaskListService);
 
+  });
 
   it('should be created', () => {
-    angularFirestore = TestBed.get(AngularFirestore);
-    const service = TestBed.get(TaskListService);
     expect(service).toBeTruthy();
   });
+
+  it('should be return boards', () => {
+    const result: IBoard[] = [];
+    collectionStub.valueChanges().subscribe(data => {
+      result.push(data);
+    });
+    expect(result).toEqual(input);
+  });
+
+  it('should be create new status', () => {
+    service.createNewStatus('new status');
+    expect(service.getStatuses([])).toContain('new status');
+  });
+
+  it('should be create new board', () => {
+    input.push({name: 'new board', id: input.length, tasks: []});
+    const result: IBoard[] = [];
+    collectionStub.valueChanges().subscribe(data => {
+      result.push(data);
+    });
+    expect(result).toEqual(input);
+  });
+
 });
