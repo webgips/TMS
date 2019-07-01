@@ -2,8 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ModalService } from '../services/modal.service';
 import IBoard from '../models/IBoard';
-import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-home',

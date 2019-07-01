@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { first } from 'rxjs/operators';
 import { NotificationService } from '../services/notification.service';
 
 @Component({

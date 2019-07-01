@@ -4,7 +4,6 @@ import IBoard from '../models/IBoard';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { first, delay } from 'rxjs/operators';
 
 @Injectable()
 export class TaskListService {
