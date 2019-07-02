@@ -45,7 +45,7 @@ export class TaskListService {
   createNewTask(task: ITask, currentBoard: string) {
     this.boardsRef.doc(currentBoard).get().subscribe(data => {
       const newTasksList = data.get('tasks');
-      newTasksList.push(task);
+      newTasksList.push(Object.assign({}, task));
       this.boardsRef.doc(currentBoard).set({tasks: newTasksList}, {merge: true});
     });
   }

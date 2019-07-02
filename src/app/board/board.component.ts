@@ -5,7 +5,18 @@ import { NotificationService } from '../services/notification.service';
 import ITask from '../models/ITask';
 import IBoard from '../models/IBoard';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-
+class Task {
+  id: number;
+  title: string;
+  desc: string;
+  status: string;
+  constructor(id: number, title: string, desc: string, status: string) {
+    this.id = id;
+    this.title = title;
+    this.desc = desc;
+    this.status = status;
+  }
+}
 
 @Component({
   selector: 'app-board',
@@ -17,19 +28,14 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 })
 
 export class BoardComponent implements OnInit {
-  updateTaskForm: FormGroup;
-  private modalTaskInfo: ITask = {
-    title: '',
-    id: null,
-    desc: '',
-    status: ''
-  };
-  private newTask: ITask = {
-    title: '',
-    id: null,
-    desc: '',
-    status: ''
-  };
+  private updateTaskForm: FormGroup = new FormGroup({
+    title: new FormControl('', Validators.required),
+    desc: new FormControl('', Validators.required),
+    status: new FormControl('', Validators.required),
+    id: new FormControl('')
+  });
+  private modalTaskInfo: Task = new Task(null, '', '', '');
+  private newTask: Task = new Task(null, '', '', '');
   private statuses: string[] = [];
   private newStatus = '';
   @Input() board: IBoard;
@@ -44,15 +50,9 @@ export class BoardComponent implements OnInit {
     if (this.board) {
       this.statuses = this.taskListService.getStatuses(this.board.tasks);
     }
-    this.updateTaskForm = new FormGroup({
-      title: new FormControl('', Validators.required),
-      desc: new FormControl('', Validators.required),
-      status: new FormControl('', Validators.required),
-      id: new FormControl('')
-    });
   }
   onOpenTaskModal(task: ITask) {
-    this.modalTaskInfo = task;
+    this.modalTaskInfo =  task;
   }
   onOpenTaskEditModal(task: ITask) {
     this.modalTaskInfo = task;
@@ -65,14 +65,7 @@ export class BoardComponent implements OnInit {
   }
   showNewTaskModal(status: string) {
     this.modalService.open('new-task-modal');
-    this.newTask = {
-      title: '',
-      id: null,
-      desc: '',
-      status: ''
-    };
-    this.newTask.id = this.board.tasks.length;
-    this.newTask.status = status;
+    this.newTask = new Task(this.board.tasks.length, '', '', status);
   }
   onNewTaskSubmit(e: Event) {
     this.taskListService.createNewTask(this.newTask, this.board.name);
