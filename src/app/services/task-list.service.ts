@@ -15,7 +15,7 @@ export class TaskListService {
   private userId;
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
     this.authenticationService.user.subscribe(data => {
-      if (data && data.uid){
+      if (data && data.uid) {
         this.userId = data.uid;
         this.boardsRef = this.afs.doc(`users/${this.userId}`).collection('boards');
         this.boardsRef.valueChanges().subscribe(data => {
