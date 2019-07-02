@@ -4,6 +4,9 @@
 	margin: 0 auto;
 	background-color: #d4edda;
 	border-color: #c3e6cb;
+	&__wrap{
+		min-height: 35px;
+	}
 	&.error{
 		background-color: #ea9ca3;
 		border-color: #ea9ca3;
