@@ -1,4 +1,8 @@
-<div class="board__name">Board: {{board.name}}</div>
+<div class="board__name">Board: {{board.name}} 
+  <a href="#" class="add-btn" (click)="deleteBoard($event, board)"
+      >Remove board...</a
+    >
+</div>
 <main class="board">
   <div class="board-col" *ngFor="let status of statuses; let i = index">
     <div class="board-col__title">{{ status }}</div>
@@ -50,7 +54,6 @@
         type="text"
         class=" modal__form-input"
         name="title"
-       
         formControlName="title"
       />
     </div>
@@ -79,7 +82,7 @@
         <button class="btn del-btn" (click)="deleteTask($event)">
             Delete task
         </button>
-        <button class="btn" type="submit">
+        <button class="btn" type="submit" [disabled]="updateTaskForm.invalid">
             Save
         </button>
     </div>

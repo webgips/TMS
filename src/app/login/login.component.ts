@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { NotificationService } from '../services/notification.service';
@@ -57,7 +57,6 @@ export class LoginComponent implements OnInit {
       this.authenticationService.updateUserData(info);
 
     }).catch((error) => {
-      console.log(error)
       this.notificationService.error(error.message);
     });
   }

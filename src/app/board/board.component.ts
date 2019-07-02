@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ModalService } from '../services/modal.service';
+import { NotificationService } from '../services/notification.service';
 import ITask from '../models/ITask';
 import IBoard from '../models/IBoard';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -33,7 +34,11 @@ export class BoardComponent implements OnInit {
   private newStatus = '';
   @Input() board: IBoard;
 
-  constructor(private taskListService: TaskListService, private modalService: ModalService) {}
+  constructor(
+    private taskListService: TaskListService,
+    private modalService: ModalService,
+    private notificationService: NotificationService
+  ) {}
   ngOnInit() {
     this.modalService.clearAll();
     if (this.board) {
@@ -90,6 +95,10 @@ export class BoardComponent implements OnInit {
     e.preventDefault();
     this.taskListService.deleteTask(this.modalTaskInfo, this.board.name);
     this.modalService.closeAll();
+  }
+  deleteBoard(e: Event, board) {
+    e.preventDefault();
+    this.taskListService.deleteBoard(board.name).then(res => this.notificationService.message(res));
   }
 
 }

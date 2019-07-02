@@ -53,7 +53,11 @@ export class TaskListService {
     this.statusList.push(status);
   }
   createNewBoard(val: string) {
-    this.boardsRef.doc(val).set({name: val, id: this.boardsSubject.value.length, tasks: []});
+    return this.boardsRef.doc(val).set({name: val, id: this.boardsSubject.value.length, tasks: []})
+    .then(() => `Board "${val}" successfully added!`);
+  }
+  deleteBoard(val: string) {
+    return this.boardsRef.doc(val).delete().then(() => `Board "${val}" successfully deleted!`);
   }
   updateTask(task: ITask, currentBoard: string) {
     this.boardsRef.doc(currentBoard).get().subscribe(data => {

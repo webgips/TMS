@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { ModalService } from '../services/modal.service';
 import IBoard from '../models/IBoard';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-home',
@@ -16,7 +17,11 @@ export class HomeComponent implements OnInit, OnDestroy {
   private currentBoard: string = localStorage.getItem('currentBoard') ?
                           JSON.parse(localStorage.getItem('currentBoard')) : null;
   private newBoard = '';
-  constructor(private taskListService: TaskListService, private modalService: ModalService ) {  }
+  constructor(
+    private taskListService: TaskListService,
+    private modalService: ModalService,
+    private notificationService: NotificationService
+  ) {  }
   ngOnInit() {
     this.taskListService.getBoards().subscribe(boards => this.boards = boards);
   }
@@ -26,7 +31,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.modalService.open('new-board-modal');
   }
   onNewBoardSubmit(e: Event) {
-    this.taskListService.createNewBoard(this.newBoard);
+    this.taskListService.createNewBoard(this.newBoard).then(res => this.notificationService.message(res));
     this.newBoard = '';
   }
   onChange(boardId: string) {
