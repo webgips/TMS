@@ -37,7 +37,7 @@ export class HomeComponent implements OnInit {
   onNewBoardSubmit(e: Event) {
     this.taskListService.createNewBoard(this.newBoard).then(res => this.notificationService.message(res));
     this.newBoard = '';
-    this.dialog.closeAll()
+    this.dialog.closeAll();
   }
   onChange(boardId: string) {
     this.currentBoard = boardId;

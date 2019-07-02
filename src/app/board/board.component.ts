@@ -52,6 +52,7 @@ export class BoardComponent implements OnInit {
   ) {}
   @ViewChild('taskInfoModal') taskInfoModal: TemplateRef<any>;
   @ViewChild('taskEditModal') taskEditModal: TemplateRef<any>;
+  @ViewChild('newTaskModal') newTaskModal: TemplateRef<any>;
   ngOnInit() {
     this.modalService.clearAll();
     if (this.board) {
@@ -76,11 +77,12 @@ export class BoardComponent implements OnInit {
     this.openDialog(this.taskEditModal);
   }
   showNewTaskModal(status: string) {
-    this.modalService.open('new-task-modal');
+    this.openDialog(this.newTaskModal);
     this.newTask = new Task(this.board.tasks.length, '', '', status);
   }
   onNewTaskSubmit(e: Event) {
     this.taskListService.createNewTask(this.newTask, this.board.name);
+    this.dialog.closeAll();
   }
   onTaskUpdateSubmit(e: Event) {
     if (this.updateTaskForm.invalid) {

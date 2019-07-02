@@ -16,7 +16,7 @@
         (openTaskEditModal)="onOpenTaskEditModal(task)"
       ></app-task>
     </ng-container>
-    <a href="#" class="add-task add-btn" (click)="showNewTaskModal(status)"
+    <a href="#" class="add-task add-btn" (click)="$event.preventDefault();showNewTaskModal(status)"
       >Add task...</a
     >
   </div>
@@ -43,6 +43,41 @@
       <div class="modal__row-name">Status:</div>
       <div class="modal__task-desc">{{ modalTaskInfo.status }}</div>
     </div>
+  </div>
+</ng-template>
+<ng-template #newTaskModal>
+  <div class="modal__container">
+    <div class="modal__task-title">Create a new task:</div>
+    <form class="modal__form" id="new-task-form" (submit)="onNewTaskSubmit($event)">
+      <label class="modal__row">
+        <div class="modal__row-name">Task title:</div>
+        <input
+          type="text"
+          name="title"
+          [(ngModel)]="newTask.title"
+          class="modal__form-input"
+          required
+          #title="ngModel"
+        />
+      </label>
+      <label class="modal__row">
+        <div class="modal__row-name">Task Description:</div>
+        <input
+          type="text"
+          name="desc"
+          [(ngModel)]="newTask.desc"
+          class="modal__form-input"
+          required
+          #desc="ngModel"
+        />
+      </label>
+      <button
+        class="modal__form-submit btn"
+        [disabled]="title.invalid || desc.invalid"
+      >
+        Submit
+      </button>
+    </form>
   </div>
 </ng-template>
 <ng-template #taskEditModal>
@@ -168,7 +203,7 @@
   </form>
 </app-modal> -->
 
-<app-modal id="new-task-modal" (NewTaskSubmit)="onNewTaskSubmit($event)">
+<!-- <app-modal id="new-task-modal" (NewTaskSubmit)="onNewTaskSubmit($event)">
   <div class="modal__task-title">Create a new task:</div>
   <form class="modal__form" id="new-task-form">
     <label class="modal__row">
@@ -200,7 +235,7 @@
       Submit
     </button>
   </form>
-</app-modal>
+</app-modal> -->
 <!-- <app-modal id="new-status-modal" (NewStatusSubmit)="onNewStatusSubmit($event)">
   <form class="modal__form" id="new-status-form">
     <label class="modal__row">
