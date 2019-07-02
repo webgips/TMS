@@ -10,9 +10,9 @@ export class ModalService {
     this.modals.push(modal);
   }
   clearAll() {
-    const newboardmodal = this.modals.filter(x => x.id ===  'new-board-modal')[0];
+    // const newboardmodal = this.modals.filter(x => x.id ===  'new-board-modal')[0];
     this.modals = [];
-    this.modals.push(newboardmodal);
+    // this.modals.push(newboardmodal);
   }
   open(id: string) {
     const modal: any = this.modals.filter(x => x.id === id)[0];

@@ -1,4 +1,7 @@
 .modal{
+	&__container{
+		min-width: 375px;
+	}
 	&__wrap{
 		position: absolute;
 		top: 0;
@@ -86,6 +89,7 @@
 			height: 40px;
 			width: 100%;
 			padding: 0 10px;
+			outline: none;
 			&.ng-touched.ng-invalid{
 				border: solid red 2px;
 			}

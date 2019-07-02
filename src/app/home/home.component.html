@@ -12,17 +12,18 @@
         {{ board.name }}
       </option>
     </select>
-    <a href="#" class="board-add-btn add-btn" (click)="showNewBoardModal($event)"
+    <!-- <a href="#" class="board-add-btn add-btn" (click)="showNewBoardModal($event)"
     >Add board...
-    </a>
+    </a> -->
+    <a href="#" class="board-add-btn add-btn" (click)="openDialog($event,newBoardModal)"
+    >Add board...
+  </a>
   </div>
   <ng-container *ngFor="let board of boards; let i = index" >
       <app-board  *ngIf="board.id == currentBoard" [board]="board">
         </app-board>
   </ng-container>
-  
-  
-  <app-modal id="new-board-modal" (NewBoardSubmit)="onNewBoardSubmit($event)">
+  <!-- <app-modal id="new-board-modal" (NewBoardSubmit)="onNewBoardSubmit($event)">
     <form class="modal__form" id="new-board-form">
       <label class="modal__row">
         <div class="modal__row-name">New board name:</div>
@@ -39,5 +40,27 @@
         Submit
       </button>
     </form>
-  </app-modal>
+  </app-modal> -->
 </main>
+
+<ng-template #newBoardModal id="new-board-modal">
+  <div class="modal__container">
+    <form class="modal__form" id="new-board-form" (submit)="onNewBoardSubmit($event)">
+      <label class="modal__row">
+        <div class="modal__row-name">New board name:</div>
+        <input
+          type="text"
+          name="statusname"
+          [(ngModel)]="newBoard"
+          [ngModelOptions]="{updateOn: 'blur'}"
+          class="modal__form-input"
+          required
+          #statusname="ngModel"
+        />
+      </label>
+      <button class="modal__form-submit" [disabled]="statusname.invalid">
+        Submit
+      </button>
+    </form>
+  </div>
+</ng-template>
