@@ -12,6 +12,7 @@ import { environment } from 'src/environments/environment';
 import { TaskListService } from '../services/task-list.service';
 import IBoard from '../models/IBoard';
 import { of } from 'rxjs';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -26,6 +27,7 @@ describe('HomeComponent', () => {
       imports: [
         ReactiveFormsModule,
         FormsModule,
+        RouterTestingModule,
         AngularFireAuthModule,
         AngularFirestoreModule,
         AngularFireModule.initializeApp(environment.firebaseConfig)
