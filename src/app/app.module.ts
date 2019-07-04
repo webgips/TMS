@@ -20,7 +20,7 @@ import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import routes from './routes';
+import { routes } from './routes';
 
 @NgModule({
   declarations: [
