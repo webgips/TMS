@@ -36,7 +36,6 @@ export class HomeComponent implements OnInit {
     this.boards.forEach((board, index) => {
      boardsName.push(board.name);
     });
-    console.log(boardsName.includes(control.value))
     if (boardsName.includes(control.value)) {
       return {'newBoard': true};
     }

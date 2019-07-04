@@ -6,7 +6,8 @@ import ITask from '../models/ITask';
 import IBoard from '../models/IBoard';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
-import createId from '../createId'
+import createId from '../createId';
+import IStatuses from '../models/IStatuses';
 class Task {
   id: string;
   title: string;
@@ -42,8 +43,7 @@ export class BoardComponent implements OnInit {
   }, { updateOn: 'blur' });
   private modalTaskInfo: Task = new Task('', '', '', '');
   private newTask: Task = new Task('', '', '', '');
-  private statuses: any = [];
-  private newStatus = '';
+  private statuses: IStatuses[] = [];
   @Input() board: IBoard;
 
   constructor(
@@ -93,7 +93,6 @@ export class BoardComponent implements OnInit {
       return;
     }
     this.taskListService.updateTask(this.updateTaskForm.value, this.board.name);
-    // this.taskListService.moveTask(this.updateTaskForm.value, this.board.name, this.updateStatusForm.value.status);
     this.dialog.closeAll();
   }
   onNewStatusSubmit() {
