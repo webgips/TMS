@@ -4,6 +4,7 @@ import IBoard from '../models/IBoard';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
 import { BehaviorSubject, Observable, merge } from 'rxjs';
+import createId from '../createId';
 
 @Injectable()
 export class TaskListService {
@@ -36,7 +37,7 @@ export class TaskListService {
     this.modalData = taskInfo;
   }
   createNewBoard(val: string) {
-    return this.boardsRef.doc(val).set({name: val, id: this.boardsSubject.value.length})
+    return this.boardsRef.doc(val).set({name: val, id: createId()})
     .then(() => `Board "${val}" successfully added!`);
   }
   deleteBoard(val: string) {

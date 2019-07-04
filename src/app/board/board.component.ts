@@ -6,6 +6,7 @@ import ITask from '../models/ITask';
 import IBoard from '../models/IBoard';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material';
+import createId from '../createId'
 class Task {
   id: string;
   title: string;
@@ -60,9 +61,6 @@ export class BoardComponent implements OnInit {
       this.taskListService.getStatuses(this.board).subscribe(data => this.statuses = data);
     }
   }
-  createId() {
-    return '_' + Math.random().toString(36).substr(2, 9);
-  }
   openDialog(templateRef: TemplateRef<any>) {
     this.dialog.open(templateRef);
   }
@@ -83,7 +81,7 @@ export class BoardComponent implements OnInit {
   }
   showNewTaskModal(status: any) {
     this.openDialog(this.newTaskModal);
-    this.newTask = new Task(this.createId(), '', '', status.name);
+    this.newTask = new Task(createId(), '', '', status.name);
   }
   onNewTaskSubmit(e: Event) {
     console.log(this.newTask.status);
@@ -94,23 +92,19 @@ export class BoardComponent implements OnInit {
     if (this.updateTaskForm.invalid) {
       return;
     }
-    console.log(this.updateTaskForm.value);
     this.taskListService.updateTask(this.updateTaskForm.value, this.board.name);
     // this.taskListService.moveTask(this.updateTaskForm.value, this.board.name, this.updateStatusForm.value.status);
     this.dialog.closeAll();
   }
-  // showNewStatusModal(e: Event) {
-  //   this.modalService.open('new-status-modal');
-  // }
   onNewStatusSubmit() {
     if (this.updateStatusForm.invalid) {
       return;
     }
     this.taskListService.createNewStatus(this.board.name, this.updateStatusForm.value.status).then(res => {
-      console.log(res); // TODO: add notification
+      this.dialog.closeAll();
+      this.notificationService.message(`Status "${this.updateStatusForm.value.status}" successfully added!`);
+      this.updateStatusForm.reset({status: ''});
     });
-    this.updateStatusForm.reset({status: ''});
-    this.dialog.closeAll();
   }
   deleteTask(e: Event) {
     e.stopPropagation();

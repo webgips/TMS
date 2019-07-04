@@ -7,7 +7,6 @@
 <main class="board">
   <div class="board-col" *ngFor="let status of statuses; let i = index">
     <div class="board-col__title">{{ status.name }}</div>
-    <!-- <ng-container *ngFor="let task of board.tasks; let i = index"> -->
       <app-task
         *ngFor="let task of status.tasks; let i = index"
         [task]="task"
@@ -15,7 +14,6 @@
         (openTaskModal)="onOpenTaskModal(task)"
         (openTaskEditModal)="onOpenTaskEditModal(task)"
       ></app-task>
-    <!-- </ng-container> -->
     <a href="#" class="add-task add-btn" (click)="$event.preventDefault();showNewTaskModal(status)"
       >Add task...</a
     >

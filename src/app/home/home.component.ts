@@ -16,7 +16,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class HomeComponent implements OnInit {
   boards: IBoard[] = [];
   private currentBoard: string = localStorage.getItem('currentBoard') ?
-                          JSON.parse(localStorage.getItem('currentBoard')) : null;
+                          localStorage.getItem('currentBoard') : null;
   private newBoard = '';
   constructor(
     private taskListService: TaskListService,

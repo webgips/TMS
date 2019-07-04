@@ -8,13 +8,11 @@
       [ngModel]="currentBoard"
       *ngIf="boards.length"
     >
-      <option *ngFor="let board of boards" [value]="board.id">
+      <option *ngIf="boards.length === 1"></option>
+      <option *ngFor="let board of boards" [value]="board.id" >
         {{ board.name }}
       </option>
     </select>
-    <!-- <a href="#" class="board-add-btn add-btn" (click)="showNewBoardModal($event)"
-    >Add board...
-    </a> -->
     <a
       href="#"
       class="board-add-btn add-btn"
@@ -25,24 +23,6 @@
   <ng-container *ngFor="let board of boards; let i = index">
     <app-board *ngIf="board.id == currentBoard" [board]="board"> </app-board>
   </ng-container>
-  <!-- <app-modal id="new-board-modal" (NewBoardSubmit)="onNewBoardSubmit($event)">
-    <form class="modal__form" id="new-board-form">
-      <label class="modal__row">
-        <div class="modal__row-name">New board name:</div>
-        <input
-          type="text"
-          name="statusname"
-          [(ngModel)]="newBoard"
-          class="modal__form-input"
-          required
-          #statusname="ngModel"
-        />
-      </label>
-      <button class="modal__form-submit" [disabled]="statusname.invalid">
-        Submit
-      </button>
-    </form>
-  </app-modal> -->
 </main>
 
 <ng-template #newBoardModal id="new-board-modal">
