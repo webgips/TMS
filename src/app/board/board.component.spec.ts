@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import ITask from '../models/ITask';
+import { MatDialogModule } from '@angular/material';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -32,7 +33,8 @@ describe('BoardComponent', () => {
         ReactiveFormsModule,
         AngularFireAuthModule,
         AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig)
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        MatDialogModule
       ],
       declarations: [
         AppComponent,

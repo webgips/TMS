@@ -17,13 +17,11 @@ export class TaskComponent {
   openModal(e: Event, task: ITask) {
     e.preventDefault();
     this.openTaskModal.emit(task);
-    // this.modalService.open('task-modal');
   }
   openEditModal(e: Event, task: ITask) {
     e.stopPropagation();
     e.preventDefault();
     this.openTaskEditModal.emit(task);
-    // this.modalService.open('task-edit-modal');
   }
 
 }

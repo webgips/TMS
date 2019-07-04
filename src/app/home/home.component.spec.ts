@@ -13,6 +13,7 @@ import { TaskListService } from '../services/task-list.service';
 import IBoard from '../models/IBoard';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
+import { MatDialogModule } from '@angular/material';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;
@@ -30,7 +31,8 @@ describe('HomeComponent', () => {
         RouterTestingModule,
         AngularFireAuthModule,
         AngularFirestoreModule,
-        AngularFireModule.initializeApp(environment.firebaseConfig)
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        MatDialogModule
       ],
       declarations: [
         HomeComponent,
