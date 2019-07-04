@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from 'firebase';
+import IUser from '../models/IUser';
 @Injectable({ providedIn: 'root' })
 
 export class AuthenticationService {
@@ -45,7 +46,7 @@ export class AuthenticationService {
     };
     return userRef.set(data, { merge: true });
   }
-  register(user: any) {
+  register(user: IUser) {
     return this.afAuth.auth.createUserWithEmailAndPassword(user.email, user.password);
   }
   login(email: string, password: string) {

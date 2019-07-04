@@ -3,7 +3,7 @@ import ITask from '../models/ITask';
 import IBoard from '../models/IBoard';
 import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
-import { BehaviorSubject, Observable, merge } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import createId from '../createId';
 import IStatuses from '../models/IStatuses';
 
@@ -14,7 +14,7 @@ export class TaskListService {
   private boardsSubject: BehaviorSubject<IBoard[]> = new BehaviorSubject([]);
   public boards: Observable<IBoard[]> = this.boardsSubject.asObservable();
   private boardsRef: AngularFirestoreCollection<IBoard>;
-  private statusesRef: AngularFirestoreCollection<any>;
+  private statusesRef: AngularFirestoreCollection<IStatuses>;
   private userId;
   constructor(private afs: AngularFirestore, private authenticationService: AuthenticationService) {
     this.authenticationService.user.subscribe(data => {

@@ -18,10 +18,10 @@ export class NotificationService {
   getNotification(): Observable<INotification> {
     return this.notification.asObservable();
   }
-  message(message: any) {
+  message(message: string) {
     this.notification.next({type: 'message', text: message});
   }
-  error(message: any) {
+  error(message: string) {
     this.notification.next({type: 'error', text: message});
   }
   clear() {
