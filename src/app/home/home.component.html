@@ -30,21 +30,21 @@
     <form
       class="modal__form"
       id="new-board-form"
+      [formGroup]="newBoardForm"
       (submit)="onNewBoardSubmit($event)"
-    >
+    >      
       <label class="modal__row">
         <div class="modal__row-name">New board name:</div>
         <input
           type="text"
           name="statusname"
-          [(ngModel)]="newBoard"
-          [ngModelOptions]="{ updateOn: 'blur' }"
+          formControlName="newBoard"
           class="modal__form-input"
           required
-          #statusname="ngModel"
         />
       </label>
-      <button class="modal__form-submit" [disabled]="statusname.invalid">
+      <div class="error" *ngIf="newBoardForm.controls.newBoard.invalid && (newBoardForm.dirty || newBoardForm.touched)">Bord name is already exist!</div>
+      <button class="modal__form-submit" [disabled]="newBoardForm.controls.newBoard.invalid">
         Submit
       </button>
     </form>
