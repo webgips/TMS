@@ -22,7 +22,7 @@ describe('TaskComponent', () => {
     component = fixture.componentInstance;
     modalService = fixture.debugElement.injector.get(ModalService);
     mockTask = {
-      id: 0,
+      id: '0',
       title: 'test title',
       desc: 'test desc',
       status: 'test status'

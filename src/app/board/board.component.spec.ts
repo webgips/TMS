@@ -54,19 +54,19 @@ describe('BoardComponent', () => {
     taskListService = fixture.debugElement.injector.get(TaskListService);
     mockTaskList = [
       {
-        id: 1,
+        id: '1',
         title: 'test',
         desc: '',
         status: 'test status'
       },
       {
-        id: 2,
+        id: '2',
         title: 'test',
         desc: '',
         status: 'test status2'
       },
       {
-        id: 3,
+        id: '3',
         title: 'test',
         desc: '',
         status: 'test status3'
@@ -75,30 +75,30 @@ describe('BoardComponent', () => {
     ];
     mockStatuses = ['test status', 'test status2', 'test status3'];
     component.board = {
-      id: 12,
+      id: 1,
       name: 'test board',
       tasks: [
         {
-          id: 1,
+          id: '1',
           title: 'test',
           desc: '',
           status: 'test status'
         },
         {
-          id: 2,
+          id: '2',
           title: 'test',
           desc: '',
           status: 'test status2'
         },
         {
-          id: 3,
+          id: '3',
           title: 'test',
           desc: '',
           status: 'test status3'
         }
       ]
     };
-    spy = spyOn(taskListService, 'getStatuses').withArgs(mockTaskList).and.returnValue(mockStatuses);
+    // spy = spyOn(taskListService, 'getStatuses').withArgs(mockTaskList).and.returnValue(mockStatuses);
     fixture.detectChanges();
   });
 

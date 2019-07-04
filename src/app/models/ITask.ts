@@ -1,6 +1,7 @@
 export default interface ITask {
-    id: number;
+    id: string;
     title: string;
     desc: string;
     status: string;
+    oldStatus?: string;
   }

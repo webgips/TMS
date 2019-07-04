@@ -12,7 +12,7 @@ describe('NotificationComponent', () => {
   let notificationService: NotificationService;
   let spy: jasmine.Spy;
   let message: INotification;
-  
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       imports: [

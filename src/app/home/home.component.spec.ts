@@ -54,7 +54,7 @@ describe('HomeComponent', () => {
       name: 'test board',
       tasks: [
         {
-          id: 2,
+          id: '2',
           title: 'title test',
           desc: 'test descr',
           status: 'done'
