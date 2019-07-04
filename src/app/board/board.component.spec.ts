@@ -16,14 +16,15 @@ import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import ITask from '../models/ITask';
 import { MatDialogModule } from '@angular/material';
+import IStatuses from '../models/IStatuses';
+import { of } from 'rxjs';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
   let fixture: ComponentFixture<BoardComponent>;
   let taskListService: TaskListService;
   let spy: jasmine.Spy;
-  let mockStatuses: string[];
-  let mockTaskList: ITask[];
+  let mockStatuses: IStatuses[];
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -52,31 +53,9 @@ describe('BoardComponent', () => {
     fixture = TestBed.createComponent(BoardComponent);
     component = fixture.componentInstance;
     taskListService = fixture.debugElement.injector.get(TaskListService);
-    mockTaskList = [
-      {
-        id: '1',
-        title: 'test',
-        desc: '',
-        status: 'test status'
-      },
-      {
-        id: '2',
-        title: 'test',
-        desc: '',
-        status: 'test status2'
-      },
-      {
-        id: '3',
-        title: 'test',
-        desc: '',
-        status: 'test status3'
-      },
-
-    ];
-    mockStatuses = ['test status', 'test status2', 'test status3'];
-    component.board = {
-      id: 1,
-      name: 'test board',
+    mockStatuses = [
+    {
+      name: 'test status',
       tasks: [
         {
           id: '1',
@@ -84,21 +63,50 @@ describe('BoardComponent', () => {
           desc: '',
           status: 'test status'
         },
-        {
-          id: '2',
-          title: 'test',
-          desc: '',
-          status: 'test status2'
-        },
+      ]
+    },
+    {
+      name: '2 status',
+      tasks: [
         {
           id: '3',
           title: 'test',
           desc: '',
-          status: 'test status3'
+          status: 'test status'
+        },
+      ]
+    },
+  ];
+    component.board = {
+      id: '1',
+      name: 'test board',
+      statuses: [
+        {
+          name: 'test status',
+          tasks: [
+            {
+              id: '1',
+              title: 'test',
+              desc: '',
+              status: 'test status'
+            },
+            {
+              id: '2',
+              title: 'test',
+              desc: '',
+              status: 'test status2'
+            },
+            {
+              id: '3',
+              title: 'test',
+              desc: '',
+              status: 'test status3'
+            }
+          ]
         }
       ]
     };
-    // spy = spyOn(taskListService, 'getStatuses').withArgs(mockTaskList).and.returnValue(mockStatuses);
+    spy = spyOn(taskListService, 'getStatuses').withArgs(component.board).and.returnValue(of(mockStatuses));
     fixture.detectChanges();
   });
 

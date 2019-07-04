@@ -7,11 +7,30 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import IBoard from '../models/IBoard';
+import IStatuses from '../models/IStatuses';
 
-const input: IBoard[] = [
+const board: IBoard[] = [
   {
-    id: 0,
+    id: '0',
     name: 'test',
+    statuses: [
+      {
+        name: 'test status',
+        tasks: [
+          {
+            desc: 'test desc',
+            id: '0',
+            status: 'test',
+            title: 'title'
+          }
+        ]
+      }
+    ]
+  }
+];
+const statuses: IStatuses[] = [
+  {
+    name: 'test status',
     tasks: [
       {
         desc: 'test desc',
@@ -20,26 +39,18 @@ const input: IBoard[] = [
         title: 'title'
       }
     ]
-  },
-  {
-    id: 1,
-    name: 'test2',
-    tasks: [
-      {
-        desc: 'test2 desc',
-        id: '0',
-        status: 'test2',
-        title: 'title2'
-      }
-    ]
   }
 ];
+
 const collectionStub = {
-  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(from(input))
+  valueChanges: jasmine.createSpy('valueChanges').and.returnValue(from(board))
 };
 const angularFirestoreStub = {
   collection: jasmine.createSpy('collection').and.returnValue(collectionStub)
 };
+const statusesCollectionStub = {
+  valueChanges: jasmine.createSpy('collection').and.returnValue(from(statuses))
+}
 
 describe('TaskListService', () => {
   let angularFirestore: AngularFirestore;
@@ -70,21 +81,25 @@ describe('TaskListService', () => {
     collectionStub.valueChanges().subscribe(data => {
       result.push(data);
     });
-    expect(result).toEqual(input);
+    expect(result).toEqual(board);
   });
 
-  // it('should be create new status', () => {
-  //   service.createNewStatus('new status');
-  //   expect(service.getStatuses([])).toContain('new status');
-  // });
+  it('should be create new status', () => {
+    const result: IStatuses[] = [];
+    statuses.push({name: 'new test status', tasks: []});
+    statusesCollectionStub.valueChanges().subscribe(data => {
+      result.push(data);
+    });
+    expect(result).toEqual(statuses);
+  });
 
   it('should be create new board', () => {
-    input.push({name: 'new board', id: input.length, tasks: []});
+    board.push({name: 'new board', id: 'tegkadsfdk', statuses: [{name: 'test task', tasks: []}]});
     const result: IBoard[] = [];
     collectionStub.valueChanges().subscribe(data => {
       result.push(data);
     });
-    expect(result).toEqual(input);
+    expect(result).toEqual(board);
   });
 
 });

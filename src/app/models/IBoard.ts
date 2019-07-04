@@ -1,7 +1,12 @@
 import ITask from './ITask';
 
 export default interface IBoard {
-    id: number;
+    id: string;
     name: string;
-    tasks: ITask[];
+    statuses: [
+        {
+            name: string;
+            tasks: ITask[];
+        }
+    ]
 }

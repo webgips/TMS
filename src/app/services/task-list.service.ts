@@ -5,6 +5,7 @@ import { AngularFirestore, AngularFirestoreCollection } from '@angular/fire/fire
 import { AuthenticationService } from './authentication.service';
 import { BehaviorSubject, Observable, merge } from 'rxjs';
 import createId from '../createId';
+import IStatuses from '../models/IStatuses';
 
 @Injectable()
 export class TaskListService {
@@ -29,7 +30,7 @@ export class TaskListService {
   getBoards = (): Observable<IBoard[]> => {
     return this.boards;
   }
-  getStatuses = (board: IBoard) => {
+  getStatuses = (board: IBoard): Observable<IStatuses[]> => {
     this.statusesRef =  this.boardsRef.doc(board.name).collection('statuses');
     return this.statusesRef.valueChanges();
   }
