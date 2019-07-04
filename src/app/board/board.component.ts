@@ -84,7 +84,6 @@ export class BoardComponent implements OnInit {
     this.newTask = new Task(createId(), '', '', status.name);
   }
   onNewTaskSubmit(e: Event) {
-    console.log(this.newTask.status);
     this.taskListService.createNewTask(this.newTask, this.board.name, this.newTask.status);
     this.dialog.closeAll();
   }
