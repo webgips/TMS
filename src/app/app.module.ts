@@ -20,14 +20,8 @@ import { environment } from 'src/environments/environment';
 import { HomeComponent } from './home/home.component';
 import { MatDialogModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import routes from './routes';
 
-const routes: Routes = [
-  { path: '', component: HomeComponent, canActivate: [AuthGuard] },
-  // { path: '', component: BoardComponent, canActivate: [AuthGuard] },
-  { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
-  { path: '**', redirectTo: '' }
-];
 @NgModule({
   declarations: [
     AppComponent,

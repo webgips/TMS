@@ -50,9 +50,9 @@ export class BoardComponent implements OnInit {
     private notificationService: NotificationService,
     public dialog: MatDialog
   ) {}
-  @ViewChild('taskInfoModal') taskInfoModal: TemplateRef<any>;
-  @ViewChild('taskEditModal') taskEditModal: TemplateRef<any>;
-  @ViewChild('newTaskModal') newTaskModal: TemplateRef<any>;
+  @ViewChild('taskInfoModal', {static: false}) taskInfoModal: TemplateRef<any>;
+  @ViewChild('taskEditModal', {static: false}) taskEditModal: TemplateRef<any>;
+  @ViewChild('newTaskModal', {static: false}) newTaskModal: TemplateRef<any>;
   ngOnInit() {
     this.modalService.clearAll();
     if (this.board) {
@@ -89,6 +89,7 @@ export class BoardComponent implements OnInit {
       return;
     }
     this.taskListService.updateTask(this.updateTaskForm.value, this.board.name);
+    this.dialog.closeAll();
   }
   // showNewStatusModal(e: Event) {
   //   this.modalService.open('new-status-modal');
@@ -111,5 +112,4 @@ export class BoardComponent implements OnInit {
     e.preventDefault();
     this.taskListService.deleteBoard(board.name).then(res => this.notificationService.message(res));
   }
-
 }
