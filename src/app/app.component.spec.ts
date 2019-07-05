@@ -1,7 +1,6 @@
 import { TestBed, async, ComponentFixture } from '@angular/core/testing';
 import { AppComponent } from './app.component';
 import { TaskComponent } from './task/task.component';
-import { ModalComponent } from './modal/modal.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './header/header.component';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -32,7 +31,6 @@ describe('AppComponent', () => {
         BoardComponent,
         HeaderComponent,
         TaskComponent,
-        ModalComponent,
         NotificationComponent
       ]
     }).compileComponents();

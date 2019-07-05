@@ -1,6 +1,5 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
-import { ModalService } from '../services/modal.service';
 import IBoard from '../models/IBoard';
 import { NotificationService } from '../services/notification.service';
 import { MatDialog } from '@angular/material/dialog';
@@ -9,7 +8,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss', '../modal/modal.component.scss'],
+  styleUrls: ['./home.component.scss'],
   providers: [
     TaskListService
   ]
@@ -24,7 +23,6 @@ export class HomeComponent implements OnInit {
   });
   constructor(
     private taskListService: TaskListService,
-    private modalService: ModalService,
     private notificationService: NotificationService,
     public dialog: MatDialog
   ) {  }
@@ -40,9 +38,6 @@ export class HomeComponent implements OnInit {
       return {'newBoard': true};
     }
     return null;
-  }
-  showNewBoardModal(e: Event) {
-    this.modalService.open('new-board-modal');
   }
   openDialog(e: Event, templateRef: TemplateRef<any>) {
     e.preventDefault();

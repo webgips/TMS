@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HomeComponent } from './home.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BoardComponent } from '../board/board.component';
-import { ModalComponent } from '../modal/modal.component';
 import { TaskComponent } from '../task/task.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -37,7 +36,6 @@ describe('HomeComponent', () => {
       declarations: [
         HomeComponent,
         BoardComponent,
-        ModalComponent,
         TaskComponent
       ],
       providers: [ TaskListService ]

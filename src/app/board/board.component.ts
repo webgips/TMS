@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, TemplateRef, ViewChild } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
-import { ModalService } from '../services/modal.service';
 import { NotificationService } from '../services/notification.service';
 import ITask from '../models/ITask';
 import IBoard from '../models/IBoard';
@@ -24,7 +23,7 @@ class Task {
 @Component({
   selector: 'app-board',
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss',  '../modal/modal.component.scss'],
+  styleUrls: ['./board.component.scss'],
   providers: [
     TaskListService
   ]
@@ -48,7 +47,6 @@ export class BoardComponent implements OnInit {
 
   constructor(
     private taskListService: TaskListService,
-    private modalService: ModalService,
     private notificationService: NotificationService,
     public dialog: MatDialog
   ) {}
@@ -56,7 +54,6 @@ export class BoardComponent implements OnInit {
   @ViewChild('taskEditModal', {static: false}) taskEditModal: TemplateRef<any>;
   @ViewChild('newTaskModal', {static: false}) newTaskModal: TemplateRef<any>;
   ngOnInit() {
-    this.modalService.clearAll();
     if (this.board) {
       this.taskListService.getStatuses(this.board).subscribe(data => this.statuses = data);
     }

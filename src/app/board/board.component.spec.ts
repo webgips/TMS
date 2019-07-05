@@ -4,9 +4,7 @@ import { BoardComponent } from './board.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from '../app.component';
 import { TaskComponent } from '../task/task.component';
-import { ModalComponent } from '../modal/modal.component';
 import { HeaderComponent } from '../header/header.component';
-import { forwardRef } from '@angular/core';
 import { TaskListService } from '../services/task-list.service';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NotificationComponent } from '../notification/notification.component';
@@ -14,7 +12,6 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire';
 import { environment } from 'src/environments/environment';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-import ITask from '../models/ITask';
 import { MatDialogModule } from '@angular/material';
 import IStatuses from '../models/IStatuses';
 import { of } from 'rxjs';
@@ -41,7 +38,6 @@ describe('BoardComponent', () => {
         AppComponent,
         BoardComponent,
         TaskComponent,
-        ModalComponent,
         HeaderComponent,
         NotificationComponent
       ],

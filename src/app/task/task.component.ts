@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ModalService } from '../services/modal.service';
 import ITask from '../models/ITask';
 @Component({
   selector: 'app-task',
@@ -12,7 +11,7 @@ export class TaskComponent {
   @Output() openTaskModal = new EventEmitter<ITask>();
   @Output() openTaskEditModal = new EventEmitter<any>();
 
-  constructor(private modalService: ModalService) { }
+  constructor() { }
 
   openModal(e: Event, task: ITask) {
     e.preventDefault();
