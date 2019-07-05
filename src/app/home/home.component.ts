@@ -15,6 +15,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 })
 export class HomeComponent implements OnInit {
   boards: IBoard[] = [];
+  private isLoading = true;
   private currentBoard: string = localStorage.getItem('currentBoard') ?
           localStorage.getItem('currentBoard') : null;
   private newBoardForm: FormGroup = new FormGroup({
@@ -26,7 +27,12 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog
   ) {  }
   ngOnInit() {
-    this.taskListService.getBoards().subscribe(boards => this.boards = boards);
+    console.log(this.boards, this.isLoading)
+    this.taskListService.getBoards().subscribe(boards => {
+      this.boards = boards;
+      this.isLoading = false;
+      console.log(this.boards, this.isLoading)
+    });
   }
   newBoardValidator(control: FormControl): {[ s: string]: boolean} {
     const boardsName = [];

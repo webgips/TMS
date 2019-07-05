@@ -1,4 +1,7 @@
-<main class="boards">
+<div class="spinner" *ngIf="isLoading">
+  <img src="../../assets/spinner.svg" alt="spinner">
+</div>
+<main class="boards" *ngIf="!isLoading">
   <div class="boards__top">
     <div *ngIf="boards.length">Select board:</div>
     <select
