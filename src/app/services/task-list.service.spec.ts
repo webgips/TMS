@@ -50,7 +50,7 @@ const angularFirestoreStub = {
 };
 const statusesCollectionStub = {
   valueChanges: jasmine.createSpy('collection').and.returnValue(from(statuses))
-}
+};
 
 describe('TaskListService', () => {
   let angularFirestore: AngularFirestore;

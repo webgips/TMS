@@ -43,7 +43,7 @@
           required
         />
       </label>
-      <div class="error" *ngIf="newBoardForm.controls.newBoard.invalid && (newBoardForm.dirty || newBoardForm.touched)">Bord name is already exist!</div>
+      <div class="error" *ngIf="(newBoardForm.controls.newBoard.errors && newBoardForm.controls.newBoard.errors.nameExist) && (newBoardForm.dirty || newBoardForm.touched)">Bord name is already exist!</div>
       <button class="modal__form-submit" [disabled]="newBoardForm.controls.newBoard.invalid">
         Submit
       </button>

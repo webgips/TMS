@@ -8,5 +8,5 @@ export default interface IBoard {
             name: string;
             tasks: ITask[];
         }
-    ]
+    ];
 }

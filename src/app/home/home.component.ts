@@ -16,8 +16,7 @@ import { FormGroup, Validators, FormControl } from '@angular/forms';
 export class HomeComponent implements OnInit {
   boards: IBoard[] = [];
   private currentBoard: string = localStorage.getItem('currentBoard') ?
-                          localStorage.getItem('currentBoard') : null;
-  // private newBoard = '';
+          localStorage.getItem('currentBoard') : null;
   private newBoardForm: FormGroup = new FormGroup({
     newBoard: new FormControl('', { validators: [Validators.required, this.newBoardValidator.bind(this)], updateOn: 'blur'}),
   });
@@ -35,7 +34,7 @@ export class HomeComponent implements OnInit {
      boardsName.push(board.name);
     });
     if (boardsName.includes(control.value)) {
-      return {'newBoard': true};
+      return {nameExist: true};
     }
     return null;
   }
@@ -45,7 +44,7 @@ export class HomeComponent implements OnInit {
   }
   onNewBoardSubmit(e: Event) {
     this.taskListService.createNewBoard(this.newBoardForm.value.newBoard).then(res => this.notificationService.message(res));
-    this.newBoardForm.value.newBoard = '';
+    this.newBoardForm.reset();
     this.dialog.closeAll();
   }
   onChange(boardId: string) {
