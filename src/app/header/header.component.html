@@ -1,8 +1,8 @@
 <header class="header" *ngIf="user" >
-<div class="header__user" *ngIf="user.email">
-    Hi {{user.email}}!
+<div class="header__user" *ngIf="user.displayName">
+    Hi {{user.displayName}}!
 </div>
-<div class="header__user" *ngIf="user.email == null">
+<div class="header__user" *ngIf="user.displayName == null">
     Hi anonym!
 </div>
 

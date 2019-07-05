@@ -36,6 +36,7 @@ export class RegisterComponent {
       val => {
         this.router.navigate(['/']);
         this.notificationService.message('Registration successful');
+        val.user.updateProfile({displayName: this.registerForm.value.name});
         const data = {
           uid: val.user.uid,
           email: val.user.email,

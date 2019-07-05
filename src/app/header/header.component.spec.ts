@@ -41,11 +41,13 @@ describe('HeaderComponent', () => {
     authenticationService = fixture.debugElement.injector.get(AuthenticationService);
     mockUser = {
       uid: 'testuid',
-      email: 'test@test.test'
+      email: 'test@test.test',
+      displayName: 'name'
     };
     mockUserNoEmail = {
       uid: 'testuid',
-      email: null
+      email: null,
+      displayName: null
     };
   });
 
@@ -56,7 +58,7 @@ describe('HeaderComponent', () => {
   it('should set user email', () => {
     authenticationService.currentUserSubject.next(mockUser);
     fixture.detectChanges();
-    expect(fixture.nativeElement.querySelector('.header__user').innerText).toEqual(`Hi ${mockUser.email}!`);
+    expect(fixture.nativeElement.querySelector('.header__user').innerText).toEqual(`Hi ${mockUser.displayName}!`);
   });
   it('should set user email to anonym', () => {
     authenticationService.currentUserSubject.next(mockUserNoEmail);
