@@ -47,6 +47,9 @@ export class TaskListService {
   createNewStatus(board: string, status: string) {
     return this.boardsRef.doc(board).collection('statuses').doc(status).set({name: status, tasks: []}, {merge: true});
   }
+  deleteStatus(board: string, status: string) {
+    return this.boardsRef.doc(board).collection('statuses').doc(status).delete().then(() => `Status "${status}" successfully deleted!`);
+  }
   createNewTask(task: ITask, currentBoard: string, status: string) {
     this.boardsRef.doc(currentBoard).collection('statuses').doc(status).get().subscribe(data => {
       const newTasksList = data.get('tasks');

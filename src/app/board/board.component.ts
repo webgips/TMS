@@ -107,8 +107,13 @@ export class BoardComponent implements OnInit {
     this.taskListService.deleteTask(this.modalTaskInfo, this.board.name);
     this.dialog.closeAll();
   }
-  deleteBoard(e: Event, board) {
+  deleteBoard(e: Event, board: IBoard) {
     e.preventDefault();
     this.taskListService.deleteBoard(board.name).then(res => this.notificationService.message(res));
   }
+  deleteStatus(e: Event, board: IBoard, statusName: string) {
+    e.preventDefault();
+    this.taskListService.deleteStatus(board.name, statusName).then(res => this.notificationService.message(res));
+  }
+
 }

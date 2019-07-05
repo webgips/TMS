@@ -6,7 +6,10 @@
 </div>
 <main class="board">
   <div class="board-col" *ngFor="let status of statuses; let i = index">
-    <div class="board-col__title">{{ status.name }}</div>
+    <div class="board-col__top">
+      <div class="board-col__title">{{ status.name }}</div>
+      <a href="#" class="board-col__remove" (click)="deleteStatus($event, board, status.name)">Remove..</a>
+    </div>
       <app-task
         *ngFor="let task of status.tasks; let i = index"
         [task]="task"

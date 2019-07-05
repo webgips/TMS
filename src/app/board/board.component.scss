@@ -8,11 +8,25 @@
 		border-radius: 6px;
 		padding: 10px;
 		height: fit-content;
+		&__top{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+			margin-bottom: 25px;
+		}
 		&__title{
 			font-size: 18px;
 			font-weight: 700;
-			margin-bottom: 25px;
 			color: #272c4d;
+			word-break: brake-word;
+		}
+		&__remove{
+			font-size: 14px;
+			font-weight: 700;
+			padding-right: 6px;
+			text-decoration: none;
+			color: #dc0000;
+			flex-shrink: 0;
 		}
 	}
 	&__name{
