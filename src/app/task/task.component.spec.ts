@@ -6,7 +6,6 @@ describe('TaskComponent', () => {
   let component: TaskComponent;
   let fixture: ComponentFixture<TaskComponent>;
   let mockTask: ITask;
-  let spy: jasmine.Spy;
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ TaskComponent ]
