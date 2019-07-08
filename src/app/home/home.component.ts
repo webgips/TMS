@@ -36,7 +36,7 @@ export class HomeComponent implements OnInit {
   }
   newBoardValidator(control: FormControl): {[ s: string]: boolean} {
     const boardsName = [];
-    this.boards.forEach((board, index) => {
+    this.boards.forEach(board => {
      boardsName.push(board.name);
     });
     if (boardsName.includes(control.value)) {
@@ -49,6 +49,7 @@ export class HomeComponent implements OnInit {
     this.dialog.open(templateRef);
   }
   onNewBoardSubmit(e: Event) {
+    e.preventDefault();
     this.taskListService.createNewBoard(this.newBoardForm.value.newBoard).then(res => this.notificationService.message(res));
     this.newBoardForm.reset();
     this.dialog.closeAll();
