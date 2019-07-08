@@ -61,7 +61,7 @@ export class TaskListService {
       let newTasksList;
       this.boardsRef.doc(currentBoard).collection('statuses').doc(task.oldStatus).get().subscribe(data => {
         newTasksList = data.get('tasks');
-        newTasksList.forEach((item, index) => {
+        newTasksList.forEach((item: ITask, index) => {
           if (item.id === task.id) {
             newTasksList.splice(index, 1);
           }
@@ -76,7 +76,7 @@ export class TaskListService {
     } else {
       this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).get().subscribe(data => {
         const newTasksList = data.get('tasks');
-        newTasksList.forEach((item, index) => {
+        newTasksList.forEach((item: ITask, index) => {
           if (item.id === task.id) {
             newTasksList[index] = task;
           }
