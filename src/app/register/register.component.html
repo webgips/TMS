@@ -1,33 +1,60 @@
-<form [formGroup]="registerForm" class="auth__form" novalidate (ngSubmit)="submit()">
+<form
+  [formGroup]="registerForm"
+  class="auth__form"
+  novalidate
+  (ngSubmit)="submit()"
+>
   <h1 class="title">Register:</h1>
-  <label  class="auth__label">
+  <label class="auth__label">
     <div class="auth__label-text">Email:</div>
-    <input type="text" name="email" formControlName="email" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.email.errors }" />
+    <input
+      type="text"
+      name="email"
+      formControlName="email"
+      class="auth__input"
+      [ngClass]="{ 'is-invalid': submitted && inpt.email.errors }"
+    />
   </label>
   <div *ngIf="submitted && inpt.email.errors" class="auth__input-error">
-      <div *ngIf="inpt.email.errors.required">Email is required</div>
+    <div *ngIf="inpt.email.errors.required">Email is required</div>
   </div>
   <div *ngIf="submitted && inpt.email.errors" class="auth__input-error">
-      <div *ngIf="inpt.email.errors.email">Invalid email address.</div>
+    <div *ngIf="inpt.email.errors.email">Invalid email address.</div>
   </div>
-  
-  <label  class="auth__label">
+
+  <label class="auth__label">
     <div class="auth__label-text">Name:</div>
-    <input type="name"  name="name" formControlName="name" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.name.errors }" />
+    <input
+      type="name"
+      name="name"
+      formControlName="name"
+      class="auth__input"
+      [ngClass]="{ 'is-invalid': submitted && inpt.name.errors }"
+    />
   </label>
   <div *ngIf="submitted && inpt.name.errors" class="auth__input-error">
-      <div *ngIf="inpt.name.errors.required">Name is required</div>
+    <div *ngIf="inpt.name.errors.required">Name is required</div>
   </div>
-  <label  class="auth__label">
+  <label class="auth__label">
     <div class="auth__label-text">Password:</div>
-    <input type="password"  name="password" formControlName="password" class="auth__input" [ngClass]="{ 'is-invalid': submitted && inpt.password.errors }" />
+    <input
+      type="password"
+      name="password"
+      formControlName="password"
+      class="auth__input"
+      [ngClass]="{ 'is-invalid': submitted && inpt.password.errors }"
+    />
   </label>
   <div *ngIf="submitted && inpt.password.errors" class="auth__input-error">
-      <div *ngIf="inpt.password.errors.required">Password is required</div>
-      <div *ngIf="inpt.password.errors.minlength">Password must be at least 6 characters</div>
+    <div *ngIf="inpt.password.errors.required">Password is required</div>
+    <div *ngIf="inpt.password.errors.minlength">
+      Password must be at least 6 characters
+    </div>
   </div>
   <div class="auth__bottom">
     <button class="btn">Confirm</button>
-    <a routerLink = "/login" class="btn btn--no-bg" routerLinkActive="active-link">Exit</a>
+    <a routerLink="/login" class="btn btn--no-bg" routerLinkActive="active-link"
+      >Exit</a
+    >
   </div>
 </form>

@@ -8,16 +8,24 @@
   <div class="board-col" *ngFor="let status of statuses; let i = index">
     <div class="board-col__top">
       <div class="board-col__title">{{ status.name }}</div>
-      <a href="#" class="board-col__remove" (click)="deleteStatus($event, board, status.name)">Remove..</a>
+      <a
+        href="#"
+        class="board-col__remove"
+        (click)="deleteStatus($event, board, status.name)"
+        >Remove..</a
+      >
     </div>
-      <app-task
-        *ngFor="let task of status.tasks; let i = index"
-        [task]="task"
-        [status]="task.status"
-        (openTaskModal)="onOpenTaskModal(task)"
-        (openTaskEditModal)="onOpenTaskEditModal(task)"
-      ></app-task>
-    <a href="#" class="add-task add-btn" (click)="$event.preventDefault();showNewTaskModal(status)"
+    <app-task
+      *ngFor="let task of status.tasks; let i = index"
+      [task]="task"
+      [status]="task.status"
+      (openTaskModal)="onOpenTaskModal(task)"
+      (openTaskEditModal)="onOpenTaskEditModal(task)"
+    ></app-task>
+    <a
+      href="#"
+      class="add-task add-btn"
+      (click)="$event.preventDefault(); showNewTaskModal(status)"
       >Add task...</a
     >
   </div>
@@ -25,7 +33,7 @@
     <a
       href="#"
       class="board-add-col-btn add-btn"
-      (click)="$event.preventDefault();openDialog(newStatusModal)"
+      (click)="$event.preventDefault(); openDialog(newStatusModal)"
       >Add status...</a
     >
   </div>
@@ -49,7 +57,11 @@
 <ng-template #newTaskModal>
   <div class="modal__container">
     <div class="modal__task-title">Create a new task:</div>
-    <form class="modal__form" id="new-task-form" (submit)="onNewTaskSubmit($event)">
+    <form
+      class="modal__form"
+      id="new-task-form"
+      (submit)="onNewTaskSubmit($event)"
+    >
       <label class="modal__row">
         <div class="modal__row-name">Task title:</div>
         <input
@@ -128,20 +140,29 @@
 </ng-template>
 <ng-template #newStatusModal>
   <div class="modal__container">
-    <form class="modal__form" [formGroup]="updateStatusForm" id="new-status-form" (submit)="onNewStatusSubmit()">
-        <label class="modal__row">
-          <div class="modal__row-name">New status name:</div>
-          <input 
-            type="text"
-            name="statusname"
-            class="modal__form-input"
-            required
-            formControlName="status"
-          />
-        </label>
-        <button class="modal__form-submit" type="submit" [disabled]="updateStatusForm.controls.status.invalid">
-          Submit
-        </button>
-      </form>
+    <form
+      class="modal__form"
+      [formGroup]="updateStatusForm"
+      id="new-status-form"
+      (submit)="onNewStatusSubmit()"
+    >
+      <label class="modal__row">
+        <div class="modal__row-name">New status name:</div>
+        <input
+          type="text"
+          name="statusname"
+          class="modal__form-input"
+          required
+          formControlName="status"
+        />
+      </label>
+      <button
+        class="modal__form-submit"
+        type="submit"
+        [disabled]="updateStatusForm.controls.status.invalid"
+      >
+        Submit
+      </button>
+    </form>
   </div>
 </ng-template>

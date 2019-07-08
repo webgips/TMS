@@ -17,15 +17,15 @@ export class HomeComponent implements OnInit {
   boards: IBoard[] = [];
   private isLoading = true;
   private currentBoard: string = localStorage.getItem('currentBoard') ?
-          localStorage.getItem('currentBoard') : null;
+    localStorage.getItem('currentBoard') : null;
   private newBoardForm: FormGroup = new FormGroup({
-    newBoard: new FormControl('', { validators: [Validators.required, this.newBoardValidator.bind(this)], updateOn: 'blur'}),
+    newBoard: new FormControl('', { validators: [Validators.required, this.newBoardValidator.bind(this)], updateOn: 'blur' }),
   });
   constructor(
     private taskListService: TaskListService,
     private notificationService: NotificationService,
     public dialog: MatDialog
-  ) {  }
+  ) { }
   ngOnInit() {
     this.taskListService.getBoards().subscribe(boards => {
       this.boards = boards;
@@ -34,13 +34,13 @@ export class HomeComponent implements OnInit {
       }
     });
   }
-  newBoardValidator(control: FormControl): {[ s: string]: boolean} {
+  newBoardValidator(control: FormControl): { [s: string]: boolean } {
     const boardsName = [];
     this.boards.forEach(board => {
-     boardsName.push(board.name);
+      boardsName.push(board.name);
     });
     if (boardsName.includes(control.value)) {
-      return {nameExist: true};
+      return { nameExist: true };
     }
     return null;
   }

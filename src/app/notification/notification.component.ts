@@ -20,7 +20,7 @@ export class NotificationComponent implements OnInit {
         this.notification.cssClass = 'error';
       }
       if (message && message.type === 'message') {
-        setTimeout(() => this.notification = undefined , 5000);
+        setTimeout(() => this.notification = undefined, 5000);
       }
     });
   }

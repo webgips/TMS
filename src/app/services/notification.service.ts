@@ -10,7 +10,7 @@ export class NotificationService {
   private notification = new Subject<INotification>();
   constructor(private router: Router) {
     this.router.events.subscribe((val) => {
-      if (val instanceof NavigationStart ) {
+      if (val instanceof NavigationStart) {
         this.clear();
       }
     });
@@ -19,10 +19,10 @@ export class NotificationService {
     return this.notification.asObservable();
   }
   message(message: string) {
-    this.notification.next({type: 'message', text: message});
+    this.notification.next({ type: 'message', text: message });
   }
   error(message: string) {
-    this.notification.next({type: 'error', text: message});
+    this.notification.next({ type: 'error', text: message });
   }
   clear() {
     this.notification.next();

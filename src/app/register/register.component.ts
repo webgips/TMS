@@ -21,7 +21,7 @@ export class RegisterComponent {
       this.router.navigate(['/']);
     }
     this.registerForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email ]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       name: new FormControl('', Validators.required),
       password: new FormControl('', [Validators.required, Validators.minLength(6)])
     });
@@ -32,23 +32,23 @@ export class RegisterComponent {
       return;
     }
     this.authenticationService.register(this.registerForm.value)
-    .then(
-      val => {
-        this.router.navigate(['/']);
-        this.notificationService.message('Registration successful');
-        val.user.updateProfile({displayName: this.registerForm.value.name});
-        const data = {
-          uid: val.user.uid,
-          email: val.user.email,
-          displayName: this.registerForm.value.name,
-          photoURL: val.user.photoURL
-        };
+      .then(
+        val => {
+          this.router.navigate(['/']);
+          this.notificationService.message('Registration successful');
+          val.user.updateProfile({ displayName: this.registerForm.value.name });
+          const data = {
+            uid: val.user.uid,
+            email: val.user.email,
+            displayName: this.registerForm.value.name,
+            photoURL: val.user.photoURL
+          };
 
-        this.authenticationService.updateUserData(data);
-      },
-      error => {
-        this.notificationService.error(error.message);
-      });
+          this.authenticationService.updateUserData(data);
+        },
+        error => {
+          this.notificationService.error(error.message);
+        });
   }
   get inpt() { return this.registerForm.controls; }
 }

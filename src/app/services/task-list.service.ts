@@ -30,21 +30,21 @@ export class TaskListService {
     return this.boards;
   }
   getStatuses = (board: IBoard): Observable<IStatuses[]> => {
-    this.statusesRef =  this.boardsRef.doc(board.name).collection('statuses');
+    this.statusesRef = this.boardsRef.doc(board.name).collection('statuses');
     return this.statusesRef.valueChanges();
   }
   setModalData(taskInfo: ITask) {
     this.modalData = taskInfo;
   }
   createNewBoard(val: string) {
-    return this.boardsRef.doc(val).set({name: val, id: createId()})
-    .then(() => `Board "${val}" successfully added!`);
+    return this.boardsRef.doc(val).set({ name: val, id: createId() })
+      .then(() => `Board "${val}" successfully added!`);
   }
   deleteBoard(val: string) {
     return this.boardsRef.doc(val).delete().then(() => `Board "${val}" successfully deleted!`);
   }
   createNewStatus(board: string, status: string) {
-    return this.boardsRef.doc(board).collection('statuses').doc(status).set({name: status, tasks: []}, {merge: true});
+    return this.boardsRef.doc(board).collection('statuses').doc(status).set({ name: status, tasks: [] }, { merge: true });
   }
   deleteStatus(board: string, status: string) {
     return this.boardsRef.doc(board).collection('statuses').doc(status).delete().then(() => `Status "${status}" successfully deleted!`);
@@ -53,7 +53,7 @@ export class TaskListService {
     this.boardsRef.doc(currentBoard).collection('statuses').doc(status).get().subscribe(data => {
       const newTasksList = data.get('tasks');
       newTasksList.push(Object.assign({}, task));
-      this.boardsRef.doc(currentBoard).collection('statuses').doc(status).set({tasks: newTasksList}, {merge: true});
+      this.boardsRef.doc(currentBoard).collection('statuses').doc(status).set({ tasks: newTasksList }, { merge: true });
     });
   }
   updateTask(task: ITask, currentBoard: string) {
@@ -66,12 +66,12 @@ export class TaskListService {
             newTasksList.splice(index, 1);
           }
         });
-        this.boardsRef.doc(currentBoard).collection('statuses').doc(task.oldStatus).set({tasks: newTasksList}, {merge: true});
+        this.boardsRef.doc(currentBoard).collection('statuses').doc(task.oldStatus).set({ tasks: newTasksList }, { merge: true });
       });
       this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).get().subscribe(data => {
         newTasksList = data.get('tasks');
         newTasksList.push(task);
-        this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).set({tasks: newTasksList}, {merge: true});
+        this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).set({ tasks: newTasksList }, { merge: true });
       });
     } else {
       this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).get().subscribe(data => {
@@ -81,7 +81,7 @@ export class TaskListService {
             newTasksList[index] = task;
           }
         });
-        this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).set({tasks: newTasksList}, {merge: true});
+        this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).set({ tasks: newTasksList }, { merge: true });
       });
     }
   }
@@ -89,7 +89,7 @@ export class TaskListService {
     this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).get().subscribe(data => {
       const newTasksList = data.get('tasks');
       newTasksList.splice(newTasksList.map(item => item.id).indexOf(task.id), 1);
-      this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).set({tasks: newTasksList}, {merge: true});
+      this.boardsRef.doc(currentBoard).collection('statuses').doc(task.status).set({ tasks: newTasksList }, { merge: true });
     });
   }
 }

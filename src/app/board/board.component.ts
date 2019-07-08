@@ -32,14 +32,14 @@ class Task {
 
 export class BoardComponent implements OnInit {
   private updateTaskForm: FormGroup = new FormGroup({
-    title: new FormControl('', { validators: [Validators.required],  updateOn: 'blur'}),
-    desc: new FormControl('', { validators: [Validators.required],  updateOn: 'blur'}),
-    status: new FormControl('', { validators: [Validators.required],  updateOn: 'blur'}),
+    title: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
+    desc: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
+    status: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
     oldStatus: new FormControl(''),
     id: new FormControl('')
   });
   private updateStatusForm: FormGroup = new FormGroup({
-    status: new FormControl('', { validators: [Validators.required],  updateOn: 'blur'}),
+    status: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
   }, { updateOn: 'blur' });
   private modalTaskInfo: Task = new Task('', '', '', '');
   private newTask: Task = new Task('', '', '', '');
@@ -50,10 +50,10 @@ export class BoardComponent implements OnInit {
     private taskListService: TaskListService,
     private notificationService: NotificationService,
     public dialog: MatDialog
-  ) {}
-  @ViewChild('taskInfoModal', {static: false}) taskInfoModal: TemplateRef<any>;
-  @ViewChild('taskEditModal', {static: false}) taskEditModal: TemplateRef<any>;
-  @ViewChild('newTaskModal', {static: false}) newTaskModal: TemplateRef<any>;
+  ) { }
+  @ViewChild('taskInfoModal', { static: false }) taskInfoModal: TemplateRef<any>;
+  @ViewChild('taskEditModal', { static: false }) taskEditModal: TemplateRef<any>;
+  @ViewChild('newTaskModal', { static: false }) newTaskModal: TemplateRef<any>;
   ngOnInit() {
     if (this.board) {
       this.taskListService.getStatuses(this.board).subscribe(data => this.statuses = data);
@@ -63,14 +63,14 @@ export class BoardComponent implements OnInit {
     this.dialog.open(templateRef);
   }
   onOpenTaskModal(task: ITask) {
-    this.modalTaskInfo =  task;
+    this.modalTaskInfo = task;
     this.openDialog(this.taskInfoModal);
   }
   onOpenTaskEditModal(task: ITask) {
     this.modalTaskInfo = task;
     this.updateTaskForm.setValue({
       title: task.title,
-      desc:  task.desc,
+      desc: task.desc,
       status: task.status,
       id: task.id,
       oldStatus: task.status
@@ -99,7 +99,7 @@ export class BoardComponent implements OnInit {
     this.taskListService.createNewStatus(this.board.name, this.updateStatusForm.value.status).then(res => {
       this.dialog.closeAll();
       this.notificationService.message(`Status "${this.updateStatusForm.value.status}" successfully added!`);
-      this.updateStatusForm.reset({status: ''});
+      this.updateStatusForm.reset({ status: '' });
     });
   }
   deleteTask(e: Event) {
