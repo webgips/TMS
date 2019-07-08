@@ -27,11 +27,11 @@ export class HomeComponent implements OnInit {
     public dialog: MatDialog
   ) {  }
   ngOnInit() {
-    console.log(this.boards, this.isLoading)
     this.taskListService.getBoards().subscribe(boards => {
       this.boards = boards;
-      this.isLoading = false;
-      console.log(this.boards, this.isLoading)
+      if (this.boards.length) {
+        this.isLoading = false;
+      }
     });
   }
   newBoardValidator(control: FormControl): {[ s: string]: boolean} {
