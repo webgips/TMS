@@ -9,7 +9,6 @@ import IStatuses from '../models/IStatuses';
 
 @Injectable()
 export class TaskListService {
-  private statusList: string[] = [];
   modalData: ITask;
   private boardsSubject: BehaviorSubject<IBoard[]> = new BehaviorSubject([]);
   public boards: Observable<IBoard[]> = this.boardsSubject.asObservable();
