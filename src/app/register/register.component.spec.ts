@@ -23,9 +23,9 @@ describe('RegisterComponent', () => {
         AngularFirestoreModule,
         AngularFireModule.initializeApp(environment.firebaseConfig)
       ],
-      declarations: [ RegisterComponent],
+      declarations: [RegisterComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

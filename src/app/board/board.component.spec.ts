@@ -50,29 +50,29 @@ describe('BoardComponent', () => {
     component = fixture.componentInstance;
     taskListService = fixture.debugElement.injector.get(TaskListService);
     mockStatuses = [
-    {
-      name: 'test status',
-      tasks: [
-        {
-          id: '1',
-          title: 'test',
-          desc: '',
-          status: 'test status'
-        },
-      ]
-    },
-    {
-      name: '2 status',
-      tasks: [
-        {
-          id: '3',
-          title: 'test',
-          desc: '',
-          status: 'test status'
-        },
-      ]
-    },
-  ];
+      {
+        name: 'test status',
+        tasks: [
+          {
+            id: '1',
+            title: 'test',
+            desc: '',
+            status: 'test status'
+          },
+        ]
+      },
+      {
+        name: '2 status',
+        tasks: [
+          {
+            id: '3',
+            title: 'test',
+            desc: '',
+            status: 'test status'
+          },
+        ]
+      },
+    ];
     component.board = {
       id: '1',
       name: 'test board',

@@ -18,19 +18,19 @@ describe('NotificationComponent', () => {
       imports: [
         RouterTestingModule
       ],
-      declarations: [ NotificationComponent ],
-      providers: [ NotificationService ]
+      declarations: [NotificationComponent],
+      providers: [NotificationService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(NotificationComponent);
     component = fixture.componentInstance;
     notificationService = fixture.debugElement.injector.get(NotificationService);
-    message =  {
-        type: 'message',
-        text: 'Registration sucessful'
+    message = {
+      type: 'message',
+      text: 'Registration sucessful'
     };
 
     spy = spyOn(notificationService, 'getNotification').and.returnValue(of(message));
@@ -44,7 +44,7 @@ describe('NotificationComponent', () => {
   it('should call getNotification one time and get notification message', () => {
 
     expect(spy).toHaveBeenCalled();
-    expect(spy.calls.all().length ).toEqual(1);
+    expect(spy.calls.all().length).toEqual(1);
     expect(component.notification).toEqual(message);
 
   });

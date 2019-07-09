@@ -6,7 +6,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 describe('NotificationService', () => {
   beforeEach(() => TestBed.configureTestingModule({
-    imports: [ RouterTestingModule, HttpClientTestingModule ]
+    imports: [RouterTestingModule, HttpClientTestingModule]
   }));
 
   it('should be created', () => {

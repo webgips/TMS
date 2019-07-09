@@ -38,9 +38,9 @@ describe('HomeComponent', () => {
         BoardComponent,
         TaskComponent
       ],
-      providers: [ TaskListService ]
+      providers: [TaskListService]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -77,7 +77,7 @@ describe('HomeComponent', () => {
   });
   it('should call getBoards one time and update the view', () => {
     expect(spy).toHaveBeenCalled();
-    expect(spy.calls.all().length ).toEqual(1);
+    expect(spy.calls.all().length).toEqual(1);
 
   });
 

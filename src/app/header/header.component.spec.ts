@@ -32,7 +32,7 @@ describe('HeaderComponent', () => {
         AuthenticationService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

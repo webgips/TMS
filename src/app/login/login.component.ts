@@ -33,7 +33,7 @@ export class LoginComponent {
     private router: Router,
     private authenticationService: AuthenticationService,
     private notificationService: NotificationService
-    ) {
+  ) {
     if (this.authenticationService.userId) {
       this.router.navigate(['/']);
     }
