@@ -1,5 +1,5 @@
 <div class="spinner" *ngIf="isLoading">
-  <img src="../../assets/spinner.svg" alt="spinner">
+  <img src="../../assets/spinner.svg" alt="spinner" />
 </div>
 <main class="boards" *ngIf="!isLoading">
   <div class="boards__top">
@@ -12,7 +12,7 @@
       *ngIf="boards.length"
     >
       <option *ngIf="boards.length === 1"></option>
-      <option *ngFor="let board of boards" [value]="board.id" >
+      <option *ngFor="let board of boards" [value]="board.id">
         {{ board.name }}
       </option>
     </select>
@@ -35,7 +35,7 @@
       id="new-board-form"
       [formGroup]="newBoardForm"
       (submit)="onNewBoardSubmit($event)"
-    >      
+    >
       <label class="modal__row">
         <div class="modal__row-name">New board name:</div>
         <input
@@ -46,8 +46,22 @@
           required
         />
       </label>
-      <div class="error" *ngIf="(newBoardForm.controls.newBoard.errors && newBoardForm.controls.newBoard.errors.nameExist) && (newBoardForm.dirty || newBoardForm.touched)">Bord name is already exist!</div>
-      <button class="modal__form-submit" [disabled]="newBoardForm.controls.newBoard.invalid">
+      <div *ngIf="inpt.newBoard.errors">
+        <div class="error" *ngIf="newBoardFormError()">
+          Name "{{ inpt.newBoard.value }}" is already exist!
+        </div>
+        <div
+          class="error"
+          *ngIf="inpt.newBoard.touched && inpt.newBoard.errors.required"
+        >
+          Board name required
+        </div>
+      </div>
+
+      <button
+        class="modal__form-submit"
+        [disabled]="newBoardForm.controls.newBoard.invalid"
+      >
         Submit
       </button>
     </form>

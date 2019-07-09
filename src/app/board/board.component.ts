@@ -13,7 +13,7 @@ class Task {
   title: string;
   desc: string;
   status: string;
-  constructor(id: string, title: string, desc: string, status: string) {
+  constructor(id: string = '', title: string = '', desc: string = '', status: string = '') {
     this.id = id;
     this.title = title;
     this.desc = desc;
@@ -41,8 +41,8 @@ export class BoardComponent implements OnInit {
   private updateStatusForm: FormGroup = new FormGroup({
     status: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
   }, { updateOn: 'blur' });
-  private modalTaskInfo: Task = new Task('', '', '', '');
-  private newTask: Task = new Task('', '', '', '');
+  private modalTaskInfo: Task = new Task();
+  private newTask: Task = new Task();
   private statuses: IStatuses[] = [];
   @Input() board: IBoard;
 

@@ -19,7 +19,10 @@ export class HomeComponent implements OnInit {
   private currentBoard: string = localStorage.getItem('currentBoard') ?
     localStorage.getItem('currentBoard') : null;
   private newBoardForm: FormGroup = new FormGroup({
-    newBoard: new FormControl('', { validators: [Validators.required, this.newBoardValidator.bind(this)], updateOn: 'blur' }),
+    newBoard: new FormControl('', {
+      validators: [Validators.required, Validators.minLength(1), this.newBoardValidator.bind(this)],
+      updateOn: 'blur'
+    }),
   });
   constructor(
     private taskListService: TaskListService,
@@ -40,13 +43,13 @@ export class HomeComponent implements OnInit {
       boardsName.push(board.name);
     });
     if (boardsName.includes(control.value)) {
-      return { nameExist: true };
+      return { nameExist: true, name: control.value };
     }
     return null;
   }
   openDialog(e: Event, templateRef: TemplateRef<any>) {
     e.preventDefault();
-    this.dialog.open(templateRef);
+    this.dialog.open(templateRef, { autoFocus: false });
   }
   onNewBoardSubmit(e: Event) {
     e.preventDefault();
@@ -57,6 +60,11 @@ export class HomeComponent implements OnInit {
   onChange(boardId: string) {
     this.currentBoard = boardId;
     localStorage.setItem('currentBoard', boardId);
+  }
+  get inpt() { return this.newBoardForm.controls; }
+  newBoardFormError() {
+    return (this.inpt.newBoard.errors && this.inpt.newBoard.errors.nameExist)
+      && (this.newBoardForm.dirty || this.newBoardForm.touched);
   }
 
 }
