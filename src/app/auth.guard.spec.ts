@@ -28,7 +28,7 @@ describe('AuthGuard', () => {
         AngularFirestoreModule,
         AngularFireModule.initializeApp(environment.firebaseConfig)
       ],
-      providers: [AuthGuard, HttpClient,  { provide: AngularFirestore, useValue: FirestoreStub }]
+      providers: [AuthGuard, HttpClient, { provide: AngularFirestore, useValue: FirestoreStub }]
     });
   });
 

@@ -42,7 +42,7 @@ export class BoardComponent implements OnInit {
     status: new FormControl('', { validators: [Validators.required], updateOn: 'blur' }),
   }, { updateOn: 'blur' });
   private modalTaskInfo: Task = new Task();
-  private newTask: Task = new Task();
+  private newTask: Task = ne    w Task();
   private statuses: IStatuses[] = [];
   @Input() board: IBoard;
 
